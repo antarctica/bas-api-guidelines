@@ -87,9 +87,9 @@ These aims will be achieved through these objectives:
 
 > This is the ninth GDS Design Principle and echoed below for convenience.
 
-> "Wherever possible we should use the same language and the same design patterns â€” this helps people get familiar with our services. But, when this isn't possible, we should make sure our underlying approach is consistent. So our users will have a reasonable chance of guessing what they're supposed to do.
+> "Wherever possible we should use the same language and the same design patterns -- this helps people get familiar with our services. But, when this isn't possible, we should make sure our underlying approach is consistent. So our users will have a reasonable chance of guessing what they're supposed to do.
 
-> This isn't a straitjacket or a rule book. We can't build great services by rote. We can't imagine every scenario and write rules for it. Every circumstance is different and should be addressed on its own terms. What unites things, therefore, should be a consistent approach â€” one that users will hopefully come to understand and trust â€” even as we move into new digital spaces."
+> This isn't a straitjacket or a rule book. We can't build great services by rote. We can't imagine every scenario and write rules for it. Every circumstance is different and should be addressed on its own terms. What unites things, therefore, should be a consistent approach -- one that users will hopefully come to understand and trust -- even as we move into new digital spaces."
 
 > Wherever possible APIs should use consistent terminology and meaning, including field names, actions, etc. Wherever possible these should be commonly used terms used elsewhere.
 
@@ -283,9 +283,9 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 > This is Principle 4 of the GDS Design Principles, echoed here for convenience.
 
-> "Making something look simple is easy; making something simple to use is much harder â€” especially when the underlying systems are complex â€” but that's what we should be doing.
+> "Making something look simple is easy; making something simple to use is much harder -- especially when the underlying systems are complex -- but that's what we should be doing.
 
-> With great power comes great responsibility â€” very often people have no choice but to use our services. If we don't work hard to make them simple and usable we're abusing that power, and wasting people's time."
+> With great power comes great responsibility -- very often people have no choice but to use our services. If we don't work hard to make them simple and usable we're abusing that power, and wasting people's time."
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
