@@ -87,9 +87,9 @@ These aims will be achieved through these objectives:
 
 > This is the ninth GDS Design Principle and echoed below for convenience.
 
-> "Wherever possible we should use the same language and the same design patterns â€” this helps people get familiar with our services. But, when this isnâ€™t possible, we should make sure our underlying approach is consistent. So our users will have a reasonable chance of guessing what theyâ€™re supposed to do.
+> "Wherever possible we should use the same language and the same design patterns â€” this helps people get familiar with our services. But, when this isn't possible, we should make sure our underlying approach is consistent. So our users will have a reasonable chance of guessing what they're supposed to do.
 
-> This isnâ€™t a straitjacket or a rule book. We canâ€™t build great services by rote. We canâ€™t imagine every scenario and write rules for it. Every circumstance is different and should be addressed on its own terms. What unites things, therefore, should be a consistent approach â€” one that users will hopefully come to understand and trust â€” even as we move into new digital spaces."
+> This isn't a straitjacket or a rule book. We can't build great services by rote. We can't imagine every scenario and write rules for it. Every circumstance is different and should be addressed on its own terms. What unites things, therefore, should be a consistent approach â€” one that users will hopefully come to understand and trust â€” even as we move into new digital spaces."
 
 > Wherever possible APIs should use consistent terminology and meaning, including field names, actions, etc. Wherever possible these should be commonly used terms used elsewhere.
 
@@ -149,15 +149,15 @@ These aims will be achieved through these objectives:
 
 ####[0.5] **APIs SHOULD be as simple as possible.**
 
-> Simple APIs, and code, are easier to understand than complex APIs and code. This increases the maintainability of the API, and through having 'less moving parts' have less chance for bugs to be introduced.
+> Simple APIs, and code, are easier to understand than complex APIs and code. This increases the maintainability of the API, and through having 'less moving parts' creates fewer places for bugs to hide.
 
-> Simple APIs are also quicker to iterate on, document and release than more complex APIs. For users, it is easier and quicker to integrate with or use a simple API, especially when revisiting implementations created in the past.
+> Simple APIs are quicker to iterate on, document and release than more complex APIs. For users, it is easier and quicker to use a simple API, especially when revisiting implementations created in the past.
 
-> APIs should not do more than they need to. If another service already provides a service we should use or recommend this, not duplicate it ourselves.
+> APIs **SHOULD NOT** do more than they need to. If another service already provides a service we **SHOULD** use or recommend this, we **SHOULD NOT** duplicate it ourselves.
 
-> For example, an API for providing the locations of BAS ships could include a current weather report from a third party. Since this weather information can be requested directly (rather than bundled by us) it SHOULD NOT be included in our API, instead information on this weather source should be documented.
+> For example, an API for providing the locations of BAS ships could include a current weather report from a third party. Since this weather information can be requested directly (rather than bundled by us) it **SHOULD NOT** be included in our API. Instead information on where to get this weather data from, and preferably an example, **SHOULD** be documented.
 
-> Doing this keeps our API as simple as possible and lets us focus on making this as useful as possible. We should let the third party concentrate on providing the weather information.
+> Doing this keeps our API as simple as possible and lets us focus on making what we need to provide as useful as possible. We should let others concentrate on solving other needs.
 
 > This is essentially the [UNIX philosophy](http://en.wikipedia.org/wiki/Unix_philosophy) i.e. 'do one thing and do it well', and the second GDS Design Principle.
 
@@ -199,6 +199,18 @@ These aims will be achieved through these objectives:
 
 > A good example of a *common* solution is [JSONP](http://en.wikipedia.org/wiki/JSONP) which is essentially a hack so as not to use the *best* solution, [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 
+####[0.8] Where possible, **APIs SHOULD be as resilient as possible**
+
+Where we create APIs that rely on third parties we must ensure we have plans in place for where these services are either temporally or permanently unavailable in the future.
+
+When evaluating whether to use an external service factors such as the reputation of the service, the cost (and if this likely to change), availability (can the service scale to the same degree we can) and support all need to considered. This applies both to external services provided internally (i.e. by ourselves, BAS, NERC) or by third parties.
+
+These factors need to weighed against the importance of the functionality such services provide. For services providing core functionality, a more defensive, conservative approach should be followed.
+
+It is unfeasible to provide all services ourselves, credit card processing for example **SHOULD** be left to a payment gateway, however we should create APIs in such a way that reliance on a particular service is abstracted. This ensures we can swap out services, potentially for newer, better ones, without having to change core 'business' logic. 
+
+> The *Sources & Further Reading* section has more resources on this guideline.
+
 ## Need Driven
 
 ####[1.1] **APIs MUST be created to meet the needs of its users.**
@@ -206,6 +218,8 @@ These aims will be achieved through these objectives:
 > Ideally all stakeholders should be involved in the development of an API, including data providers, API creators, relevant project mangers, significant end users and representative users.
 
 > For simple APIs, this may not be many people and simple to organise. Others may require more extensive research and engagement with users, including resolving conflicts through negotiation.
+
+> Testing is important to ensure APIs we create meet these needs, and logging and monitoring should be used to track this over time. Feedback and retrospectives should be used to ensure that we don't repeat mistakes in the future, and support and emphasise things that worked well. 
 
 > This is the first of the GDS Design Principles, the *Sources & Further Reading* section has more resources on this guideline.
 
@@ -236,9 +250,10 @@ These aims will be achieved through these objectives:
 
 ~~ Fill this out (the irony is not lost on me) ~~
 
-> * Availability (Uptime), rate limiting 
-> * Security
-> * Data sources, accuracy and limitations 
+* Availability (Uptime), rate limiting 
+* Security
+* Data sources, accuracy and limitations 
+* Deprecation policy for older API versions
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
@@ -268,9 +283,9 @@ These aims will be achieved through these objectives:
 
 > This is Principle 4 of the GDS Design Principles, echoed here for convenience.
 
-> "Making something look simple is easy; making something simple to use is much harder â€” especially when the underlying systems are complex â€” but thatâ€™s what we should be doing.
+> "Making something look simple is easy; making something simple to use is much harder â€” especially when the underlying systems are complex â€” but that's what we should be doing.
 
-> With great power comes great responsibility â€” very often people have no choice but to use our services. If we donâ€™t work hard to make them simple and usable weâ€™re abusing that power, and wasting peopleâ€™s time."
+> With great power comes great responsibility â€” very often people have no choice but to use our services. If we don't work hard to make them simple and usable we're abusing that power, and wasting people's time."
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
@@ -341,6 +356,68 @@ The *Resources & Implementations* section has read world examples of this guidel
 
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
 
+## Versioning
+
+#### [X.X] APIs MUST use versioning, versions SHOULD map to major releases and MUST be whole integers
+
+API versions are not alternatives, they are linear progressions, ideally improving over time. This means new API versions **SHOULD** replace older versions, therefore older versions **SHOULD** be deprecated.
+
+#### [X.X] APIs MUST not assume a version for requests that do not specify one.
+
+APIs **MUST NOT** use conventions such as `/latest/`, `/current/`, `/head/` etc. as pointers to the latest API version. This behaviour is not clear or unambiguous, requests made in this way may suddenly fail if a breaking change is introduced to a new version.
+
+Instead users **MUST** explicitly state the version they wish to use. If no version is provided, the API **MUST** return a fatal error until one is provided.
+
+#### [X.X] Within a version, APIs MUST preserve backwards compatibility
+
+APIs **MUST NOT** introduce braking changes *within* an API version. If you need to do this create a new version.
+
+Sources:
+
+* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
+
+#### [X.X] Where possible, APIs SHOULD support old versions
+
+It is not reasonable to assume all users will upgrade to newer API versions at the same time. Therefore old APIs **SHOULD** continue to be supported, for a limited period, to allow users to upgrade in their own time.
+
+The length of this time period will depend on the audience of the API, for internal APIs the period can be quite short, for external APIs a longer period should be given. The number of users of the API should also be taken into account, which should be judged from API analytics and logs.
+
+Wherever possible users **SHOULD** be notified of new API versions in advance, increasing the likelihood of a quicker adoption by allowing testing. Additionally, requests made to deprecated API versions **SHOULD** inform the user the version is deprecated and how they can use the new version.
+
+APIs **SHOULD** clearly state their deprecation policy within their documentation, this allows users to evaluate if they can commit to this schedule before a version change occurs.
+
+The number of API versions that should be supported will depend on the same factors as above and the rate at which new versions are released. Ultimately these are judgement calls with internal resources for supporting these older version being the limiting factor.
+
+Supported, in these guidelines, mean older versions should remain accessible, bugs and faults should be addressed (as these will likely exist in newer versions as well). Security issues **MUST** be addressed, if this is not possible the older version MUST no longer be made available.
+
+Improvements and new features, regardless of whether they maintain compatibility within a version, **SHOULD NOT** be supported in older versions.
+
+Sources:
+
+* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
+
+#### [X.X] APIs SHOULD try to remain compatible with older versions, providing they remain clear and unambiguous
+
+For example, an API method is moved from `/ships` to `/fleet/ships` to be better organised, no other aspects of the method are changed.
+
+This represents a breaking change, as requests made to `/ships` will no longer return what they did previously. In this case a request made to the earlier `/ships` and newer `/fleet/ships` will be identical (other than the URL obviously). Backwards compatibility can therefore be preserved by using a `301 Moved Permanently` header to redirect requests made to the old method to the new.
+
+This remains clear and unambiguous by informing the user, 'this has moved to here', the user can then update their requests accordingly in their own time, which is nice.
+
+Sources:
+
+* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
+
+#### [X.X] Where possible, APIs SHOULD be forwards compatible, providing they remain clear and unambiguous
+
+APIs should be designed to be robust and forward thinking, given the speed of evolution on the web.
+
+For example, if a new header is added to later API versions older API versions should ignore it, rather than fail. Documentation should emphasise where different versions may give different responses for the same request, however these situations should be avoided where possible.
+
+Sources: 
+
+* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
+
 ## Other
 
 [X.X] One individual should take responsible for an API
@@ -365,12 +442,29 @@ The *Resources & Implementations* section has read world examples of this guidel
 
 [Logging and Analytics - points]
 
-* Collect how people use your API
+* Collect how people use your API, this should aim to:
+	* Detect bugs (errors, 404s, etc.)
+	* Log usage (most popular requests, etc. identify needs, where to prioritise, need driven)
+	* Log performance (queries, rendering time, caching performance, etc.)
 
 [Logging and Analytics - sources]
 
 * https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example
 	* "Collect how people use your API"
+* https://www.gov.uk/service-manual/making-software/apis.html#testing
+
+[API Development - Points]
+
+* APIs should be built in a loosely coupled way, using interfaces to separate tasks with specific implementations, and repositories to separate data sources from how and where that data is accessed.
+
+* APIs should be tested, this takes a number of forms
+	* Automated testing using linters, test suites & continuous integration, mocked services etc.
+	* Human testing through passive and active feedback during alpha/beta/live stages of development
+
+[API Development - Sources]
+
+* https://www.gov.uk/service-manual/making-software/apis.html#code-integration
+* https://www.gov.uk/service-manual/making-software/apis.html#testing
 
 ## Resources & Implementations
 
@@ -437,15 +531,21 @@ Bespoke/Custom
 
 * [Keep It Simple Stupid (KISS) Principle](http://en.wikipedia.org/wiki/KISS_principle)
 * [Second Principle - GDS Design Principles](https://www.gov.uk/design-principles#second)
+* [APIs - Consuming and Using APIs - GDS Design Principles](https://www.gov.uk/service-manual/making-software/apis.html#consuming-and-using-apis)
 
 [0.6]
 
 * [APIs - Just Use the Web - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#just-use-the-web)
 * [APIs - Choosing Appropriate Formats - GDS Service Manual](https://www.gov.uk/service-manual/user-centred-design/choosing-appropriate-formats.html)
 
+[0.8]
+
+* [APIs - Service Agreements and Resilience - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#service-agreements-and-resilience)
+
 [1.1]
 
 * [First Principle - GDS Design Principles](https://www.gov.uk/design-principles#first)
+* [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
 
 [1.3]
 
@@ -453,7 +553,8 @@ Bespoke/Custom
 
 [2.1]
 
-* [APIs Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
+* [APIs - Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
+* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 
 [2.2]
 
