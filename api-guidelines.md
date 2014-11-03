@@ -250,10 +250,13 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 ~~ Fill this out (the irony is not lost on me) ~~
 
-* Availability (Uptime), rate limiting 
+* Availability, Deprecation policy for older API versions
+* Rate limiting 
 * Security
 * Data sources, accuracy and limitations 
-* Deprecation policy for older API versions
+* Methods
+	* Access (URL)
+	* Authenticated/Anonymous access
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
@@ -337,6 +340,10 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 [Authentication/Authorisation - points]
 
+* Methods may be Anonymous or Authenticated, defaulting to anonymous.
+	* Easier to use/experiment with
+	* Provides greatest caching benefit
+
 * Authentication/Authorisation SHOULD NOT require authentication/authorisation by default
 	* Increases barriers
 	* Makes examples harder
@@ -362,6 +369,16 @@ The *Resources & Implementations* section has read world examples of this guidel
 
 API versions are not alternatives, they are linear progressions, ideally improving over time. This means new API versions **SHOULD** replace older versions, therefore older versions **SHOULD** be deprecated.
 
+####[X.X] The API version **MUST** be the first token in a URL, immediately after the domain, prefixed by a "V".
+
+E.g.
+
+`api.nerc-bas.ac.uk/V2/ships`
+
+Sources:
+
+* [Version Control For APIs - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-VersionControlforAPIs)
+
 #### [X.X] APIs MUST not assume a version for requests that do not specify one.
 
 APIs **MUST NOT** use conventions such as `/latest/`, `/current/`, `/head/` etc. as pointers to the latest API version. This behaviour is not clear or unambiguous, requests made in this way may suddenly fail if a breaking change is introduced to a new version.
@@ -372,9 +389,22 @@ Instead users **MUST** explicitly state the version they wish to use. If no vers
 
 APIs **MUST NOT** introduce braking changes *within* an API version. If you need to do this create a new version.
 
+Examples of changes that can be implemented in the current version:
+
+* New resources (with associated methods)
+* New methods for existing resources
+* New data formats
+* New attributes or elements on existing data types
+
+Examples of changes that **MUST** be implemented in a new version:
+
+* Removed or renamed methods/resources/URLs, including changes to HTTP verb
+* Changes to the data returned by a method
+
 Sources:
 
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
+* [Version Control For APIs - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-VersionControlforAPIs)
 
 #### [X.X] Where possible, APIs SHOULD support old versions
 
@@ -420,11 +450,14 @@ Sources:
 
 ## Other
 
-[X.X] One individual should take responsible for an API
+####[X.X] One individual should take responsible for an API
 
 * This person will be reasonable for making sure the API follows these guidelines.
 
-[X.X] Data formats
+#### [X.X] Data Formats
+
+
+* Use `Accept` and `Content-Type` headers to perform content negotiation to decide which data type to use for a request.
 
 * Responses **SHOUlD** be made available one or more appropriate data formats, with the simplest, most open, format used by default.
 
@@ -465,6 +498,32 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#code-integration
 * https://www.gov.uk/service-manual/making-software/apis.html#testing
+
+[Caching & Version Control - Points]
+
+* Read-only API responses **SHOULD**, where practical, be cacheable, using appropriate methods for invaliding expired information.
+	* ETag
+		* The ETag for a resource **MUST** be the same regardless of the data-type used.
+	* 304 Not Modified
+	* TTL
+
+General:
+
+* Two types of caching
+	* *External* caching of URLs (i.e. methods), can provide information where the API itself is unavailable. Only available for anonymous requests.
+	* *Internal* within the API application, e.g. query caching, speeds up request processing for all types of request (anonymous and authenticated).
+
+[Caching & Version Control - Sources]
+
+* [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
+
+[Responses]
+
+* Use an appropriate status code.
+	* 2XX responses code **MUST** only be used for successful requests
+	* 4XX responses **MUST** be used to indicate client errors, i.e. that the user must fix
+	* 5XX responses **MUST** be used to indicate server errors, i.e. that we must fix
+	* Its not practical to give guidance on specific status codes for every situation, look for the common consensus elsewhere.
 
 ## Resources & Implementations
 
@@ -555,6 +614,7 @@ Bespoke/Custom
 
 * [APIs - Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
+* [Security - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-Security)
 
 [2.2]
 
