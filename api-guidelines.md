@@ -20,6 +20,12 @@ Status:
 
 **SHOULD** / **SHOULD NOT** - As defined by [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
+* Method - 
+* Resource - 
+* Request - 
+* Response - 
+* CRUD - **C**reate, **R**etrieve (**R**ead), **U**pdate, **D**estroy (**D**elete).
+
 Guidelines use a numbered prefix like this:
 
 #### [X.X] Guideline
@@ -47,6 +53,9 @@ Important information is shown **like this**.
 As noted later, **BAS APIs are not significantly unique**, therefore large parts of guidelines produced by others are directly applicable here. Consequently, **large parts of these guidelines are based on other peoples work**, particularly those with significant experience.
 
 * [Government Digital Service - Service Manual](https://www.gov.uk/service-manual)
+* [18F - 18F API Standards](https://github.com/18f/api-standards)[1]
+
+[1] 18F are the US equivalent of the GDS.
 
 ## Aims & Objectives
 
@@ -60,7 +69,7 @@ These aims will be achieved through these objectives:
 * Provide a series of guidelines focusing on the *design* and *behaviour* of APIs[1].
 * Promote the use of standards, best practice and how these create better APIs.
 * Ensure technologies and approaches used to create APIs are justified.
-* Provide, real world, non-abstract resources which creators can use to provide functionality that meet these guidelines[2].
+* Provide, real world, non-abstract resources and practices which creators can use to provide functionality that meet these guidelines[2].
 * In some cases, make opinionated decisions, with explanations why these have been made.
 * Ensure any relevant requirements that apply to BASIS through BAS, NERC, Government, etc. are followed.
 * Ensure these guidelines are updated in a timely fashion to ensure guidance remains relevant and APIs remain useful.
@@ -93,6 +102,14 @@ These aims will be achieved through these objectives:
 
 > Wherever possible APIs should use consistent terminology and meaning, including field names, actions, etc. Wherever possible these should be commonly used terms used elsewhere.
 
+> APIs will not all serve the same purpose, however there are a number of common types that should, where appropriate, be consistent with one another. Some examples are listed in the 18F API Standards and echoed here for convenience:
+
+> *  "*Bulk data*. Clients often wish to establish their own copy of the API's dataset in its entirety. For example, someone might like to build their own search engine on top of the dataset, using different parameters and technology than the "official" API allows. If the API can't easily act as a bulk data provider, provide a separate mechanism for acquiring the backing dataset in bulk.
+
+> *  *Staying up to date*. Especially for large datasets, clients may want to keep their dataset up to date without downloading the data set after every change. If this is a use case for the API, prioritise it in the design.
+
+> *  *Driving expensive actions*. What would happen if a client wanted to automatically send text messages to thousands of people or light up the side of a skyscraper every time a new record appears? Consider whether the API's records will always be in a reliable unchanging order, and whether they tend to appear in clumps or in a steady stream. Generally speaking, consider the "entropy" an API client would experience."
+
 > The *Sources & Further Reading* section has more resources on this guideline.
 
 ####[0.2] Wherever possible, **APIs should be developed in the open, and made available publicly**
@@ -102,6 +119,8 @@ These aims will be achieved through these objectives:
 > In addition to API outputs, the research, design and code of APIs themselves can prove useful to others and ourselves. We benefit enormously from the work of others, through open sourced ideas and technologies, it is therefore right we make whatever we can available for others.
 
 > In general the more people that use our APIs, and able to see how they work, the higher the chance of feedback. Either bugs/inaccuracies in our code or data we can correct, or 'have you thought about this' type ideas.
+
+> In addition APIs and their code being publicly available, where feasible associated issue trackers, wiki's and other sources of information **SHOULD** be made available. This gives users an increased understanding of the current status of an API, its history, challenges and how these were resolved etc. This helps users evaluate our APIs with more confidence and prevents repeating old discussions.
 
 > This is the tenth GDS Design Principle, the *Sources & Further Reading* section has more resources on this guideline.
 
@@ -144,6 +163,8 @@ These aims will be achieved through these objectives:
 > * The value used in the request ('2004/10/14')
 
 > This shows, clearly and unambiguously, why the request failed and how to correct the mistake. Importantly, regardless of the input used, this method will, from first use, only succeed where the date is correctly formatted.
+
+> In addition an appropriate status code should be used to indicate more generally the type of error that has occurred. Errors caused by us, or the API should use a status code in the `5XX` range. User errors should use a status code in the `4XX` range.
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
@@ -225,7 +246,7 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 ####[1.2] **APIs MUST allow for feedback to be submitted by anyone and for this to taken seriously.**
 
-> Ideally the individual responsible for each API should be contactable directly.
+> Ideally the individual responsible for each API **SHOULD** be contactable directly.
 
 > Feedback **MUST** be treated seriously, particularly in regards to usability problems.  
 
@@ -254,6 +275,9 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 * Rate limiting 
 * Security
 * Data sources, accuracy and limitations 
+* Feedback, Issues, contacts
+* Mailing list - i.e. some way to stay up to date with any changes.
+* Contribution policy
 * Methods
 	* Access (URL)
 	* Authenticated/Anonymous access
@@ -292,32 +316,129 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
-## Method design
+## API Requests
 
-[URLS - points]
+#### [x.x] Each API method **MUST** be available at a unique *endpoint*
 
-* URLs SHOULD be well structured, consistent, stable and clean, for both 'a thing' and 'a collection of things'.
-* Query strings MUST NOT be required and MUST be used for optional, unordered parameters.
+Within these guidelines, an *endpoint* consists of 4 elements:
 
-[URLS - sources]
+1. HTTP verb (e.g. `GET`)
+2. HTTP headers (e.g. `Accept: application/json`
+3. URL path (e.g. `/ships`)
+4. URL parameters (e.g. `?operator=BAS`) 
+
+The HTTP verb and URL Path **MUST** be specified in each API request (and indeed by HTTP itself), these are referred to as *required* elements.
+
+HTTP headers and URL parameters can be specified in each API request, these are referred to as *optional* elements.
+
+**An API endpoint is considered unique if its required elements are unique.**
+
+For example,
+
+* `[GET]V2/ships` and `[GET]V2/ships/{id}` are unique as the URL path is different.
+* `[GET]V2/ship/{id}` and `[PUT]V2/ship/{id}` are unique as the HTTP verb is different.
+* `[Get]V2/ships` and `[Get]V2/ships?id={id}` are NOT unique as the required endpoint elements are not unique.
+
+This ensures each API endpoint can be bookmarked and referenced easily and that each API request refers to a unique API method, which is needed for analytics.
+
+Sources:
+
+* https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
+* [18F API Standards - API Endpoints - I8F](https://github.com/18f/api-standards#api-endpoints)
+
+#### APIs Endpoints **SHOULD** use an appropriate HTTP verb
+
+Mapping to CRUD, these would be:
+
+* `GET` for retrieving/reading
+* `POST` for creating
+* `PUT` for updateing
+* `DELETE` for deleting
+
+Sources:
+
+* https://www.gov.uk/service-manual/making-software/apis.html#use-http-methods-as-tim-intended
+
+#### [X.X] API Endpoints **MUST NOT** allow GET requests to alter resources.
+
+`GET` endpoints should be *safe* and essentially act as read-only.
+
+Sources:
+
+* https://www.gov.uk/service-manual/making-software/apis.html#use-http-methods-as-tim-intended
+
+#### [X.X] API Endpoints **SHOULD NOT** rely on verbs other than `GET` and `POST` 
+
+A mechanism for using `POST` requests instead with some way specify the intended verb **SHOULD** be supported.
+
+For example, a `_method` parameter could be used to fake other request types.
+
+APIs **SHOULD NOT** use verbs such as **PATCH** which are unambiguous.
+APIS **SHOULD** treat less common verbs with caution and **SHOULD** always a well supported alternative if used. 
+
+Sources:
+
+* https://www.gov.uk/service-manual/making-software/apis.html#use-http-methods-as-tim-intended
+
+#### [X.X] API Endpoints **SHOULD** be self describing
+
+It **SHOULD** be possible to gather what an API method does from its endpoint alone. Therefore endpoints should be as self descriptive as possible, whilst being concise and ensuring endpoints remain well structured.
+
+The easiest way to do this is to use descriptive and logical names for endpoints, you **SHOULD NOT** use verbs. If the method belongs to a resource use its name in its description.
+
+Further endpoints **SHOULD** be structured logically and intuitively. Methods for a resource should be nested under the resource.
+
+For example, `[GET]V2/ships/{id}/voyages` indicates the resource is `ships`, `{id}` the specific resource and the method is `voyages`. From this alone, it should be reasonably obvious this endpoint returns a list of voyages for a ship specified by `{id}`.
+
+Sources:
+
+* [18F API Standards - API Endpoints - I8F](https://github.com/18f/api-standards#api-endpoints)
+
+#### [x.x] For resources, API Endpoints **SHOULD** use the plural term in all cases
+
+The same endpoint **SHOULD** be used for both 'a thing' and 'a collection of things'. This helps keep URLs consistent as datasets change and are more predictable by not splitting methods over multiple URL paths.
+
+For example, `[GET]V2/ships/{id}/` and `[GET]V2/ships` both use `ships` even though the first returns a single *ship* and the latter multiple *ships*.
+
+You **SHOULD NOT** have URLs such as:
+
+* `[GET]V2/ships/method_A`
+* `[GET]V2/ship/method_B`
+* `[GET]V2/ships/method_C`
+
+Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 
-[HTTP methods - points]
+#### [x.x] Wherever possible endpoints should remain as stable as possible.
 
-* APIs SHOULD use appropriate verbs for CRUD actions
-	* Get for Read
-	* Post for Create/Update/Delete
-	* Put for Update
-	* Delete for Delete
-* APIs MUST NOT allow Get requests to alter resources.
-* Assume only Get and Post are available, i.e. use '_method' to fake a Put/Delete request
-* APIs SHOULD NOT use ambiguous verbs such as Patch.
-* APIs SHOULD treat less common verbs with caution, and always offer a well supported alternative.
+Where endpoints do change location and perform the same function, use redirects (e.g. `301 Moved Permanently`) to ensure backwards compatibility. You **MUST NOT** do this if the method an endpoint refers to has changed, or where doing so would introduce confusion and ambiguity.
+ 
+Sources:
 
-[HTTP methods - sources]
+* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 
-* https://www.gov.uk/service-manual/making-software/apis.html#use-http-methods-as-tim-intended
+#### [x.x] URL Parameters **MUST NOT** Be Required
+
+URL Parameters (query strings) **MUST** be optional.
+
+Generally URL parameters are used for filtering information in a request, for example setting sorting or specifying a date range. API requests made without these parameters would be the same in both cases, though in a different order or a super set of the same information.
+
+Sources:
+
+* https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
+
+#### [x.x] The Order of URL Parameters **MUST NOT** Be Significant
+
+It **MUST NOT** matter in what order URL parameters are given.
+
+For example,
+
+`?from=1991-12-22&until=20010-07-21` and `?until=20010-07-21&from=1991-12-22` **MUST** return the same result if all other factors are the same.
+
+Sources:
+
+* https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 
 ## Security, Authentication & Authorisation
 
@@ -332,7 +453,9 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 [HTTPS - points]
 
-* HTTPS MUST be used for sensitive information.
+* HTTPS **MUST** be used for sensitive information.
+* HTTPS **SHOULD** be used by default.
+* If HTTPS is used HTTP **SHOULD** not be supported.
 
 [HTTPS - sources]
 
@@ -362,6 +485,7 @@ The *Resources & Implementations* section has read world examples of this guidel
 [Authentication/Authorisation - sources]
 
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
+* [18F API Standards - API keys - I8F](https://github.com/18f/api-standards#api-keys)
 
 ## Versioning
 
@@ -369,7 +493,7 @@ The *Resources & Implementations* section has read world examples of this guidel
 
 API versions are not alternatives, they are linear progressions, ideally improving over time. This means new API versions **SHOULD** replace older versions, therefore older versions **SHOULD** be deprecated.
 
-####[X.X] The API version **MUST** be the first token in a URL, immediately after the domain, prefixed by a "V".
+####[X.X] The API version **MUST** be the first token in a URL path, prefixed by a "V".
 
 E.g.
 
@@ -405,6 +529,7 @@ Sources:
 
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 * [Version Control For APIs - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-VersionControlforAPIs)
+* [18F API Standards - I8F](https://github.com/18f/api-standards)
 
 #### [X.X] Where possible, APIs SHOULD support old versions
 
@@ -448,30 +573,62 @@ Sources:
 
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 
-## Other
+## API Responses
 
-####[X.X] One individual should take responsible for an API
+#### [x.x] API Responses **SHOULD** Support Appropriate Data Formats, Defaulting to the Simplest.
 
-* This person will be reasonable for making sure the API follows these guidelines.
+The default format should the most useful for the given response. Where multiple data formats are offered, at least one should be a widely interoperable, ideally open, format.
 
-#### [X.X] Data Formats
+Often more complex, specialised formats may be more useful for particular tasks. These should be offered, where feasible and based on user need, alongside simpler but more interoperable alternatives.
 
+Sources:
+
+* https://www.gov.uk/service-manual/user-centred-design/choosing-appropriate-formats.html
+
+Resources:
+
+* [List of common formats](https://www.gov.uk/service-manual/making-software/apis.html#representations-are-for-the-consumer)
+
+#### [x.x] API Responses **SHOULD** Ideally offer JSON as an available data format
+
+Where a single data format is offered this **SHOULD** ideally be JSON, unless another, similarly open format is available.
+
+The 18F API Standards summarise the benefits of using JSON, they are echoed here for convenience:
+
+"JSON is an excellent, widely supported transport format, suitable for many web APIs.
+
+Supporting JSON and only JSON is a practical default for APIs, and generally reduces complexity for both the API provider and consumer.
+
+General JSON guidelines:
+
+* *Responses should be a JSON object (not an array).* Using an array to return results limits the ability to include metadata about results, and limits the API's ability to add additional top-level keys in the future.
+* *Don't use unpredictable keys.* Parsing a JSON response where keys are unpredictable (e.g. derived from data) is difficult, and adds friction for clients.
+* *Use under_score case for keys*. Different languages use different case conventions. JSON uses `under_score`, not `camelCase`.
+"
+
+Sources:
+
+* [18F API Standards - Just Use JSON - I8F](https://github.com/18f/api-standards#just-use-json)
+
+#### Other
 
 * Use `Accept` and `Content-Type` headers to perform content negotiation to decide which data type to use for a request.
 
-* Responses **SHOUlD** be made available one or more appropriate data formats, with the simplest, most open, format used by default.
+## Data Type Representations
 
-* Often more complex, specialised formats may be more useful for particular tasks. These should be offered, where feasible and based on user need, alongside simpler but more interoperable alternatives.
+#### [x.x] APIs Should Use ISO 8601 for Dates, Times and Date-Times using UTC
 
-* Sources:
+The 18F API Standards summarise the benefits of using this, they are echoed here for convenience:
 
-	* https://www.gov.uk/service-manual/making-software/apis.html#representations-are-for-the-consumer
+"For just dates, that looks like 2013-02-27. For full times, that's of the form 2013-02-27T10:00:00Z.
 
-		* Gives a list of common formats
+This date format is used all over the web, and puts each field in consistent order -- from least granular to most granular."
 
-	* https://www.gov.uk/service-manual/user-centred-design/choosing-appropriate-formats.html
+Sources:
 
-		* General information
+* [18F API Standards - Use A Consistent Date Format - I8F](https://github.com/18f/api-standards#use-a-consistent-date-format)
+
+## Other
 
 [Logging and Analytics - points]
 
@@ -517,13 +674,35 @@ General:
 
 * [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
 
-[Responses]
+[Responses - Points]
 
 * Use an appropriate status code.
 	* 2XX responses code **MUST** only be used for successful requests
 	* 4XX responses **MUST** be used to indicate client errors, i.e. that the user must fix
 	* 5XX responses **MUST** be used to indicate server errors, i.e. that we must fix
 	* Its not practical to give guidance on specific status codes for every situation, look for the common consensus elsewhere.
+
+[Responses - Sources]
+
+* [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
+
+[Pagination]
+
+~~ Range headers etc. ~~
+
+[Project Management - Points]
+
+* Each API **SHOULD** have a single owner, responsible for delivering and supporting each API
+	* This person **SHOULD** be reasonable for making sure the API follows these guidelines.
+	* This person **SHOULD** be involved in the day to day creation and running of the API, they **SHOULD NOT** be a symbolic figurehead.
+	* This person **SHOULD** be responsible for the allocation of available resources to that API.
+	* This person **SHOULD** be contactable by users of the API, and **SHOULD** personally review and act on any feedback provided.
+* API creation, running and maintenance *SHOULD* use issue tracking to manage and track tasks, bugs, etc.
+	* Where possible this should be in the open to allow users to understand the status of an API, find known issues, etc.
+
+[Project Management - Sources]
+
+* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
 
 ## Resources & Implementations
 
@@ -571,11 +750,13 @@ Bespoke/Custom
 * [Ninth Principle - GDS Design Principles](https://www.gov.uk/design-principles#ninth)
 * [APIs - Names Reinforce Conventions - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#names-reinforce-conventions)
 * [Naming Principles - Microformats](http://microformats.org/wiki/naming-principles)
+* [18F API Standards - Design For Common Use Cases - I8F](https://github.com/18f/api-standards#design-for-common-use-cases)
 
 [0.2]
 
 * [Tenth Principle - GDS Design Principles](https://www.gov.uk/design-principles#tenth)
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
+* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
 
 [0.3]
 
@@ -585,6 +766,7 @@ Bespoke/Custom
 [0.4]
 
 * [APIs Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
+* [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
 
 [0.5]
 
@@ -606,15 +788,20 @@ Bespoke/Custom
 * [First Principle - GDS Design Principles](https://www.gov.uk/design-principles#first)
 * [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
 
+[1.2]
+* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
+
 [1.3]
 
 * [APIs - Build an API By Building With the API](https://www.gov.uk/service-manual/making-software/apis.html#build-an-api-by-building-with-the-api)
+* [18F API Standards - Using One's Own API - I8F](https://github.com/18f/api-standards#using-ones-own-api)
 
 [2.1]
 
 * [APIs - Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 * [Security - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-Security)
+* [18F API Standards - Notifications of Updatess - I8F](https://github.com/18f/api-standards#notifications-of-updates)
 
 [2.2]
 
