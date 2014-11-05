@@ -442,6 +442,50 @@ Sources:
 
 ## Security, Authentication & Authorisation
 
+#### [x.x] APIs **SHOULD** use HTTPS by default
+
+The 18F API Standards summarise the benefits of using HTTPS, they are echoed here for convenience:
+
+"Any new API should use and require HTTPS encryption (using TLS/SSL). HTTPS provides:
+
+* *Security*. The contents of the request are encrypted across the Internet.
+* *Authenticity*. A stronger guarantee that a client is communicating with the real API.
+* *Privacy*. Enhanced privacy for apps and users using the API. HTTP headers and query string parameters (among other things) will be encrypted.
+* *Compatibility*. Broader client-side compatibility. For CORS requests to the API to work on HTTPS websites -- to not be blocked as mixed content -- those requests must be over HTTPS.
+
+HTTPS should be configured using modern best practices, including ciphers that support forward secrecy, and HTTP Strict Transport Security."
+
+For internal testing, the Web & Applications team maintain a internal Certification Authority which can issue certificates on a per domain basis. This simplifies trusting self signed certificates by owning needing to trust the CA certificate. These certificates **MUST NOT** be used externally or for services hosted outside of BAS.
+
+Please contact the [BAS Web & Applications Team](mailto:basweb@bas.ac.uk) for how to request an internal certificate or how to trust the internal CA.
+
+For hosting outside of BAS or non-testing purposes BAS IT maintain certificates for `antarctica.ac.uk` and `nerc-bas.ac.uk`. These are wildcard certificates issued by a well supported Certification Authority.
+
+Please contact the [BAS IT Help Desk](mailto:helpdesk@bas.ac.uk) for how to use these certificates for your API.
+
+Sources:
+
+* [18F API Standards - Always Use HTTPS - I8F](https://github.com/18f/api-standards#always-use-https)
+
+Resources:
+
+* [SSL Labs](https://ssllabs.com/ssltest/analyze.html)
+
+####  [x.x] Where HTTPS is used, HTTP requests **SHOULD** be rejected.
+
+Insecure requests **SHOULD NOT** be silently *upgraded* to secure requests. Users **SHOULD** explicitly state their intention and we **SHOULD** respond to that directly. This removes any ambiguity and keeps the API as simple as possible.
+
+#### [x.x] APIs **MUST** Use HTTPS for Sensitive Information
+
+This includes anything information that is personally identifying, confidential or privileged (including anything rated as 'OFFICIAL' under the Government Security Classifications.
+
+Sources:
+
+* [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
+* [Government Security Classifications - GOV.UK](https://www.gov.uk/government/publications/government-security-classifications)
+
+#### Other
+
 [Security - points]
 
 * APIs MUST NOT roll their own crypto.
@@ -450,16 +494,6 @@ Sources:
 [Security - sources]
 
 * 
-
-[HTTPS - points]
-
-* HTTPS **MUST** be used for sensitive information.
-* HTTPS **SHOULD** be used by default.
-* If HTTPS is used HTTP **SHOULD** not be supported.
-
-[HTTPS - sources]
-
-* [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
 
 [Authentication/Authorisation - points]
 
