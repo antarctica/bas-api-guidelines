@@ -493,7 +493,31 @@ Sources:
 
 [Security - sources]
 
-* 
+*
+
+[Access Control]
+
+#### [x.x] To Allow Access From Web Browsers, APIs SHOULD Use CORS
+
+CORS is an industry standard for allowing access to APIs from multiple origins from within web browsers. 
+
+All major browsers, servers (including TomCat) and frameworks (including jQuery) support this standard and ensure strong security and wide interoperability.
+
+Depending on how CORS is configured access can be restricted at the origin level. Outside of browsers these restrictions are meaningless (its just a header) but CORS provides good protection against certain web based attacks.
+
+APIs **SHOULD NOT** use JSONP, its a hack and we **SHOULD NOT** condone its use. The 18F API Standards provide good reasons not to use this, they are echoed for convenience:
+
+"JSONP is not secure or performant. If IE8 or IE9 must be supported, use Microsoft's XDomainRequest object instead of JSONP. There are libraries to help with this."
+
+Sources:
+
+* [18F -  - 18F](https://github.com/18f/api-standards#cors)
+* [Why JSONP Is a Terrible Idea and I Will Never Use it Again - tmcw](https://gist.github.com/tmcw/6244497)
+
+Resources:
+
+* [Enable CORS](http://enable-cors.org/index.html)
+* [Corslight - Mapbox](https://github.com/mapbox/corslite)
 
 [Authentication/Authorisation - points]
 
@@ -648,9 +672,29 @@ Sources:
 
 * Use `Accept` and `Content-Type` headers to perform content negotiation to decide which data type to use for a request.
 
-## Data Type Representations
+## Data Type Representations ##
 
-#### [x.x] APIs Should Use ISO 8601 for Dates, Times and Date-Times using UTC
+#### [x.x] APIs **SHOULD** Use UTF-8 for Character Encoding 
+
+The 18F API Standards summarise the benefits of using this, they are echoed here for convenience:
+
+"Expect accented characters or 'smart quotes' in API output, even if they're not expected.
+
+An API should tell clients to expect UTF-8 by including a charset notation in the Content-Type header for responses.
+
+An API that returns JSON should use:
+
+`Content-Type: application/json; charset=utf-8`"
+
+Sources:
+
+* [18F API Standards - Just Use UTF-8 - 18F](https://github.com/18f/api-standards#use-utf-8)
+
+Resources:
+
+* [UTF-8 Everywhere](http://utf8everywhere.org/)
+
+#### [x.x] APIs **SHOULD** Use ISO 8601 for Dates, Times and Date-Times using UTC
 
 The 18F API Standards summarise the benefits of using this, they are echoed here for convenience:
 
