@@ -54,6 +54,7 @@ As noted later, **BAS APIs are not significantly unique**, therefore large parts
 
 * [Government Digital Service - Service Manual](https://www.gov.uk/service-manual)
 * [18F - 18F API Standards](https://github.com/18f/api-standards)[1]
+* [Interagent (Heroku) - HTTP API Design](https://github.com/interagent/http-api-design)
 
 [1] 18F are the US equivalent of the GDS.
 
@@ -398,17 +399,18 @@ Sources:
 
 The same endpoint **SHOULD** be used for both 'a thing' and 'a collection of things'. This helps keep URLs consistent as datasets change and are more predictable by not splitting methods over multiple URL paths.
 
-For example, `[GET]V2/ships/{id}/` and `[GET]V2/ships` both use `ships` even though the first returns a single *ship* and the latter multiple *ships*.
+For example, `[GET]v2/ships/{id}/` and `[GET]v2/ships` both use `ships` even though the first returns a single *ship* and the latter multiple *ships*.
 
 You **SHOULD NOT** have URLs such as:
 
-* `[GET]V2/ships/method_A`
-* `[GET]V2/ship/method_B`
-* `[GET]V2/ships/method_C`
+* `[GET]v2/ships/method_A`
+* `[GET]v2/ship/method_B`
+* `[GET]v2/ships/method_C`
 
 Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
+* [HTTP API Design - Use Consistent Path Formats - Interagent](https://github.com/interagent/http-api-design#use-consistent-path-formats)
 
 #### [x.x] Wherever possible endpoints should remain as stable as possible.
 
@@ -440,6 +442,22 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 
+#### [x.x] Serialised JSON should be accepted in request bodies using relevant HTTP verbs and where JSON is a supported data-type.
+
+Where JSON is used for both the request and response data-type this provides a symmetry, simplifying making requests for the user.
+
+This also prevents any errors when converting JSON data into HTTP form key-value pairs. This makes use the users code simpler and clearer without introducing ambiguity in our API.
+
+For example,
+
+    $ curl -X POST https://ships-api/V2/ship \
+    -H "Content-Type: application/json" \
+    -d '{"name": "RRS James Clarke Ross"}'
+
+Sources:
+
+* [HTTP API Design - Accept Serialised JSON in Request Bodies - Interagent](https://github.com/interagent/http-api-design#accept-serialized-json-in-request-bodies)
+
 ## Security, Authentication & Authorisation
 
 #### [x.x] APIs **SHOULD** use HTTPS by default
@@ -453,7 +471,7 @@ The 18F API Standards summarise the benefits of using HTTPS, they are echoed her
 * *Privacy*. Enhanced privacy for apps and users using the API. HTTP headers and query string parameters (among other things) will be encrypted.
 * *Compatibility*. Broader client-side compatibility. For CORS requests to the API to work on HTTPS websites -- to not be blocked as mixed content -- those requests must be over HTTPS.
 
-HTTPS should be configured using modern best practices, including ciphers that support forward secrecy, and HTTP Strict Transport Security."
+HTTPS **SHOULD** be configured using modern best practices, including ciphers that support forward secrecy, and HTTP Strict Transport Security."
 
 For internal testing, the Web & Applications team maintain a internal Certification Authority which can issue certificates on a per domain basis. This simplifies trusting self signed certificates by owning needing to trust the CA certificate. These certificates **MUST NOT** be used externally or for services hosted outside of BAS.
 
@@ -473,7 +491,15 @@ Resources:
 
 ####  [x.x] Where HTTPS is used, HTTP requests **SHOULD** be rejected.
 
-Insecure requests **SHOULD NOT** be silently *upgraded* to secure requests. Users **SHOULD** explicitly state their intention and we **SHOULD** respond to that directly. This removes any ambiguity and keeps the API as simple as possible.
+It is clearer and simpler to support only one protocol and ensures all requests are made securely.
+
+Ideally insecure requests **SHOULD NOT** be accepted, either by refusing the connection or using a `403 Forbidden` response.
+
+Insecure requests **SHOULD NOT** be silently 'upgraded' or redirected to secure alternatives. This introduces ambiguity and requires additional complexity to support. Taking a hard line approach is not as permissive as redirecting but it ensures 'lazy' behaviours are not tolerated.
+
+Sources:
+
+* [HTTP API Design - Require TLS - Interagent](https://github.com/interagent/http-api-design#require-tls)
 
 #### [x.x] APIs **MUST** Use HTTPS for Sensitive Information
 
@@ -708,18 +734,40 @@ Sources:
 
 ## Other
 
-[Logging and Analytics - points]
+## Logging & Analytics
 
-* Collect how people use your API, this should aim to:
-	* Detect bugs (errors, 404s, etc.)
-	* Log usage (most popular requests, etc. identify needs, where to prioritise, need driven)
-	* Log performance (queries, rendering time, caching performance, etc.)
+#### [x.x] Requests Should Be Logged, Using an unique Identifier
 
-[Logging and Analytics - sources]
+Each request made to an API should be given a UUID. This **SHOULD** be returned in the response to that request as a `x-request-id` header allowing the client to easily log and quote this value.
 
-* https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example
-	* "Collect how people use your API"
-* https://www.gov.uk/service-manual/making-software/apis.html#testing
+APIs **SHOULD** log this request ID, along with an other relevant information, such as the endpoint called, parameters and options and an indication of what was returned (an error, some data etc).
+
+This information is invaluable when resolving bugs or issues that are reported.
+
+Sources:
+
+* [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#trace-requests-with-request-ids)
+
+#### [x.x] Request Logs  **SHOULD** Be Stored Anonymously ####
+
+Unless required, identifying information such as full IP addresses, location data, etc. **SHOULD** not be stored.
+
+#### [x.x] APIs **SHOULD** Collect Information to Determine User Needs and identify problems
+
+Aggregating and analysing request data **SHOULD** inform the future development of our APIs.
+
+Information on which methods and features are used most provides an evidence base for planning future development with the needs of users in mind. This data is unlikely to explain what *new* functionality might be required, but is invaluable in identifying features that are not used.
+
+At a technical level this data is useful at both a macro and micro level. For example, frequent errors can be highlighted to ensure common problems can be identified or fixed swiftly. Or an issue with a specific resource or even request can be flagged for manual review later. Whilst testing may identify some of these types of issue in advance, its not feasible to test every condition and request premonition possible.
+
+By recording factors such as the time taken to generate requests and logging queries/requests to other data sources or services the performance of the API can be measured objectively. Knowing which types of requests result in slow database queries for example can only feasibly be gathered using this type of analysis.
+
+Key to the success of this staggery lies not only in the raw data being available, but in the tools used to process, analyse and present it in a useful fashion. Fortunately a multitude of third party and self hosted solutions are available to assist with this. Given the availability of these tools, and high value for effort ratio of the insight they can be provide, our APIs **SHOULD** use such an approach.
+
+Sources:
+
+* [APIs Document by discovery... and Example - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example)
+* [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
 
 [API Development - Points]
 
@@ -739,6 +787,7 @@ Sources:
 * Read-only API responses **SHOULD**, where practical, be cacheable, using appropriate methods for invaliding expired information.
 	* ETag
 		* The ETag for a resource **MUST** be the same regardless of the data-type used.
+		* The user should be able to check for staleness in their subsequent requests by supplying the value in the If-None-Match header.
 	* 304 Not Modified
 	* TTL
 
@@ -751,22 +800,55 @@ General:
 [Caching & Version Control - Sources]
 
 * [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
+* [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#support-caching-with-etags)
 
-[Responses - Points]
+## Responses
 
-* Use an appropriate status code.
-	* 2XX responses code **MUST** only be used for successful requests
-	* 4XX responses **MUST** be used to indicate client errors, i.e. that the user must fix
-	* 5XX responses **MUST** be used to indicate server errors, i.e. that we must fix
-	* Its not practical to give guidance on specific status codes for every situation, look for the common consensus elsewhere.
+#### [x.x] Each API response **SHOULD** use an appropriate status code
 
-[Responses - Sources]
+The general case, i.e. look it up if you don't know.
+
+Its not practical to give guidance on specific status codes for every situation, look for the common consensus elsewhere.
+
+4XX responses **SHOULD** be used to indicate client errors, i.e. that the user must fix
+5XX responses **SHOULD** be used to indicate server errors, i.e. that we must fix
+
+Sources:
 
 * [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
 
-[Pagination]
+#### [x.x] a 2XX Status Code **MUST NOT** Be Used for Unsuccessful Requests ####
+
+If the API is unable to return a response to a request that does not meet it documented output a non-2XX status code **MUST** be used.
+
+For example, a request is made for a resource that cannot be found, the API is unable to return the expected output meaning a 2XX status code **MUST NOT** be used.
+
+If, for the same request, the resource can be found but the resource has been deprecated, the API has been able to return the expected output, in addition to some additional information (that it is deprecated). In this case a 2XX status code **MUST** be used, and the additional information included in the request (i.e. as a warning).
+
+Sources:
+
+* [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
+
+#### [x.x] Wherever Possible a Full Representation of a Resource Should Be Returned
+
+This prevents additional requests (for example a POST followed by a GET request for the same resource), which reduces load on the API and improves the experience for the user.
+
+Where a response may contain nested resources, judgement should be used whether to include all or part of each nested resource.
+
+Wherever feasible nested resources **SHOULD** be returned in full, as requesting each nested resource separately would create significantly more requests than simply making the original request alone.
+
+Sources:
+
+* [HTTP API Design - Provide Full Resources Where Available - Interagent](https://github.com/interagent/http-api-design#provide-full-resources-where-available)
+
+### Pagination
 
 ~~ Range headers etc. ~~
+
+
+
+
+
 
 [Project Management - Points]
 
