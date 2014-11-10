@@ -14,16 +14,17 @@ Status:
 * **Adopted versions** of these guidelines will be tracked in the **master** branch of the [API Guidelines repository](), tagged by version.
 * **Draft versions** of these guidelines will be tracked in the **develop** branch of the [API Guidelines repository]().
 
-## Conventions & Terms ##
+## Conventions & Terms
 
 **MUST** / **MUST NOT** - As defined by [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
 **SHOULD** / **SHOULD NOT** - As defined by [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 
-* Method - 
-* Resource - 
-* Request - 
-* Response - 
+* REST(ful) - [Representational state transfer](http://en.wikipedia.org/wiki/Representational_state_transfer)
+* Method - [Methods are actions performed on a resource, accessed through an endpoint](http://restful-api-design.readthedocs.org/en/latest/methods.html)
+* Resource - [Similar to the concept of an object in programming](http://restful-api-design.readthedocs.org/en/latest/resources.html)
+* Request - [A request for something, such as a resource](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_message)
+* Response - [A reply to a request, such as a representation of a resource](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Response_message)
 * CRUD - **C**reate, **R**etrieve (**R**ead), **U**pdate, **D**estroy (**D**elete).
 
 Guidelines use a numbered prefix like this:
@@ -36,13 +37,11 @@ Guidelines use a numbered prefix like this:
 
 Important information is shown **like this**.
 
-> Descriptive or explanatory information about a guideline is shown as a block quote like this.
-
 ## Audience
 
-**These guidelines are aimed at API authors or those working closely with them**, such as a technical managers if an API is used with an project. **You do not need to know these guidelines to consume an API based on these guidelines**. The documentation for the respective API **SHOULD** contain any information you require.
+These guidelines are aimed at API authors or those working closely with them, such as a technical managers if an API is used with an project.You do not need to know these guidelines to consume an API based on these guidelines. The documentation for the respective API **SHOULD** contain any information you require.
 
-**These guidelines are written for a technical audience and use technical terms where appropriate.** The *Conventions & Terms* section will document any terms that may not be generally known by such an audience, or where a term is used to mean something other than its common definition.
+These guidelines are written for a technical audience and use technical terms where appropriate. The *Conventions & Terms* section will document any terms that may not be generally known by such an audience, or where a term is used to mean something other than its common definition.
 
 ## Feedback
 
@@ -50,13 +49,13 @@ Important information is shown **like this**.
 
 ## Acknowledgements
 
-As noted later, **BAS APIs are not significantly unique**, therefore large parts of guidelines produced by others are directly applicable here. Consequently, **large parts of these guidelines are based on other peoples work**, particularly those with significant experience.
+As noted later, **BAS APIs are not significantly unique**, therefore large parts of guidelines produced by others are directly applicable here. Consequently, large parts of these guidelines are based on other peoples work, particularly those with significant experience.
 
 * [Government Digital Service - Service Manual](https://www.gov.uk/service-manual)
 * [18F - 18F API Standards](https://github.com/18f/api-standards)[1]
 * [Interagent - HTTP API Design](https://github.com/interagent/http-api-design)[2]
 
-[1] 18F are the US equivalent of the GDS.
+[1] 18F are the US equivalent of the GDS.  
 [2] AKA Heroku
 
 ## Aims & Objectives
