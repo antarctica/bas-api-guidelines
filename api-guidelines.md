@@ -627,18 +627,31 @@ Sources:
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
 * [Government Security Classifications - GOV.UK](https://www.gov.uk/government/publications/government-security-classifications)
 
-#### Other
+#### APIs **MUST NOT** Use Non-Standard Cryptographic Methods for Encryption
 
-[Security - points]
+Simply put Cryptography is hard and we **SHOULD NOT** do it ourselves. Cryptography, encryption, etc. are all excellent examples of when its better to use something by someone else, or more specifically by someone that knows what their doing.
 
-* APIs MUST NOT roll their own crypto.
-* Do not rely on security through obscurity.
+Even *implementing* cryptography is different, as a quick internet search will prove. Banks struggle with stuff so it would insane for us to attempt to 'roll our own' cryptography or implementation.
 
-[Security - sources]
+If you think you do need to **STOP!** Consult widely with others (both internally and online) to test your reasoning and ensure you haven't missed something.
 
-*
+Sources:
 
-[Access Control]
+* [Why shouldn't we roll our own? - Information Security - Stack Exchange](http://security.stackexchange.com/questions/18197/why-shouldnt-we-roll-our-own)
+* [Even if You Don't Invent Your Own Cryptography its Still Hard - Neohapsis Labs](http://labs.neohapsis.com/2010/01/19/even-if-you-dont-invent-your-own-crypto-its-still-hard/)
+
+Resources:
+
+* [OWASP](https://www.owasp.org/index.php/Main_Page)
+
+#### APIs **MUST NOT** Rely on 'Security Through Obscurity'
+
+It is a dangerous fallacy and **MUST NOT** be relied upon.
+
+Sources:
+
+* [Security Through Obscurity - Wikipedia](http://en.wikipedia.org/wiki/Security_through_obscurity)
+* [Why is Security Through Obscurity a Bad Idea - Stack Overflow](http://stackoverflow.com/questions/533965/why-is-security-through-obscurity-a-bad-idea)
 
 #### [x.x] To Allow Access From Web Browsers, APIs SHOULD Use CORS
 
@@ -662,31 +675,61 @@ Resources:
 * [Enable CORS](http://enable-cors.org/index.html)
 * [Corslight - Mapbox](https://github.com/mapbox/corslite)
 
-[Authentication/Authorisation - points]
+#### [x.x] APIs SHOULD Allow Anonymous Access Wherever Possible
 
-* Methods may be Anonymous or Authenticated, defaulting to anonymous.
-	* Easier to use/experiment with
-	* Provides greatest caching benefit
+This means access should require authentication or authorisation, unless it is necessary.
 
-* Authentication/Authorisation SHOULD NOT require authentication/authorisation by default
-	* Increases barriers
-	* Makes examples harder
+This ensures APIs are easier to experiment with and integrate, especially for semolina like a scientist who just wants to get the information they want as quickly and easily as possible.
 
-* Authentication/Authorisation MUST be used for sensitive information
+Anonymous responses can be externally cached much more easily and effectively, for popular APIs this saves resources and speeds up response times.
 
-* Avoid 'siloing' by using bespoke user accounts
-	* For internal services integrate with NERC LDAP
+Clearly there will be many cases where anonymous access simply isn't tenable (or useful). As a general rule `GET` methods for most resources can be made accessible anonymously, other methods would typically require authentication/authorisation.
 
-* Wherever possible, APIs SHOULD use common authentication/authorisation schemes
-	* Well supported, understood
-	* More secure, higher chance of flaws being found and patched
+In some cases authentication is a useful feature for the end user, such as 'favourites' or usage histories. These are perfectly acceptable and **SHOULD** be offered if they help the user.
 
-The *Resources & Implementations* section has read world examples of this guideline.
-
-[Authentication/Authorisation - sources]
+Sources:
 
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
 * [18F API Standards - API keys - I8F](https://github.com/18f/api-standards#api-keys)
+
+#### [x.x] APIs MUST Restrict Access to Sensitive Information Through the Use of Authentication and Authorisation
+
+This includes anything information that is personally identifying, confidential or privileged (including anything rated as 'OFFICIAL' under the Government Security Classifications.
+
+Authorisation levels should be created according to need, using the principle of least privileged access.
+
+Sources:
+
+* [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
+* [Government Security Classifications - GOV.UK](https://www.gov.uk/government/publications/government-security-classifications)
+* [Principle of Least Privileged Access](http://en.wikipedia.org/wiki/Principle_of_least_privilege)
+
+#### [x.x] APIs **SHOULD** Use Common Sources of Authentication
+
+Many APIs will be accessible to the same group of people (i.e. BAS/NERC staff). It would therefore make sense to centralise the verification of user credentials to a central service, or order to keep our APIs as simple as possible, and to reduce the number of passwords users have to remember. 
+
+For internal APIs this central service **SHOULD** be all or part of the NERC Active Directory. This allows the authentication of users to be delegated out completely, saving considerable time and effort. Integration with Active Directory directly or through LDAP is widely supported by a range of technologies and, if correctly implemented, is secure.
+
+It is reasonable to assume users will be able to readily provide their NERC AD account details, and if not we can again delegate password resets to IT Help Desks. This ensures where authentication is needed, it is as painless as possible.
+
+For external (to NERC) users, a similar approach should be adopted where a common authentication source is created to contain these users, to which our APIs authenticate credentials. This may take the form of a formal internal LDAP service or users database or, for academic users, Shibboleth, or for the general public, OAuth for providers such as Google, Facebook and Twitter.
+
+These external authentication sources offer similar benefits as internal sources, they also offer much larger audience sizes and, in some cases, access to additional user information, subject to the user's approval.
+
+The key point to this guideline is APIs **SHOULD NOT** maintain their directory of users for the purposes of authentication.
+
+However, there will likely be times where APIs may need to store information about a user that is specific to that API. In this cases, APIs **SHOULD** store this extra information within the API so as not to 'pollute' the authentication service.
+
+Sources:
+
+* [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
+
+Resources:
+
+* [The UK Access Management Federation](http://www.ukfederation.org.uk/)
+* [OAuth](http://oauth.net/)
+
+The *Resources & Implementations* section has read world examples of this guideline.
 
 ## Versioning
 
