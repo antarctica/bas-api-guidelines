@@ -847,9 +847,13 @@ Sources:
 
 * [18F API Standards - Just Use JSON - I8F](https://github.com/18f/api-standards#just-use-json)
 
-#### Other
+#### [x.x] APIs **SHOULD** Use Accept and Content-Type Headers to Agree on the Response Data Format
 
-* Use `Accept` and `Content-Type` headers to perform content negotiation to decide which data type to use for a request.
+Content (data type) negotiation using the `Accept` and `Content-Type` headers is a best practice which is widely supported and tested.
+
+Sources:
+
+* [Content Negotiation - Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation)
 
 ## Data Type Representations ##
 
@@ -943,8 +947,6 @@ Sources:
 * [18F API Standards - Use A Consistent Date Format - I8F](https://github.com/18f/api-standards#use-a-consistent-date-format)
 * [HTTP API Design - Use UTC Times Formatted in ISO8601 - Interagent](https://github.com/interagent/http-api-design#use-utc-times-formatted-in-iso8601)
 
-## Other
-
 ## Logging & Analytics
 
 #### [x.x] Requests Should Be Logged, Using an unique Identifier
@@ -980,49 +982,132 @@ Sources:
 * [APIs Document by discovery... and Example - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example)
 * [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
 
-[API Development - Points]
+## Caching and Version Control
 
-* APIs should be built in a loosely coupled way, using interfaces to separate tasks with specific implementations, and repositories to separate data sources from how and where that data is accessed.
+#### [x.x] Where Possible, API Responses **SHOULD** Be Catchable
 
-* APIs should be tested, this takes a number of forms
-	* Automated testing using linters, test suites & continuous integration, mocked services etc.
-	* Human testing through passive and active feedback during alpha/beta/live stages of development
+There are two forms of caching:
 
-[API Development - Sources]
+* *External* caching, caches Endpoint responses and can provide information even when the API itself is unavailable.
+* *Internal* caching takes place the API application, e.g. query caching.
 
-* https://www.gov.uk/service-manual/making-software/apis.html#code-integration
-* https://www.gov.uk/service-manual/making-software/apis.html#testing
+External caching is much more robust and effective than internal caching and should be used for APIs with large (thousands) of users. However this method of caching is only effective for anonymous requests, returning the same information. If authentication is used the effectiveness will be decreased.
 
-[Caching & Version Control - Points]
+Caching, of any kind, should only become a focus after an API has been launched and is proving, through metrics, to be causing performance problems. That said techniques that would make adding caching more difficult, such as a authenticating all methods, should be taken into consideration during development so as not to make adding caching more trouble than it needs to.
 
-* Read-only API responses **SHOULD**, where practical, be cacheable, using appropriate methods for invaliding expired information.
-	* ETag
-		* The ETag for a resource **MUST** be the same regardless of the data-type used.
-		* The user should be able to check for staleness in their subsequent requests by supplying the value in the If-None-Match header.
-	* 304 Not Modified
-	* TTL
+#### [x.x] For Cached Responses, Suitable Time Limits **SHOULD** Be Used ####
 
-General:
+Where caching is used suitable measures should be used to ensure stale or invalid data is removed in a trimly fashion.
 
-* Two types of caching
-	* *External* caching of URLs (i.e. methods), can provide information where the API itself is unavailable. Only available for anonymous requests.
-	* *Internal* within the API application, e.g. query caching, speeds up request processing for all types of request (anonymous and authenticated).
+Techniques such as `Cache-Control` headers can be used to instruct caching systems, and users, how long a response should be cached before a new request is made.
 
-[Caching & Version Control - Sources]
+Users should be able to query this information in subsequent requests using a `If-None-Match` header.
+
+For example, an Endpoint may update once an hour with a new ship position, responses from this endpoint should include a `Cache-Control` header to inform the user the information will not change until the next update. This also ensures any request made after this period has expired will automatically receive the updated information.
+
+Sources:
 
 * [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
 * [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#support-caching-with-etags)
 
+#### [x.x] For Cached Resources, Etags **SHOULD** Be Used ####
 
-[Rate Limiting]
+Importantly the Etag for a resource **SHOULD** be the same regardless of the data-type used for the response.
 
-[Rate Limiting - Sources]
+Sources:
+
+* [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
+* [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#support-caching-with-etags)
+
+#### [x.x] Where needed rate limiting **SHOULD** be used to ensure resources are not monopolised 
+
+In some cases, for endpoints that may update frequently or which are expensive to process, rate limiting can be used to ensure users do not (inadvertently) overwhelm the API or cause performance/access problems for other users.
+
+Where this type of activity apparent rate limiting can be used, to inform users they are making to many requests in a given period. This can be combined with technologies within the API to ensure this is enforced.
+
+Sources:
 
 * [HTTP API Design - Show Rate Limit Status - Interagent](https://github.com/interagent/http-api-design#show-rate-limit-status)
 
-[Rate Limiting - Resources]
+Resources:
 
 * [Token Bucket - Wikipedia](http://en.wikipedia.org/wiki/Token_bucket)
+
+## API Development
+
+#### [x.x] APIs SHOULD Be developed Using Source Control ####
+
+Git is preferred, specially the NERC Stash repository provided by CEH.
+
+APIs **SHOULD** adopt a suitable branching model for separating development and production codebases, and for using tools such as continuous integration and task such as code reviews.
+
+By convention a *develop* branch should reflect the version of the API under active development, and a *master* branch reflecting the latest stable version.
+
+Wherever possible, API source code **SHOULD** be made available publicly. This increases the number of people who can review our code for bugs and mistakes and maybe offer suggestions on how to do things better. It also forces us to write better code, by avoiding 'hacks' using proper structuring and ensuring code is readable and well explained.
+
+Sources:
+
+* [Why Should I use Source Control - Stack Overflow](http://stackoverflow.com/questions/1408450/why-should-i-use-version-control)
+
+Resources:
+
+* [Stash - CEH](https://stash.ceh.ac.uk)
+* [Comparing Workflows - Atlassian Tutorials](https://www.atlassian.com/git/tutorials/comparing-workflows)
+
+#### [x.x] APIs SHOULD Be Developed Using Issue Tracking software
+
+These guidelines have no preference on the wide range of issue trackers that are available. The type of issue tracker you choose will depend on the audience of the API, the number and range of people contributing to the API and the complexity of the issues that will need to handled.
+
+For small projects released to the public tools like the GitHub or BitBucket issue trackers offer good accessibility for users and contributors and are free to use. However they lack more complex features such as assignments, custom issue states and associations.
+
+For larger projects or those focused on an internal or NERC audience, it is recommended you use Jira, of which NERC has an instance provided by CEH. An added benefit of using this system is integration with other services such as Stash.
+
+As with source code, wherever possible the issue tracker should be a publicly available resource. This allows users to check for previously reported issues and encourages greater debate, and ideally better APIs through openness.
+
+Sources:
+
+* [Why Use Bug Tracking Software - Stack Overflow](http://stackoverflow.com/questions/765968/why-use-bug-tracking-software)
+
+Resources:
+
+* [Comparison of Issue Tracking Software - Wikipedia](http://en.wikipedia.org/wiki/Comparison_of_issue-tracking_systems)
+* [Github Issues 2.0 - Github Blog](https://github.com/blog/831-issues-2-0-the-next-generation)
+* [Jira - CEH](https://jira.ceh.ac.uk)
+* [Stash - CEH](https://stash.ceh.ac.uk)
+
+#### [x.x] APIs **SHOULD** Have a Single Owner, Who Is Responsible for Delivering and Supporting that API
+
+* This person **SHOULD** be reasonable for making sure the API follows these guidelines.
+* This person **SHOULD** be involved in the day to day creation and running of the API, they **SHOULD NOT** be a symbolic figurehead.
+* This person **SHOULD** be responsible for the allocation of available resources to that API.
+* This person **SHOULD** be contactable by users of the API, and **SHOULD** personally review and act on any feedback provided.
+
+Sources:
+
+* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
+
+#### [x.x] APIs SHOULD Be developed in a Loosely Coupled Way
+
+This means the use of interfaces to separate tasks with specific implementations, and repositories to separate data sources from how and where that data is accessed.
+
+This ensures the APIs we create a modular and adaptable to change. This applies at a service level (changing payment processor or even database backend) and at a local code level by designing properly scoped functions and clear separation of concerns.
+
+Sources:
+
+* [APIs - Code Integration - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#code-integration)
+* [Seperation of Concerns - WikiPedia](http://en.wikipedia.org/wiki/Separation_of_concerns)
+
+#### [x.x] APIs SHOULD be robustly tested
+
+This takes a number of forms:
+
+* Automated testing using linters, test suites & continuous integration, mocked services etc.
+* Human testing through passive and active feedback during alpha/beta/live stages of development
+
+Sources:
+
+* [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
+
 ## Responses
 
 #### [x.x] Each API response **SHOULD** use an appropriate status code
@@ -1079,20 +1164,6 @@ Pagination is often combined with sorting to return the most useful, as determin
 Sources:
 
 * https://devcenter.heroku.com/articles/platform-api-reference#ranges
-
-[Project Management - Points]
-
-* Each API **SHOULD** have a single owner, responsible for delivering and supporting each API
-	* This person **SHOULD** be reasonable for making sure the API follows these guidelines.
-	* This person **SHOULD** be involved in the day to day creation and running of the API, they **SHOULD NOT** be a symbolic figurehead.
-	* This person **SHOULD** be responsible for the allocation of available resources to that API.
-	* This person **SHOULD** be contactable by users of the API, and **SHOULD** personally review and act on any feedback provided.
-* API creation, running and maintenance *SHOULD* use issue tracking to manage and track tasks, bugs, etc.
-	* Where possible this should be in the open to allow users to understand the status of an API, find known issues, etc.
-
-[Project Management - Sources]
-
-* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
 
 ## Resources & Implementations
 
