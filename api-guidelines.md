@@ -268,7 +268,7 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 ## Documentation & User Experience
 
-####[2.1] **APIs MUST be well documented** for end users
+####[2.1] APIs **MUST**  provide end user documentation
 
 It isn't feasible to cover exactly how each API should be documented as this will depend on its purpose, intended audience and other factors. However in general APIs **MUST** be well documented so it is clear to users what the API can do and how they should use it to achieve what they want.
 
@@ -276,7 +276,7 @@ However there it is possible to identify some key requirements for API documenta
 
 How you decide to write and structure your documentation is up to you. To ensure that common elements are not forgotten a list of suggested sections/topics is given here. You do not have follow all of these items, and you **SHOULD NOT** include any that do not fit your API, this will confuse people.
 
-These suggested are divided into two levels:
+It is suggested to divide documentation into two parts:
 
 * Overview information
 * Endpoint information
@@ -304,6 +304,18 @@ Endpoint information **HSOULD** cover, for each endpoint:
 * Additional information as required
 
 > The *Sources & Further Reading* section has more resources on this guideline.
+
+#### [2.X] APIs **MUST** Provide Developer Documentation
+
+Developer documentation **SHOULD** contain:
+
+* A description of the technology stack used by an API and how this should be provisioned to allow new instances of the API to be created, either for further development or deployment.
+* In addition, a 'getting started' walkthrough of how to checkout the API source code through to launching the API into production. This is crucial for new developers, especially where you are using non-standard or custom technologies.
+* A brief overview of the development process, issues that were encountered, any non-straight forward decisions that were taken and why, etc. This aids new developers understand how the API was built and why it works the way it does. This is especially important if non-standard design decisions were made.
+
+The standard of documentation for both internal and externally released APIs **SHOULD** be the same, i.e. you should assume the developer has never used one of our APIs before. It is reasonable to assume knowledge of basic programming terminology and concepts and a certain familiarity with the BAS domain.
+
+Where useful and available, link to meeting minutes, process reports or other sources of information that may have been created as part of a development. This can provide more context without much effort on your part.
 
 ####[2.2] **APIs SHOULD provide real world examples**
 
