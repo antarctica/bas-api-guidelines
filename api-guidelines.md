@@ -54,9 +54,10 @@ As noted later, **BAS APIs are not significantly unique**, therefore large parts
 
 * [Government Digital Service - Service Manual](https://www.gov.uk/service-manual)
 * [18F - 18F API Standards](https://github.com/18f/api-standards)[1]
-* [Interagent (Heroku) - HTTP API Design](https://github.com/interagent/http-api-design)
+* [Interagent - HTTP API Design](https://github.com/interagent/http-api-design)[2]
 
 [1] 18F are the US equivalent of the GDS.
+[2] AKA Heroku
 
 ## Aims & Objectives
 
@@ -268,20 +269,40 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 ## Documentation & User Experience
 
-####[2.1] **APIs MUST be well documented**
+####[2.1] **APIs MUST be well documented** for end users
 
-~~ Fill this out (the irony is not lost on me) ~~
+It isn't feasible to cover exactly how each API should be documented as this will depend on its purpose, intended audience and other factors. However in general APIs **MUST** be well documented so it is clear to users what the API can do and how they should use it to achieve what they want.
 
-* Availability, Deprecation policy for older API versions
-* Rate limiting 
-* Security
+However there it is possible to identify some key requirements for API documentation. It **MUST** be clear, concise and well organised. It **MUST** care to two key audiences, users, looking to evaluate the API, and existing users, looking for specific information.
+
+How you decide to write and structure your documentation is up to you. To ensure that common elements are not forgotten a list of suggested sections/topics is given here. You do not have follow all of these items, and you **SHOULD NOT** include any that do not fit your API, this will confuse people.
+
+These suggested are divided into two levels:
+
+* Overview information
+* Endpoint information
+
+Overview information **SHOULD** cover:
+
+* Security and authentication, including acquiring and using authentication tokens, if used.
+* API stability, versioning and deprecation policy, including how to select the desired API version.
+* Common request and response headers.
+* Error serialisation format.
+* Rate limiting
 * Data sources, accuracy and limitations 
 * Feedback, Issues, contacts
 * Mailing list - i.e. some way to stay up to date with any changes.
 * Contribution policy
-* Methods
-	* Access (URL)
-	* Authenticated/Anonymous access
+* Real world examples
+
+Endpoint information **HSOULD** cover, for each endpoint:
+
+* Access (including endpoint URL, anonymous/authenticated status, required authorisation)
+* Stability & Deprecation
+* Request parameters & headers
+* Response headers, supported data types output
+* Associated resources
+* Additional information as required
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
@@ -316,6 +337,18 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 > With great power comes great responsibility -- very often people have no choice but to use our services. If we don't work hard to make them simple and usable we're abusing that power, and wasting people's time."
 
 > The *Sources & Further Reading* section has more resources on this guideline.
+
+#### [2.4] **APIs **SHOULD** Be Backed by a Schema
+
+This ensures all elements of an API are defined in a structured, testable, way and can be validated either by hand or using automatic tools.
+
+Sources:
+
+* [HTTP API Design - Provide Machine Readable JSON Schema - Interagent](https://github.com/interagent/http-api-design#provide-machine-readable-json-schema)
+
+Resources:
+
+* [Understanding JSON Schema - Michael Droettboom, Space Telescope Science Institute](http://spacetelescope.github.io/understanding-json-schema/)
 
 ## API Requests
 
@@ -395,6 +428,16 @@ Sources:
 
 * [18F API Standards - API Endpoints - I8F](https://github.com/18f/api-standards#api-endpoints)
 
+#### [x.x] API EndPoints **SHOULD** Be Safe Insensitive and Hyphen Separated
+
+This aids consistency and removes ambiguity, it also preserves compatibility with hostnames.
+
+For example, `ships` not `Ships`, `cruise-reports` not `cruise_reports`.
+
+Sources:
+
+* [HTTP API Design - Downcase Paths and Attributes - Interagent](https://github.com/interagent/http-api-design#downcase-paths-and-attributes)
+
 #### [x.x] For resources, API Endpoints **SHOULD** use the plural term in all cases
 
 The same endpoint **SHOULD** be used for both 'a thing' and 'a collection of things'. This helps keep URLs consistent as datasets change and are more predictable by not splitting methods over multiple URL paths.
@@ -420,6 +463,31 @@ Sources:
 
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 
+#### [x.x] Wherever Possible EndPoints **SHOULD** Be as Succinct as Possible
+
+Ideally EndPoints should be snappy, URLs with more tokens require more effort to understand and increase the chance of making a mistake (in the spelling, order, etc.).
+
+EndPoints do not need to reflect the underlying relationship between resources, providing this full relationship 'chain' is not relevant for the EndPoint.
+
+The Interagent HTTP API Design guidelines provide a good example of when this technique makes sense. In this case there is no need to understand what the resources used are, other than their relationship (shown in the first URL example).
+
+"
+
+    /orgs/{org_id}/apps/{app_id}/dynos/{dyno_id}
+
+Limit nesting depth by preferring to locate resources at the root path. Use nesting to indicate scoped collections. For example, for the case above where a dyno belongs to an app belongs to an org:
+
+    /orgs/{org_id}
+    /orgs/{org_id}/apps
+    /apps/{app_id}
+    /apps/{app_id}/dynos
+    /dynos/{dyno_id}
+"
+
+Sources:
+
+* [HTTP API Design - Minimize Path Nesting - Interagent](https://github.com/interagent/http-api-design#minimize-path-nesting)
+
 #### [x.x] URL Parameters **MUST NOT** Be Required
 
 URL Parameters (query strings) **MUST** be optional.
@@ -442,6 +510,24 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 
+#### [x.x] APIs **SHOULD** Support  Resources Aliases
+
+Typically IDs will be randomly assigned to resources, whether a numeric or UUID like ID is used. Whilst these ensure resources are uniquely referenced, they are not user friendly.
+
+In many cases resources will contain one or more 'pseudo-IDs' such as a username or name that are usually unique for a resource, thus acting as an identifier, and are possible to remember or understand.
+
+Where this is the case our APIs **SHOULD** support using these additional references as aliases to the same resource.
+
+Aliases may not guarantee the correct resource will be returned, and in some cases may return more than one resource. A judgement should be made to ensure a balance between ease of referring to resources, and accuracy of results. Aliases which are likely to exhibit these problems **SHOULD** not be used.
+
+Whilst supporting aliases does increase the complexity of an API, providing this behaviour is documented properly, there is no significant loss of clarity or  unambiguousness. Clearly there will be *some* loss which highlights the judgement aspect of this guideline. In general the cases where this behaviour **SHOULD** be used will be obvious. If in doubt, you **SHOULD NOT** use an alias.
+
+For example, the call sign of BAS ship's are not likely to change, the call sign attributes id also an attribute by which a ship is commonly known. In this case it would be appropriate to use the ship callsign as an alias to a ship resource.
+
+Sources:
+
+* [HTTP API Design - Support Non-Id Dereferencing for Convenience - Interagent](https://github.com/interagent/http-api-design#support-non-id-dereferencing-for-convenience)
+
 #### [x.x] Serialised JSON should be accepted in request bodies using relevant HTTP verbs and where JSON is a supported data-type.
 
 Where JSON is used for both the request and response data-type this provides a symmetry, simplifying making requests for the user.
@@ -457,6 +543,26 @@ For example,
 Sources:
 
 * [HTTP API Design - Accept Serialised JSON in Request Bodies - Interagent](https://github.com/interagent/http-api-design#accept-serialized-json-in-request-bodies)
+
+#### [x.x] Resources **SHOULD** Use a Unique ID
+
+Each resource **SHOULD** be identified by a unique identifier, ideally a UUID ***SHOULD** be used. This ID **SHOULD** be unique all instances of an API and ideally other APIs as well.
+
+If using UUIDs version 4 or 5 is recommended and should be represented in lower case.
+
+Sources:
+
+* [HTTP API Design - Provide Resource (UU)IDs - Interagent](https://github.com/interagent/http-api-design#provide-resource-uuids)
+
+#### [x.x] Where appropriate, Resources **SHOULD** Use Created and Modified Timestamps
+
+The created at timestamp should be set when the object is first created and **SHOULD NOT** change. The modified at timestamp **SHOULD** change whenever a resource is modified.
+
+There may be resources where using these attributes don't make sense, in such cases they **SHOULD NOT** be used, as this may create confusion.
+
+Sources:
+
+* [HTTP API Design - Provide Standard Timestamps - Interagent](https://github.com/interagent/http-api-design#provide-standard-timestamps)
 
 ## Security, Authentication & Authorisation
 
@@ -681,14 +787,7 @@ The 18F API Standards summarise the benefits of using JSON, they are echoed here
 
 "JSON is an excellent, widely supported transport format, suitable for many web APIs.
 
-Supporting JSON and only JSON is a practical default for APIs, and generally reduces complexity for both the API provider and consumer.
-
-General JSON guidelines:
-
-* *Responses should be a JSON object (not an array).* Using an array to return results limits the ability to include metadata about results, and limits the API's ability to add additional top-level keys in the future.
-* *Don't use unpredictable keys.* Parsing a JSON response where keys are unpredictable (e.g. derived from data) is difficult, and adds friction for clients.
-* *Use under_score case for keys*. Different languages use different case conventions. JSON uses `under_score`, not `camelCase`.
-"
+Supporting JSON and only JSON is a practical default for APIs, and generally reduces complexity for both the API provider and consumer."
 
 Sources:
 
@@ -700,7 +799,7 @@ Sources:
 
 ## Data Type Representations ##
 
-#### [x.x] APIs **SHOULD** Use UTF-8 for Character Encoding 
+#### [x.x] API Responses **SHOULD** Use UTF-8 for Character Encoding 
 
 The 18F API Standards summarise the benefits of using this, they are echoed here for convenience:
 
@@ -720,7 +819,64 @@ Resources:
 
 * [UTF-8 Everywhere](http://utf8everywhere.org/)
 
-#### [x.x] APIs **SHOULD** Use ISO 8601 for Dates, Times and Date-Times using UTC
+#### [x.x] JSON API Responses **SHOULD** Use Objects With Lower Case, Underscored, Attributes 
+
+Using an array to return data limits the ability to include metadata (including errors/warnings/notices etc.) and limits the ability to add additional top-level keys in the future.
+
+Different languages use different case conventions. JSON uses underscored properties, and ensures attributes can be used without quotes in JavaScript.
+
+For example, use `cruise_reports` not `cruise-reports` or `cruiseReports`.
+
+Sources:
+
+* [18F API Standards - Just Use JSON - I8F](https://github.com/18f/api-standards#just-use-json)
+* [HTTP API Design - Downcase Paths and Attributes - Interagent](https://github.com/interagent/http-api-design#downcase-paths-and-attributes)
+
+#### [x.x] API Responses Containing Related Resources **SHOULD** Be Nested
+
+For a resource contains relations to other resources these should be nested within the resource returned.
+
+This guideline applies regardless of the number of attributes for each related resource are included.
+
+The Interagent HTTP API Design guidelines provide a good example of why this technique makes sense.
+
+"
+E.g.
+
+    {
+        "name": "service-production",
+        "owner": {
+            "id": "5d8201b0..."
+        },
+        ...
+    }
+
+Instead of e.g:
+
+    {
+        "name": "service-production",
+        "owner_id": "5d8201b0...",
+        ...
+    }
+
+This approach makes it possible to inline more information about the related resource without having to change the structure of the response or introduce more top-level response fields, e.g.:
+
+    {
+        "name": "service-production",
+        "owner": {
+            "id": "5d8201b0...",
+            "name": "Alice",
+            "email": "alice@heroku.com"
+        },
+        ...
+    }
+"
+
+Sources:
+
+* [HTTP API Design - Nest foreign key relations - Interagent](https://github.com/interagent/http-api-design#nest-foreign-key-relations)
+
+#### [x.x] API Responses **SHOULD** Use ISO 8601 for Dates, Times and Date-Times using UTC
 
 The 18F API Standards summarise the benefits of using this, they are echoed here for convenience:
 
@@ -731,6 +887,7 @@ This date format is used all over the web, and puts each field in consistent ord
 Sources:
 
 * [18F API Standards - Use A Consistent Date Format - I8F](https://github.com/18f/api-standards#use-a-consistent-date-format)
+* [HTTP API Design - Use UTC Times Formatted in ISO8601 - Interagent](https://github.com/interagent/http-api-design#use-utc-times-formatted-in-iso8601)
 
 ## Other
 
@@ -802,6 +959,16 @@ General:
 * [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
 * [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#support-caching-with-etags)
 
+
+[Rate Limiting]
+
+[Rate Limiting - Sources]
+
+* [HTTP API Design - Show Rate Limit Status - Interagent](https://github.com/interagent/http-api-design#show-rate-limit-status)
+
+[Rate Limiting - Resources]
+
+* [Token Bucket - Wikipedia](http://en.wikipedia.org/wiki/Token_bucket)
 ## Responses
 
 #### [x.x] Each API response **SHOULD** use an appropriate status code
@@ -843,12 +1010,21 @@ Sources:
 
 ### Pagination
 
-~~ Range headers etc. ~~
+#### [x.x] Where large numbers of items are to returned, pagination **SHOULD** be used
 
+Where a response involves returning a large number of resources or other items pagination should be used to split these items into a number of 'chunks'. Only one chunk **SHOULD** be returned in each response, with additional requests used to request other 'chunks'.
 
+The API **SHOULD** provide the mechanism for managing this process and communicating with the user using meta-data. This meta-data **SHOULD** include, where chunking has been used in a response, which chunk is present and how to request other chunks.
 
+There are numerous implementations of pagination, most have similar features but expose these to the user in different ways. Some use HTTP headers whilst others data structures within response bodies themselves.
 
+These guidelines don't make a preference as to which implementation **SHOULD** be used, and there is no fixed point where pagination need to be used. However any solution **SHOULD** allow the user to determine the size of each 'chunk'.
 
+Pagination is often combined with sorting to return the most useful, as determined by the request, information first.
+
+Sources:
+
+* https://devcenter.heroku.com/articles/platform-api-reference#ranges
 
 [Project Management - Points]
 
@@ -939,6 +1115,10 @@ Bespoke/Custom
 * [APIs - Just Use the Web - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#just-use-the-web)
 * [APIs - Choosing Appropriate Formats - GDS Service Manual](https://www.gov.uk/service-manual/user-centred-design/choosing-appropriate-formats.html)
 
+[0.7]
+
+* [HTTP API Design - Generate Structured Errors - Interagent](https://github.com/interagent/http-api-design#generate-structured-errors)
+
 [0.8]
 
 * [APIs - Service Agreements and Resilience - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#service-agreements-and-resilience)
@@ -961,11 +1141,14 @@ Bespoke/Custom
 * [APIs - Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 * [Security - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-Security)
-* [18F API Standards - Notifications of Updatess - I8F](https://github.com/18f/api-standards#notifications-of-updates)
+* [18F API Standards - Notifications of Updates - I8F](https://github.com/18f/api-standards#notifications-of-updates)
+* [HTTP API Design - Provide Human Readable Docs - Interagent](https://github.com/interagent/http-api-design#provide-human-readable-docs)
+* [HTTP API Design - Describe Stability - Interagent](https://github.com/interagent/http-api-design#describe-stability)
 
 [2.2]
 
 * [APIs Document by discovery... and Example - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example)
+* [HTTP API Design - Provide Executable Examples - Interagent](https://github.com/interagent/http-api-design#provide-executable-examples)
 
 [2.3]
 
