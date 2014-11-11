@@ -2,161 +2,164 @@
 
 ## General Principles
 
-### [x.x] **APIs should be consistent but not uniform,** using the most appropriate solution for each need.
+### [x.x] APIs **SHOULD** be consistent but not uniform, using the most appropriate solution for each need
 
-### [x.x] **APIs SHOULD Be as Simple as Possible.** ###
+### [x.x] APIs **SHOULD** be as simple as possible
 
-### [x.x] **APIs SHOULD be *clear and explicit* in their operation, returning helpful errors.** 
+### [x.x] APIs **SHOULD** be clear and explicit in their operation, returning helpful errors 
 
-### [x.x] **APIs SHOULD make things as easy as possible, whilst remaining clear and consistent.**
+### [x.x] APIs **SHOULD** make things as easy as possible, whilst remaining clear and consistent
 
-### [x.x] Where possible, **APIs SHOULD be as resilient as possible**
+### [x.x] APIs **SHOULD** be as resilient as possible
 
-### [x.x] Where appropriate, **APIs SHOULD use best practice for solving common problems.**
+### [x.x] Where appropriate, APIs **SHOULD** use best practice for solving common problems
 
-### [x.x] Wherever possible, **APIs should be developed in the open, and made available publicly**
+### [x.x] Where appropriate, APIs **SHOULD** be open, and made available publicly
 
-### [x.x] Where appropriate, **APIs SHOULD use established standards and open formats.**
+### [x.x] Where appropriate, APIs **SHOULD** use established standards and open formats
 
-### [x.x] **Proprietary, beta or experimental technologies should be avoided in favour of  proven, open source alternatives.** This ensures that APIs are more likely to be available for longer.
+### [x.x] Where appropriate, APIs **SHOULD** favour proven and open source alternatives over experimental or proprietary, alternatives
 
 ## Need Driven
 
-### [x.x] **APIs MUST be created to meet the needs of its users.**
+### [x.x] APIs **MUST**  meet the needs of their users
 
-### [x.x] **APIs MUST allow for feedback to be submitted by anyone and for this to taken seriously.**
+### [x.x] APIs **MUST** allow user feedback, and this **MUST** be taken seriously
 
-### [x.x] **We SHOULD use our own APIs** and, ideally, **they SHOULD NOT be developed insolation.**
+### [x.x] APIs **SHOULD NOT** be created in isolation, and we **SHOULD** use our own APIs 
 
 ## API Development
 
-### [x.x] APIs **SHOULD** Have a Single Owner, Who Is Responsible for Delivering and Supporting That API ###
+### [x.x] APIs **SHOULD** have a single owner responsible for its delivery and support
 
-### [x.x] APIs SHOULD Be developed in a Loosely Coupled Way
+### [x.x] APIs **SHOULD** be loosely coupled
 
-### [x.x] APIs SHOULD Be Developed Using Source Control ###
+### [x.x] APIs **SHOULD** use source control
 
-### [x.x] APIs SHOULD Be Developed Using Issue Tracking Software ###
+### [x.x] APIs **SHOULD** use issue tracking
 
-### [x.x] APIs SHOULD be robustly tested
+### [x.x] APIs **SHOULD** be robustly tested
+
+## API Design
+
+### [x.x] APIs **SHOULD** use `UTF-8` for character encoding 
+
+### [x.x] APIs **SHOULD** use `ISO 8601` and `UTC` for dates and times
+
+### [x.x] APIs **SHOULD** use unique ids for resources
+
+### [x.x] Where Appropriate, resources **SHOULD** use `created_at` and `modified_at` timestamps
 
 ## Documentation
 
 ### [x.x] APIs **MUST**  provide end user documentation
 
-### [x.x] **APIs SHOULD provide real world examples**
+### [x.x] APIs **SHOULD** provide real world examples
 
-### [x.x] APIs **MUST** Provide Developer Documentation
+### [x.x] APIs **SHOULD** provide developer documentation
 
-### [x.x] **APIs **SHOULD** Be Backed by a Schema
+### [x.x] APIs **SHOULD** be backed by a schema
 
 ## Versioning
 
-### [x.x] APIs MUST use versioning, versions SHOULD map to major releases and MUST be whole integers
+### [x.x] APIs **MUST** use versioning using whole integers
 
-###[x.x] The API version **MUST** be the first token in a URL path, prefixed by a "v".
+### [x.x] API versions **SHOULD** map to major releases
 
-### [x.x] APIs MUST not assume a version for requests that do not specify one.
+###[x.x] The API version **MUST** be the first token in a URL path, prefixed by a "v"
 
-### [x.x] Within a version, APIs MUST preserve backwards compatibility
+### [x.x] APIs **MUST NOT** assume a version for requests that do not specify one
 
-### [x.x] APIs SHOULD Try to Remain Compatible With Older Versions, Providing They Remain Clear and Unambiguous ###
+### [x.x] APIs **MUST** preserve backwards compatibility within a version
 
-### [x.x] Where possible, APIs SHOULD support old versions
+### [x.x] APIs **SHOULD** try to be compatible with older versions, providing they remain clear and unambiguous
 
-### [x.x] Where possible, APIs SHOULD be forwards compatible, providing they remain clear and unambiguous
+### [x.x] Where appropriate,  APIs **SHOULD** support old versions
 
-## Security, Authentication & Authorisation
+### [x.x] **SHOULD** APIs **SHOULD** be forwards compatible, providing they remain clear and unambiguous
 
-### [x.x] APIs **MUST NOT** Rely on 'Security Through Obscurity'
+## Security
 
-### [x.x] APIs **MUST NOT** Use Non-Standard Cryptographic Methods for Encryption
+### [x.x] APIs **MUST NOT** rely on 'security through obscurity'
 
-### [x.x] APIs SHOULD Allow Anonymous Access Wherever Possible
+### [x.x] APIs **MUST NOT** use non-standard cryptography
 
-### [x.x] APIs MUST Restrict Access to Sensitive Information Through the Use of Authentication and Authorisation ###
+### [x.x] Where appropriate, APIs **SHOULD** allow anonymous access
 
-### [x.x] APIs **SHOULD** Use Common Sources of Authentication
+### [x.x] Where appropriate, APIs **MUST** restrict access to sensitive information
 
-### [x.x] APIs **SHOULD** use HTTPS by default
+### [x.x] Where appropriate, APIs **SHOULD** use common authentication sources
 
-### [x.x] APIs **MUST** Use HTTPS for Sensitive Information
+### [x.x] APIs **SHOULD** use HTTPS
 
-###  [x.x] Where HTTPS is used, HTTP requests **SHOULD** be rejected.
+### [x.x] Where appropriate, APIs **MUST** use HTTPS for sensitive information
 
-## Logging & Analytics
+###  [x.x] Where HTTPS is used, APIs  **SHOULD** reject HTTP requests
 
-### [x.x] APIs **SHOULD** Collect Information to Determine User Needs and identify problems
+## Logging & analytics
 
-### [x.x] Requests Should Be Logged, Using an unique Identifier
+### [x.x] APIs **SHOULD** collect information about itself to determine user needs and identify problems
 
-### [x.x] Request Logs  **SHOULD** Be Stored Anonymously ####
+### [x.x] APIs **SHOULD** log requests using an unique identifier
 
+### [x.x] Where appropriate, API logs  **SHOULD** be anonymous
 
-## Caching and Version Control
+## Caching & version control
 
-### [x.x] Where Possible, API Responses **SHOULD** Be Catchable
+### [x.x] Where appropriate, API responses **SHOULD** be able to be cached
 
-### [x.x] For Cached Resources, Etags **SHOULD** Be Used ####
+### [x.x] Where appropriate, APIs **SHOULD** use Etags for cached resources
 
-### [x.x] For Cached Responses, Suitable Time Limits **SHOULD** Be Used ####
+### [x.x] Where appropriate, APIs **SHOULD** use sensible time limits for cached responses
 
-### [x.x] Where needed rate limiting **SHOULD** be used to ensure resources are not monopolised 
+### [x.x] Where appropriate, APIs **SHOULD** use rate limiting to ensure the API is used fairly 
 
-## API Requests
+## API requests
 
-### [x.x] Each API method **MUST** be available at a unique *endpoint*
+### [x.x]  API methods **MUST** be available at unique endpoints
 
-### [x.x] Wherever possible endpoints should remain as stable as possible.
+### [x.x] API endpoints **SHOULD** not change
 
-### [x.x] APIs Endpoints **SHOULD** use an appropriate HTTP verb
+### [x.x] API endpoints **SHOULD** use an appropriate HTTP verb
 
-### [x.x] API Endpoints **SHOULD NOT** rely on verbs other than `GET` and `POST` 
+### [x.x] API endpoints **SHOULD NOT** rely on HTTP verbs other than `GET` and `POST` 
 
-### [x.x] API Endpoints **MUST NOT** allow `GET` requests to alter resources.
+### [x.x] API endpoints **MUST NOT** allow `GET` requests to alter resources
 
-### [x.x] API Endpoints **SHOULD** be self describing
+### [x.x] API endpoints **SHOULD** be self descriptive
 
-### [x.x] Wherever Possible EndPoints **SHOULD** Be as Succinct as Possible
+### [x.x] API endpoints **SHOULD** be succinct
 
-### [x.x] API EndPoints **SHOULD** Be Safe Insensitive and Hyphen Separated
+### [x.x] API endpoints **SHOULD** be case insensitive using hyphens as separators
 
-### [x.x] For resources, API Endpoints **SHOULD** use the plural term in all cases
+### [x.x] Where appropriate, API endpoints **SHOULD** use the plural term for a resource
 
-### [x.x] APIs **SHOULD** Support  Resources Aliases
+### [x.x] Where appropriate, APIs **SHOULD** support aliases for a resource
 
-### [x.x] URL Parameters **MUST NOT** Be Required
+### [x.x] Where appropriate, URL parameters **MUST NOT** be required
 
-### [x.x] The Order of URL Parameters **MUST NOT** Be Significant
+### [x.x] Where appropriate, the order of URL parameters **MUST NOT** be significant
 
-### [x.x] Serialised JSON should be accepted in request bodies using relevant HTTP verbs and where JSON is a supported data-type.
+### [x.x] Where appropriate, API endpoints which accept JSON **SHOULD** support serialised JSON within the request body
 
-## API Responses
+## API responses
 
-### [x.x] Each API Response **SHOULD** Use an Appropriate Status Code ####
+### [x.x] API responses **SHOULD** use an appropriate status code
 
-### [x.x] a 2XX Status Code **MUST NOT** Be Used for Unsuccessful Requests ####
+### [x.x] Where appropriate, API responses **MUST NOT** use a 2XX status code for an unsuccessful request
 
-### [x.x] To Allow Access From Web Browsers, APIs SHOULD Use CORS
+### [x.x] Where appropriate, APIs **SHOULD** support CORS
 
-### [x.x] API Responses **SHOULD** Support Appropriate Data Formats, Defaulting to the Simplest.
+### [x.x] API responses **SHOULD** support appropriate data formats, defaulting to the simplest
 
-### [x.x] APIs **SHOULD** Use Accept and Content-Type Headers to Agree on the Response Data Format
+### [x.x] APIs **SHOULD** use HTTP content negotiation to decide which supported data format to use
 
-### [x.x] API Responses **SHOULD** Ideally offer JSON as an available data format
+### [x.x] API responses **SHOULD** offer JSON as a supported data format
 
-### [x.x] JSON API Responses **SHOULD** Use Objects With Lower Case, Underscored, Attributes 
+### [x.x] Where appropriate, API responses using JSON **SHOULD** use objects and underscored attributes in lower case 
 
-### [x.x] API Responses **SHOULD** Use UTF-8 for Character Encoding 
+### [x.x] Where appropriate, API responses **SHOULD** return a full representation of a resource
 
-### [x.x] API Responses **SHOULD** Use ISO 8601 for Dates, Times and Date-Times Using UTC ####
+### [x.x] Where appropriate, API responses **SHOULD** nest related resources
 
-### [x.x] Resources **SHOULD** Use a Unique ID
-
-### [x.x] Where Appropriate, Resources **SHOULD** Use Created and Modified Timestamps ###
-
-### [x.x] Wherever Possible a Full Representation of a Resource Should Be Returned
-
-### [x.x] API Responses Containing Related Resources **SHOULD** Be Nested
-
-### [x.x] Where large numbers of items are to returned, pagination **SHOULD** be used
+### [x.x] Where appropriate, API responses **SHOULD** support pagination for managing large numbers of items
