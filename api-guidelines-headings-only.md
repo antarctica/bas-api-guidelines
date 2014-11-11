@@ -1,19 +1,5 @@
 # API Guidlines
 
-Version:
-
-* **0.1.0** - November 2014 - Draft
-
-Authors:
-
-* [Felix Fennell](mailto:felnne@bas.ac.uk) (BASIS)
-
-Status: 
-
-* **These guidelines have not yet been adopted**. When they are, they will automatically become version 1.0.0.
-* **Adopted versions** of these guidelines will be tracked in the **master** branch of the [API Guidelines repository](), tagged by version.
-* **Draft versions** of these guidelines will be tracked in the **develop** branch of the [API Guidelines repository]().
-
 ## General Principles
 
 ### [x.x] **APIs should be consistent but not uniform,** using the most appropriate solution for each need.
