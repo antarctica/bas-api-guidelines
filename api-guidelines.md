@@ -113,6 +113,13 @@ These aims will be achieved through these objectives:
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
+Sources:
+
+* [Ninth Principle - GDS Design Principles](https://www.gov.uk/design-principles#ninth)
+* [APIs - Names Reinforce Conventions - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#names-reinforce-conventions)
+* [Naming Principles - Microformats](http://microformats.org/wiki/naming-principles)
+* [18F API Standards - Design For Common Use Cases - I8F](https://github.com/18f/api-standards#design-for-common-use-cases)
+
 ####[0.2] Wherever possible, **APIs should be developed in the open, and made available publicly**
 
 > Given BAS is Government organisation (according to Wikipedia so it must be true) our work should visible and accessible. Providing APIs aids this by offering data in an organised, logic way in convenient formats, ideally without involvement with BAS staff.
@@ -125,6 +132,12 @@ These aims will be achieved through these objectives:
 
 > This is the tenth GDS Design Principle, the *Sources & Further Reading* section has more resources on this guideline.
 
+Sources:
+
+* [Tenth Principle - GDS Design Principles](https://www.gov.uk/design-principles#tenth)
+* [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
+* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
+
 ####[0.3] **Proprietary, beta or experimental technologies should be avoided in favour of  proven, open source alternatives.** This ensures that APIs are more likely to be available for longer.
 
 > A experimental or immature technology may be discontinued. If resources are not available to reimplement the features that technology provided, the API may be degraded or cease to function. Similarly, if proprietary technology is used and is no longer supported or open sourced, it will become obsolete and incompatible with newer technologies.
@@ -134,6 +147,11 @@ These aims will be achieved through these objectives:
 > Each time a technology is changed it may introduce new dependencies and constraints, such as needing to remove a feature that the new technology cannot provide itself. New bugs may be introduced, potentially across the API. Such changes introduce change, which impact on the consistency of the API.
 
 > The *Sources & Further Reading* section has more resources on this guideline.
+
+Sources:
+
+* [Choosing Technology - GDS Service Manual](https://www.gov.uk/service-manual/making-software/choosing-technology)
+* [Technology Code of Practice - GDS Service Manual](https://www.gov.uk/service-manual/technology/code-of-practice.html)
 
 ####[0.4] **APIs SHOULD be *clear and explicit* in their operation, returning helpful errors.** 
 
@@ -169,6 +187,11 @@ These aims will be achieved through these objectives:
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
+Sources:
+
+* [APIs Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
+* [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
+
 ####[0.5] **APIs SHOULD be as simple as possible.**
 
 > Simple APIs, and code, are easier to understand than complex APIs and code. This increases the maintainability of the API, and through having 'less moving parts' creates fewer places for bugs to hide.
@@ -184,6 +207,12 @@ These aims will be achieved through these objectives:
 > This is essentially the [UNIX philosophy](http://en.wikipedia.org/wiki/Unix_philosophy) i.e. 'do one thing and do it well', and the second GDS Design Principle.
 
 > The *Sources & Further Reading* section has more resources on this guideline.
+
+Sources:
+
+* [Keep It Simple Stupid (KISS) Principle](http://en.wikipedia.org/wiki/KISS_principle)
+* [Second Principle - GDS Design Principles](https://www.gov.uk/design-principles#second)
+* [APIs - Consuming and Using APIs - GDS Design Principles](https://www.gov.uk/service-manual/making-software/apis.html#consuming-and-using-apis)
 
 ####[0.6] Where appropriate, **APIs SHOULD use established standards and open formats.**
 
@@ -203,6 +232,11 @@ These aims will be achieved through these objectives:
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
+Sources:
+
+* [APIs - Just Use the Web - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#just-use-the-web)
+* [APIs - Choosing Appropriate Formats - GDS Service Manual](https://www.gov.uk/service-manual/user-centred-design/choosing-appropriate-formats.html)
+
 ####[0.7] Where appropriate, **APIs SHOULD use best practice for solving common problems.**
 
 > **APIs SHOULD NOT 'reinvent the wheel'**. The types of APIs BAS will commonly create will not be unique. They therefore don't require unique functionality or solutions to common problems.
@@ -221,6 +255,10 @@ These aims will be achieved through these objectives:
 
 > A good example of a *common* solution is [JSONP](http://en.wikipedia.org/wiki/JSONP) which is essentially a hack so as not to use the *best* solution, [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 
+Sources:
+
+* [HTTP API Design - Generate Structured Errors - Interagent](https://github.com/interagent/http-api-design#generate-structured-errors)
+
 ####[0.8] Where possible, **APIs SHOULD be as resilient as possible**
 
 Where we create APIs that rely on third parties we must ensure we have plans in place for where these services are either temporally or permanently unavailable in the future.
@@ -232,6 +270,10 @@ These factors need to weighed against the importance of the functionality such s
 It is unfeasible to provide all services ourselves, credit card processing for example **SHOULD** be left to a payment gateway, however we should create APIs in such a way that reliance on a particular service is abstracted. This ensures we can swap out services, potentially for newer, better ones, without having to change core 'business' logic. 
 
 > The *Sources & Further Reading* section has more resources on this guideline.
+
+Sources:
+
+* [APIs - Service Agreements and Resilience - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#service-agreements-and-resilience)
 
 ## Need Driven
 
@@ -245,6 +287,11 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 
 > This is the first of the GDS Design Principles, the *Sources & Further Reading* section has more resources on this guideline.
 
+Sources:
+
+* [First Principle - GDS Design Principles](https://www.gov.uk/design-principles#first)
+* [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
+
 ####[1.2] **APIs MUST allow for feedback to be submitted by anyone and for this to taken seriously.**
 
 > Ideally the individual responsible for each API **SHOULD** be contactable directly.
@@ -256,6 +303,10 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 > * A user has made a reasonable attempt to achieve a task the API claims to support using provided documentation/examples and limited experimentation.
 > * A user reports that something doesn't work as expected or is unclear how something should be used.
  
+Sources:
+
+* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
+
 ####[1.3] **We SHOULD use our own APIs** and, ideally, **they SHOULD NOT be developed insolation.**
 
 > API creators SHOULD be also be API consumers, this is the quickest and easiest way to validate our APIs do what it should.
@@ -265,6 +316,11 @@ It is unfeasible to provide all services ourselves, credit card processing for e
 > Wherever possible, APIs should be implemented in a real system, usually online. Again this highlights any problems in using an API and ensuring APIs are practical, if not *nice* to use.
 
 > The *Sources & Further Reading* section has more resources on this guideline.
+
+Sources:
+
+* [APIs - Build an API By Building With the API](https://www.gov.uk/service-manual/making-software/apis.html#build-an-api-by-building-with-the-api)
+* [18F API Standards - Using One's Own API - I8F](https://github.com/18f/api-standards#using-ones-own-api)
 
 ## Documentation & User Experience
 
@@ -305,6 +361,23 @@ Endpoint information **HSOULD** cover, for each endpoint:
 
 > The *Sources & Further Reading* section has more resources on this guideline.
 
+Sources:
+
+* [APIs - Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
+* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
+* [Security - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-Security)
+* [18F API Standards - Notifications of Updates - I8F](https://github.com/18f/api-standards#notifications-of-updates)
+* [HTTP API Design - Provide Human Readable Docs - Interagent](https://github.com/interagent/http-api-design#provide-human-readable-docs)
+* [HTTP API Design - Describe Stability - Interagent](https://github.com/interagent/http-api-design#describe-stability)
+
+Resources:
+
+Good Examples
+
+* [Stripe](https://stripe.com/docs/api)
+* [New York Times](http://developer.nytimes.com/docs/read/article_search_api_v2)
+* [Twilio](https://www.twilio.com/docs/api)
+
 #### [2.X] APIs **MUST** Provide Developer Documentation
 
 Developer documentation **SHOULD** contain:
@@ -337,6 +410,31 @@ Where useful and available, link to meeting minutes, process reports or other so
 
 > The *Sources & Further Reading* section has more resources on this guideline. The *Resources & Implementations* section has read world examples of this guideline.
 
+Sources:
+
+* [APIs Document by discovery... and Example - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example)
+* [HTTP API Design - Provide Executable Examples - Interagent](https://github.com/interagent/http-api-design#provide-executable-examples)
+
+Resources:
+
+Examples/Generators:
+
+Self hosted:
+
+* [Swagger](https://helloreverb.com/developers/swagger)
+* [Slate](https://github.com/tripit/slate)
+
+SASS:
+
+* [Apiary](http://apiary.io/blueprint)
+* [Mashape](https://www.mashape.com/)
+
+Bespoke/Custom: 
+
+* [Facebook API Tools](https://developers.facebook.com/tools/)
+* [Guardian API Explorer](http://open-platform.theguardian.com/explore/)
+* [Google Search - API Explorer](https://www.google.co.uk/search?hl=en&q=API+explorer)
+
 ####[2.3] **APIs SHOULD make things as easy as possible, whilst remaining clear and consistent.**
 
 > If there is something we can do to make things easier for the end user we should do so, providing this is clearly explained, either in the response or in documentation.
@@ -348,6 +446,10 @@ Where useful and available, link to meeting minutes, process reports or other so
 > With great power comes great responsibility -- very often people have no choice but to use our services. If we don't work hard to make them simple and usable we're abusing that power, and wasting people's time."
 
 > The *Sources & Further Reading* section has more resources on this guideline.
+
+Sources:
+
+* [Fourth Principle - GDS Design Principles](https://www.gov.uk/design-principles#fourth)
 
 #### [2.4] **APIs **SHOULD** Be Backed by a Schema
 
@@ -728,6 +830,7 @@ Resources:
 
 * [The UK Access Management Federation](http://www.ukfederation.org.uk/)
 * [OAuth](http://oauth.net/)
+* HTTP Basic authentication
 
 The *Resources & Implementations* section has read world examples of this guideline.
 
@@ -1164,117 +1267,3 @@ Pagination is often combined with sorting to return the most useful, as determin
 Sources:
 
 * https://devcenter.heroku.com/articles/platform-api-reference#ranges
-
-## Resources & Implementations
-
-*This will probably be split into a wiki page*
-
-[2.1]
-
-Good examples
-
-* [Stripe](https://stripe.com/docs/api)
-* [New York Times](http://developer.nytimes.com/docs/read/article_search_api_v2)
-* [Twilio](https://www.twilio.com/docs/api)
-
-[2.2]
-
-Self hosted
-
-* [Swagger](https://helloreverb.com/developers/swagger)
-* [Slate](https://github.com/tripit/slate)
-
-SASS
-
-* [Apiary](http://apiary.io/blueprint)
-* [Mashape](https://www.mashape.com/)
-
-Bespoke/Custom 
-
-* [Facebook API Tools](https://developers.facebook.com/tools/)
-* [Guardian API Explorer](http://open-platform.theguardian.com/explore/)
-* [Google Search - API Explorer](https://www.google.co.uk/search?hl=en&q=API+explorer)
-
-[Authentication/Authorisation]
-
-* HTTP Basic authentication
-* OAuth
-
-[CORS]
-
-* http://enable-cors.org/
-
-## Sources & Further Reading
-
-[0.1]
-
-* [Ninth Principle - GDS Design Principles](https://www.gov.uk/design-principles#ninth)
-* [APIs - Names Reinforce Conventions - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#names-reinforce-conventions)
-* [Naming Principles - Microformats](http://microformats.org/wiki/naming-principles)
-* [18F API Standards - Design For Common Use Cases - I8F](https://github.com/18f/api-standards#design-for-common-use-cases)
-
-[0.2]
-
-* [Tenth Principle - GDS Design Principles](https://www.gov.uk/design-principles#tenth)
-* [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
-* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
-
-[0.3]
-
-* [Choosing Technology - GDS Service Manual](https://www.gov.uk/service-manual/making-software/choosing-technology)
-* [Technology Code of Practice - GDS Service Manual](https://www.gov.uk/service-manual/technology/code-of-practice.html)
-
-[0.4]
-
-* [APIs Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
-* [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
-
-[0.5]
-
-* [Keep It Simple Stupid (KISS) Principle](http://en.wikipedia.org/wiki/KISS_principle)
-* [Second Principle - GDS Design Principles](https://www.gov.uk/design-principles#second)
-* [APIs - Consuming and Using APIs - GDS Design Principles](https://www.gov.uk/service-manual/making-software/apis.html#consuming-and-using-apis)
-
-[0.6]
-
-* [APIs - Just Use the Web - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#just-use-the-web)
-* [APIs - Choosing Appropriate Formats - GDS Service Manual](https://www.gov.uk/service-manual/user-centred-design/choosing-appropriate-formats.html)
-
-[0.7]
-
-* [HTTP API Design - Generate Structured Errors - Interagent](https://github.com/interagent/http-api-design#generate-structured-errors)
-
-[0.8]
-
-* [APIs - Service Agreements and Resilience - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#service-agreements-and-resilience)
-
-[1.1]
-
-* [First Principle - GDS Design Principles](https://www.gov.uk/design-principles#first)
-* [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
-
-[1.2]
-* [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
-
-[1.3]
-
-* [APIs - Build an API By Building With the API](https://www.gov.uk/service-manual/making-software/apis.html#build-an-api-by-building-with-the-api)
-* [18F API Standards - Using One's Own API - I8F](https://github.com/18f/api-standards#using-ones-own-api)
-
-[2.1]
-
-* [APIs - Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
-* [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
-* [Security - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-Security)
-* [18F API Standards - Notifications of Updates - I8F](https://github.com/18f/api-standards#notifications-of-updates)
-* [HTTP API Design - Provide Human Readable Docs - Interagent](https://github.com/interagent/http-api-design#provide-human-readable-docs)
-* [HTTP API Design - Describe Stability - Interagent](https://github.com/interagent/http-api-design#describe-stability)
-
-[2.2]
-
-* [APIs Document by discovery... and Example - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example)
-* [HTTP API Design - Provide Executable Examples - Interagent](https://github.com/interagent/http-api-design#provide-executable-examples)
-
-[2.3]
-
-* [Fourth Principle - GDS Design Principles](https://www.gov.uk/design-principles#fourth)
