@@ -22,10 +22,11 @@ Status:
 
 * REST(ful) - [Representational state transfer](http://en.wikipedia.org/wiki/Representational_state_transfer)
 * Method - [Methods are actions performed on a resource, accessed through an endpoint](http://restful-api-design.readthedocs.org/en/latest/methods.html)
-* Resource - [Similar to the concept of an object in programming](http://restful-api-design.readthedocs.org/en/latest/resources.html)
-* Request - [A request for something, such as a resource](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_message)
+* Resource - [Similar to the concept of an object in object orientated programming](http://restful-api-design.readthedocs.org/en/latest/resources.html)
+* Request - [A request for something, such as a resource made by a user](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_message)
 * Response - [A reply to a request, such as a representation of a resource](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Response_message)
 * CRUD - **C**reate, **R**etrieve (**R**ead), **U**pdate, **D**estroy (**D**elete).
+* BASIS - British Antarctic Survey Information Services
 
 Guidelines use a numbered prefix like this:
 
@@ -35,11 +36,9 @@ Guidelines use a numbered prefix like this:
 
 ####[2.4] Guideline
 
-Important information is shown **like this**.
-
 ## Audience
 
-These guidelines are aimed at API authors or those working closely with them, such as a technical managers if an API is used with an project.You do not need to know these guidelines to consume an API based on these guidelines. The documentation for the respective API **SHOULD** contain any information you require.
+These guidelines are aimed at API authors or those working closely with them, such as technical managers for APIs used in a project. You do not need to know these guidelines to consume an API based upon them. The documentation for the respective API **SHOULD** contain any information you require.
 
 These guidelines are written for a technical audience and use technical terms where appropriate. The *Conventions & Terms* section will document any terms that may not be generally known by such an audience, or where a term is used to mean something other than its common definition.
 
@@ -49,7 +48,7 @@ These guidelines are written for a technical audience and use technical terms wh
 
 ## Acknowledgements
 
-As noted later, **BAS APIs are not significantly unique**, therefore large parts of guidelines produced by others are directly applicable here. Consequently, large parts of these guidelines are based on other peoples work, particularly those with significant experience.
+As noted later, **BAS APIs are not significantly unique**, therefore large parts of guidelines produced by others are directly applicable here. Consequently, large parts of these guidelines are based on other peoples work, namely.
 
 * [Government Digital Service - Service Manual](https://www.gov.uk/service-manual)
 * [18F - 18F API Standards](https://github.com/18f/api-standards)[1]
@@ -62,48 +61,48 @@ As noted later, **BAS APIs are not significantly unique**, therefore large parts
 
 The aims of these guidelines are:
 
-* To ensure APIs created by BASIS follow best practice in a way that makes them better to maintain and use.
-* To ensure, where appropriate, APIs created by BASIS are of a consistent design with one another, so as to be able to share experience and ease maintaining multiple APIs.
+* To ensure APIs created by BASIS follow best practice in a way that makes them easier to maintain and use.
+* To ensure, where appropriate, APIs created by BASIS are of a consistent design with one another, so as to be able to share experience and efficiently maintain multiple APIs.
 
 These aims will be achieved through these objectives:
 
 * Provide a series of guidelines focusing on the *design* and *behaviour* of APIs[1].
 * Promote the use of standards, best practice and how these create better APIs.
 * Ensure technologies and approaches used to create APIs are justified.
-* Provide, real world, non-abstract resources and practices which creators can use to provide functionality that meet these guidelines[2].
+* Provide, real world, non-abstract resources and implementations which creators can use to provide functionality that meet these guidelines[2].
 * In some cases, make opinionated decisions, with explanations why these have been made.
 * Ensure any relevant requirements that apply to BASIS through BAS, NERC, Government, etc. are followed.
 * Ensure these guidelines are updated in a timely fashion to ensure guidance remains relevant and APIs remain useful.
 
-[1] These guidelines provide one way of doing things that might not always be the only way nor the best way. In such cases, feel free to move away from the guidelines. However such APIs **MUST** state they do not follow these guidelines. You **MUST** also be aware of any potential repercussions such as security issues, consistency issues, etc.  
+[1] These guidelines provide one way of doing things, this is not the **only** way, and in some cases may not be the **best** way. In such cases, you **SHOULD** move away from these guidelines. However such APIs **MUST** state they do not follow these guidelines. You **MUST** be aware of the potential repercussions of doing this such as security and interoperability issues, etc. and manage these yourself.
 
 [2] These are not required implementations, where others are more suitable they **SHOULD** be used.
 
 ## Scope
 
-* Currently these guidelines apply to APIs created by members of BAS Information Services only.
-* These guidelines apply to both new and existing APIs, which may require some existing APIs to be modified [1].
-* These guidelines apply to both internal and external APIs. Internal in this case refers to APIs used solely within BASIS, BAS or NERC.
+* Currently these guidelines apply to APIs created by members of BAS Information Services (BASIS) only.
+* These guidelines apply to both **new** and **existing** APIs, which may require some existing APIs to be modified [1].
+* These guidelines apply to both **internal** and **external** APIs. Internal in this case refers to APIs used solely within BASIS, BAS or NERC.
 * These guidelines apply to HTTP based 'RESTful' APIs only. Web and data services in general are out of scope.
 * The specific technology stack used within an API is out of scope. These guidelines provide criteria on how choices in technology **SHOULD** be made and how these **SHOULD** be justified, but do not specify what languages, frameworks, methodologies **SHOULD** be used.
 
-[1] APIs where this cannot be achieved are still in scope of these guidelines but can choose not to implement them. Such APIs **MUST** state whether they follow or no not follow these guidelines in their documentation.
+[1] APIs where this cannot be achieved are still in scope of these guidelines, but can choose not to implement them. Such APIs **MUST** state whether they follow or no not follow these guidelines in their documentation. If an API does follow these guidelines it **MUST** indicate the version used. If an API does not follow these guidelines you **MUST** be of the potential repercussions of doing so, such as security and interoperability issues, etc. and manage these yourself.
 
 ## General Principles
 
 ### [x.x] APIs **SHOULD** be consistent but not uniform, using the most appropriate solution for each need
 
-Consistency, within these guidelines, refers to not only providing a similar response format, errors, etc. but also the *stability* (amount of change) and *sustainability* (long term maintenance and availability) of the API.
+Consistency, within these guidelines, refers to not only providing a similar response format, errors, etc. but also the *stability* (amount of change) and *sustainability* (long term maintenance and availability) of an API.
 
-This is the ninth GDS Design Principle and echoed below for convenience.
+This is the ninth GDS Design Principle, echoed here for convenience.
 
 > "Wherever possible we should use the same language and the same design patterns -- this helps people get familiar with our services. But, when this isn't possible, we should make sure our underlying approach is consistent. So our users will have a reasonable chance of guessing what they're supposed to do.
 
 > This isn't a straitjacket or a rule book. We can't build great services by rote. We can't imagine every scenario and write rules for it. Every circumstance is different and should be addressed on its own terms. What unites things, therefore, should be a consistent approach -- one that users will hopefully come to understand and trust -- even as we move into new digital spaces."
 
-Wherever possible APIs **SHOULD** use consistent terminology and meaning, including field names, actions, etc. Wherever possible these **SHOULD** be commonly used terms used elsewhere.
+Wherever appropriate APIs **SHOULD** use consistent terminology and meaning, including field names, actions, error formats, etc. Where appropriate these **SHOULD** be commonly used terms used elsewhere.
 
-APIs will not all serve the same purpose, however there are a number of common types that **SHOULD**, where appropriate, be consistent with one another. Some examples are listed in the 18F API Standards and echoed here for convenience:
+**APIs will not all serve the same purpose,** however there are a number of common types that **SHOULD**, where appropriate, be consistent with one another. Some examples are listed in the 18F API Standards, echoed here for convenience:
 
 > *  "*Bulk data*. Clients often wish to establish their own copy of the API's dataset in its entirety. For example, someone might like to build their own search engine on top of the dataset, using different parameters and technology than the "official" API allows. If the API can't easily act as a bulk data provider, provide a separate mechanism for acquiring the backing dataset in bulk.
 
@@ -124,9 +123,9 @@ Simple APIs, and code, are easier to understand than complex APIs and code. This
 
 Simple APIs are quicker to iterate on, document and release than more complex APIs. For users, it is easier and quicker to use a simple API, especially when revisiting implementations created in the past.
 
-APIs **SHOULD NOT** do more than they need to. If another service already provides a service we **SHOULD** use or recommend this, we **SHOULD NOT** duplicate it ourselves.
+APIs **SHOULD NOT** do more than they need to. If someone else already provides an appropriate service we **SHOULD** use or recommend this, we **SHOULD NOT** duplicate it ourselves.
 
-For example, an API for providing the locations of BAS ships could include a current weather report from a third party. Since this weather information can be requested directly (rather than bundled by us) it **SHOULD NOT** be included in our API. Instead information on where to get this weather data from, and preferably an example, **SHOULD** be documented.
+For example, an API for providing the locations of BAS ships could include a current weather report from a third party. Since this weather information can be requested directly from the third party, rather than bundled by us, it **SHOULD NOT** be included in our API. Instead information on where to get this weather data from, and preferably an example, **SHOULD** be documented.
 
 Doing this keeps our API as simple as possible and lets us focus on making what we need to provide as useful as possible. We should let others concentrate on solving other needs.
 
@@ -142,19 +141,19 @@ Sources:
 ### [x.x] APIs **SHOULD** be clear and explicit in their operation, returning helpful errors 
 
 
-APIs **SHOULD NOT** try to 'guess' or make assumptions about what what the user wants. If a request doesn't make sense the API **SHOULD** say so by returning an error.  
+APIs **SHOULD NOT** try to "guess" or make assumptions about what what the user wants. If a request doesn't make sense, or is unclear, the API **SHOULD** say so by returning an error/warning etc.  
 
-*Guessing* introduces unnecessary logic within the API, making it more complex, increasing the changes of something going wrong. This decreases reliability and increases unpredictability. However, APIs **SHOULD** be *helpful*.
+"Guessing" introduces unnecessary logic within the API, making it more complex, increasing the changes of something going wrong. This decreases reliability and increases unpredictability. Instead, APIs **SHOULD** be "helpful".
 
 For example, an API method takes a start date as a filter for some dataset, the method expects a date in the form `YYYY-MM-DD`. A request is made using a date `2004/10/14`.
 
 This request **SHOULD** fail, stating the start date given is not recognised as valid.
 
-It is clear the date is valid, but is in the wrong format. Whilst it is possible (and likely trivial) to detect this and convert the date into the right format the API **SHOULD NOT** do so.
+It is clear the date is valid, but is in the wrong format. Whilst it is possible (and likely trivial) to detect this and convert the date into the right format, the API **SHOULD NOT** do so.
 
 In most cases, it would be necessary to add code to check for this, if the code is refactored and this is missed this request will now fail when previously it succeeded. This will likely have an impact on any service using the API and cause confusion (i.e. not clear and unambiguous) and require debugging. Further refactoring, probably caused by a submitted bug report, will then be needed to fix the error.
 
-In this case, the delimiter, `/` used is common and would typically be included in any *guessing* code. However if a `;` was used instead, and not coded for, that request would fail. This would mean the two requests, which contain the same fault, would be treated differently.
+In this case, the delimiter, `/` used is common and would typically be included in any "guessing" code. However if a `;` was used instead, and not coded for, that request would fail. This would mean the two requests, which contain the same fault, would be treated differently.
 
 Instead, a simple `if date == format` **SHOULD** be used, if it fails, for any reason, an error **SHOULD** be returned. The error **SHOULD** explain:
  
@@ -164,7 +163,7 @@ Instead, a simple `if date == format` **SHOULD** be used, if it fails, for any r
 
 This shows, clearly and unambiguously, why the request failed and how to correct the mistake. Importantly, regardless of the input used, this method will, from first use, only succeed where the date is correctly formatted.
 
-In addition, an appropriate status code **SHOULD** be used to indicate more generally the type of error that has occurred. Errors caused by us, or the API **SHOULD** use a status code in the `5XX` range. User errors **SHOULD** use a status code in the `4XX` range.
+In addition, an appropriate status code **SHOULD** be used to indicate more generally the type of error that has occurred. Errors caused by us (the API) **SHOULD** use a status code in the `5XX` range, user errors **SHOULD** use a status code in the `4XX` range.
 
 Sources:
 
@@ -187,13 +186,13 @@ Sources:
 
 ### [x.x] APIs **SHOULD** be as resilient as possible
 
-Where we create APIs that rely on third parties we **MUST** ensure we have plans in place for where these services are either temporally or permanently unavailable in the future.
+Where we create APIs that rely on third parties, we **MUST** ensure we have plans in place for where these services are either temporally or permanently unavailable in the future.
 
 When evaluating whether to use an external service factors such as the reputation of the service, the cost (and if this likely to change), availability (can the service scale to the same degree we can) and support all need to considered. This applies both to external services provided internally (i.e. by ourselves, BAS, NERC) or by third parties.
 
 These factors need to weighed against the importance of the functionality such services provide. For services providing core functionality, a more defensive, conservative approach **SHOULD** be followed.
 
-It is infeasible to provide all services ourselves, credit card processing for example **SHOULD** be left to a payment gateway, however we **SHOULD** create APIs in such a way that reliance on a particular service is abstracted. This ensures we can swap out services, potentially for newer, better ones, without having to change core 'business' logic. 
+It is infeasible to provide all services ourselves, credit card processing for example **SHOULD** be left to a payment gateway, however we **SHOULD** create APIs in such a way that reliance on a particular service is avoided through abstraction. This ensures we can swap out services, potentially for newer, better ones, without having to change core 'business' logic. 
 
 Sources:
 
@@ -203,19 +202,19 @@ Sources:
 
 APIs **SHOULD NOT** 'reinvent the wheel'. The types of APIs BAS will commonly create will not be unique. They therefore don't require unique functionality or solutions to common problems.
 
-Using a common solution can utilise prior or community knowledge, reducing implementation and support costs. Existing tooling, frameworks and can be easily applied, increasing interoperability and looser coupling between different solutions.
+Using a common solution can utilise prior or community knowledge, reducing implementation and support costs. Existing tooling, frameworks can be easily applied, increasing interoperability and looser coupling between different solutions.
 
-For example, content negotiation for determining response format is a solved problem. Rolling our solution would take time, not cover all edge cases and would require all support to be provided by us. Using the *standard* solution means we benefit from the experience of others and more people are able to provide support (e.g. StackOverflow etc.).
+For example, content negotiation for determining response data types is a solved problem. Rolling our solution would take time, not cover all edge cases and would require all support to be provided by us. Using the *standard* solution means we benefit from the experience of others and more people are able to provide support (e.g. StackOverflow etc.).
 
 A distinction **SHOULD** be made between *best* practice, which **SHOULD** be followed, and *common* practice, which might not be "a good idea". Examples of *common* practice which are justifiable to avoid include:
 
 * Solutions which break or misuse standards.
 * Solutions which not sufficiently secure, in situations where a more secure alternative exists, or for sensitive information, where any solution exists.
-* Solutions which are 'hacks' or 'lazy' approaches, where a 'proper' approach is available, or rely on 'quirks' or 'side effects' to achieve their purpose.
+* Solutions which are "hacks" or "lazy" approaches, where a "proper" approach is available, or rely on "quirks" or "side effects" to achieve their purpose.
 
-These approaches, especially the latter 'quirk' kind, are typically not sustainable as their behaviour could change at any time, often without warning. The results of this could, at best, break the approach used, or at worst, change the result of the approach. This could potentially suddenly introduce new security flaws or inadvertently exposing information presumed to be safe.
+These approaches, especially the latter ""quirk"" kind, are typically not sustainable as their behaviour could change at any time, often without warning. The results of this could, at best, break the approach used, or at worst, alter the result of the approach. This could unexpectedly introduce new security flaws or expose information presumed to be safe.
 
-A good example of a *common* solution is [JSONP](http://en.wikipedia.org/wiki/JSONP) which is essentially a hack so as not to use the *best* solution, [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
+A good example of a *common* practice solution is [JSONP](http://en.wikipedia.org/wiki/JSONP), which is essentially a hack compared to the *best* practice solution, [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 
 Sources:
 
@@ -223,13 +222,13 @@ Sources:
 
 ### [x.x] Where appropriate, APIs **SHOULD** be open, and made available publicly
 
-Given BAS is Government organisation (according to Wikipedia so it must be true) our work **SHOULD** visible and accessible. Providing APIs aids this by offering data in an organised, logic way in convenient formats, ideally without involvement with BAS staff.
+Given BAS is Government organisation (according to Wikipedia so it must be true) our work **SHOULD** visible and accessible. Providing APIs aids this by offering data in an organised, logical way in convenient formats, ideally without the involvement of BAS staff.
 
-In addition to API outputs, the research, design and code of APIs themselves can prove useful to others and ourselves. We benefit enormously from the work of others, through open sourced ideas and technologies, it is therefore right we make whatever we can available for others.
+In addition to API outputs, the research, design and code of APIs themselves can prove useful to others. We benefit enormously from the work of others, through open sourced ideas and technologies, it is therefore right we make whatever we can available to others.
 
-In general the more people that use our APIs, and able to see how they work, the higher the chance of feedback. Either bugs/inaccuracies in our code or data we can correct, or 'have you thought about this' type ideas.
+In general the more people that use our APIs, and are able to see how they work, the higher the chance of feedback. This may be bugs/inaccuracies in our code or data we need to correct, or 'have you thought about this' type ideas.
 
-In addition APIs and their code being publicly available, where feasible associated issue trackers, wiki's and other sources of information **SHOULD** be made available. This gives users an increased understanding of the current status of an API, its history, challenges and how these were resolved etc. This helps users evaluate our APIs with more confidence and prevents repeating old discussions.
+In addition to APIs and their code being publicly available, where appropriate associated issue trackers, wiki's and other sources of information **SHOULD** be made available. This gives users an increased understanding of the current status of an API, its history, challenges and how these were resolved etc. This helps users evaluate our APIs with more confidence and prevents repeating old discussions.
 
 This is the tenth GDS Design Principle.
 
@@ -241,19 +240,19 @@ Sources:
 
 ### [x.x] Where appropriate, APIs **SHOULD** use established standards and open formats
 
-Good standards encourage interoperability through consistency between different systems implementing the same standards.
+Good standards encourage interoperability through consistency between different systems that implement the same standard.
 
-Different standards target different *layers*, technologies or approaches used within an API. Conformance to appropriate standard, at whatever level, can be used to justify technology choices for example. In such cases it usually isn't necessary to verify a technology meets a standard but technologies that do (or claim to) **SHOULD** be preferred over those that don't.
+Different standards target different *layers*, technologies or designs used within an API. Conformance to appropriate standards, at whatever level, can be used to justify technology choices for example.
 
 Following standards, or using standards compliment technologies, typically bring benefits such as community/hive knowledge (e.g. StackOverflow etc.) and compatibility with tooling, saving time and generally giving a better experience than non-standard alternatives.
 
-The [HTTP Protocol](https://tools.ietf.org/html/rfc2616) is a good example of a standard, using it means we can use a variety of tools (web browser, caching layers, load balancers etc.) and frameworks provided by others with a high confidence these will understand each other. End users will also typically understand, if not expect, the use of this standard. 
+The [HTTP Protocol](https://tools.ietf.org/html/rfc2616) is a good example of a standard, using it means we can use a variety of tools (web browsers, caching layers, load balancers etc.) and frameworks provided by others with a high confidence these will understand each other. End users will also typically understand, if not expect, the use of this standard. 
 
-Another, technology specific, good example, is the [PSR-4 Autoloader](http://www.php-fig.org/psr/psr-4/) standard for automatically loading PHP classes. Using this standard reduces the effort to use unfamiliar technologies, encouraging experimentation and making rapid iteration more achievable. Similarly a common standard encourages the creation of associated tooling, such as package managers and IDE/editor support.
+Another good technology specific, example, is the [PSR-4 Autoloader](http://www.php-fig.org/psr/psr-4/) standard for automatically loading PHP classes. Using this standard reduces the effort to use unfamiliar technologies, encouraging experimentation and rapid iteration. Using a common standard encourages the creation of associated tooling, such as package managers and IDE/editor support.
 
-Data formats **SHOULD** be chosen based on there suitability to the data being represented and interoperability.
+Data formats **SHOULD** be chosen based on there suitability for the data being represented and their interoperability.
 
-Data formats are discussed later in this document, however in general, data formats **SHOULD** be as open as possible. Similar to technologies, proprietary data formats can become obsolete or expensive to maintain limiting their long term availability.
+In general, data formats **SHOULD** be as open as possible. Similar to technologies, proprietary data formats can become obsolete or expensive to maintain limiting their long term availability.
 
 Sources:
 
@@ -277,7 +276,7 @@ Sources:
 
 ### [x.x] APIs **MUST**  meet the needs of their users
 
-Ideally all stakeholders **SHOULD** be involved in the development of an API, including data providers, API creators, relevant project mangers, significant end users and representative users.
+Ideally all stakeholders **SHOULD** be involved in the development of an API, including data providers, API creators, relevant project mangers, significant end users and representative end users.
 
 For simple APIs, this may not be many people and simple to organise. Others may require more extensive research and engagement with users, including resolving conflicts through negotiation.
 
@@ -296,7 +295,7 @@ Ideally the individual responsible for each API **SHOULD** be contactable direct
 
 Feedback **MUST** be treated seriously, particularly in regards to usability problems.  
 
-Examples of this type of feedback might include:
+Examples of this type of feedback include:
 
 * A user has made a reasonable attempt to achieve a task the API claims to support using provided documentation/examples and limited experimentation.
 * A user reports that something doesn't work as expected or is unclear how something should be used.
@@ -307,12 +306,11 @@ Sources:
 
 ### [x.x] APIs **SHOULD NOT** be created in isolation, and we **SHOULD** use our own APIs 
 
-API creators **SHOULD** be also be API consumers, this is the quickest and easiest way to validate our APIs do what it should.
+API creators **SHOULD** be also be API consumers, this is the quickest and easiest way to validate our APIs do what they should.
 
 API creators **SHOULD** also take part in any discussions on the needs of an API. This reinforces *why* the API is needed and helps ensures these needs are met.
 
-Wherever possible, APIs **SHOULD** be implemented in a real system, usually online. Again this highlights any problems in using an API and ensuring APIs are practical, if not *nice* to use.
-
+Wherever possible, APIs **SHOULD** be implemented in a real system. This highlights any problems using the API and ensures APIs are practical.
 Sources:
 
 * [APIs - Build an API By Building With the API](https://www.gov.uk/service-manual/making-software/apis.html#build-an-api-by-building-with-the-api)
@@ -335,9 +333,9 @@ Sources:
 
 ### [x.x] APIs **SHOULD** be loosely coupled
 
-This means the use of interfaces to separate tasks with specific implementations, and repositories to separate data sources from how and where that data is accessed.
+This means the use of interfaces to separate actions from specific implementations, and repositories to separate data sources from how and where that data is accessed.
 
-This ensures the APIs we create a modular and adaptable to change. This applies at a service level (changing payment processor or even database backend) and at a local code level by designing properly scoped functions and clear separation of concerns.
+This ensures the APIs we create are modular and adaptable to change. This applies at a service level (changing payment processor or even database backend) and at an internal level by designing properly scoped functions with a clear separation of concerns.
 
 Sources:
 
@@ -346,13 +344,13 @@ Sources:
 
 ### [x.x] APIs **SHOULD** use source control
 
-Git is preferred, specially the NERC Stash repository provided by CEH.
+Git is preferred, specifically the NERC Stash repository provided by CEH.
 
-APIs **SHOULD** adopt a suitable branching model for separating development and production codebases, and for using tools such as continuous integration and task such as code reviews.
+APIs **SHOULD** adopt a suitable branching model for separating development and production codebases, and for using tools such as continuous integration and processes such as code reviews.
 
 By convention, a *develop* branch should reflect the version of the API under active development, and a *master* branch reflecting the latest stable version.
 
-Wherever possible, API source code **SHOULD** be made available publicly. This increases the number of people who can review our code for bugs and mistakes and maybe offer suggestions on how to do things better. It also forces us to write better code, by avoiding 'hacks' using proper structuring and ensuring code is readable and well explained.
+Wherever possible, API source code **SHOULD** be made publicly available. This increases the number of people who can review our code for bugs and mistakes and maybe offer suggestions on how to do things better. It also forces us to write better code, by avoiding "hacks", using proper structuring and ensuring code is readable and well explained.
 
 Sources:
 
@@ -365,9 +363,9 @@ Resources:
 
 ### [x.x] APIs **SHOULD** use issue tracking
 
-These guidelines have no preference on the wide range of issue trackers that are available. The type of issue tracker you choose will depend on the audience of the API, the number and range of people contributing to the API and the complexity of the issues that will need to handled.
+These guidelines have no preference on how issues are managed, or the system used to do so. The type of issue tracker you choose will depend on the audience of the API, the number and range of people contributing to the API and the complexity of the issues that will need to be handled.
 
-For small projects released to the public tools like the GitHub or BitBucket issue trackers offer good accessibility for users and contributors and are free to use. However they lack more complex features such as assignments, custom issue states and associations.
+For small projects released to the public, issue tracked provided by GitHub or BitBucket offer good accessibility for users and contributors and are free to use. However they lack more complex features such as assignments, custom issue states and associations.
 
 For larger projects or those focused on an internal or NERC audience, it is recommended you use Jira, of which NERC has an instance provided by CEH. An added benefit of using this system is integration with other services such as Stash.
 
@@ -399,7 +397,7 @@ Sources:
 
 ### [x.x] APIs **SHOULD** use `UTF-8` for character encoding 
 
-The 18F API Standards summarise the benefits of using this, they are echoed here for convenience:
+The 18F API Standards summarise the benefits of using this, echoed here for convenience:
 
 > "Expect accented characters or 'smart quotes' in API output, even if they're not expected.
 > An API should tell clients to expect UTF-8 by including a charset notation in the Content-Type header for responses.
@@ -415,7 +413,7 @@ Resources:
 
 ### [x.x] APIs **SHOULD** use `ISO 8601` and `UTC` for dates and times
 
-The 18F API Standards summarise the benefits of using this, they are echoed here for convenience:
+The 18F API Standards summarise the benefits of using this, echoed here for convenience:
 
 > "For just dates, that looks like 2013-02-27. For full times, that's of the form 2013-02-27T10:00:00Z.
 > This date format is used all over the web, and puts each field in consistent order -- from least granular to most granular."
@@ -427,9 +425,9 @@ Sources:
 
 ### [x.x] APIs **SHOULD** use unique ids for resources
 
-Each resource **SHOULD** be identified by a unique identifier, ideally a UUID ***SHOULD** be used. This ID **SHOULD** be unique all instances of an API and ideally other APIs as well.
+Each resource **SHOULD** be identified by a unique identifier, ideally using a UUID ***SHOULD** be used. This ID **SHOULD** be unique across all instances of an API and ideally other APIs as well.
 
-If using UUIDs, version 4 or 5 is recommended represented in lower case.
+If using UUIDs, version 4 or 5 is recommended, represented in lower case.
 
 Sources:
 
@@ -437,9 +435,9 @@ Sources:
 
 ### [x.x] Where Appropriate, resources **SHOULD** use `created_at` and `modified_at` timestamps
 
-The created at timestamp **SHOULD** be set when the object is first created and **SHOULD NOT** change. The modified at timestamp **SHOULD** change whenever a resource is modified.
+A "created at" timestamp **SHOULD** be set when the object is first created and **SHOULD NOT** change. A "modified at" timestamp **SHOULD** change whenever a resource is modified.
 
-There may be resources where using these attributes don't make sense, in such cases they **SHOULD NOT** be used, as this may create confusion.
+There may be resources where using these attributes doesn't make sense, in such cases they **SHOULD NOT** be used, as this may create confusion.
 
 Sources:
 
@@ -451,34 +449,36 @@ Sources:
 
 It isn't feasible to cover exactly how each API **SHOULD** be documented as this will depend on its purpose, intended audience and other factors. However in general APIs **MUST** be well documented so it is clear to users what the API can do and how they should use it to achieve what they want.
 
-However there it is possible to identify some key requirements for API documentation. It **MUST** be clear, concise and well organised. It **MUST** care to two key audiences, users, looking to evaluate the API, and existing users, looking for specific information.
+It is possible to identify some key requirements for API documentation. It **MUST** be clear, concise and well organised. It **MUST** cater to two key audiences, new users, looking to evaluate the API, and existing users, looking for specific information on how to use the API.
 
-How you decide to write and structure your documentation is up to you. To ensure that common elements are not forgotten a list of suggested sections/topics is given here. You do not have follow all of these items, and you **SHOULD NOT** include any that do not fit your API, this will confuse people.
+How you decide to write and structure your documentation is up to you. To ensure that common elements are not forgotten a list of suggested sections/topics is given here. You do not have include all of these items, and you **SHOULD NOT** include any that don't make sense for your API, as this may confuse people.
 
 It is suggested to divide documentation into two parts:
 
-* Overview information
-* Endpoint information
+* Overview information, aimed primarily at new/evaluating users.
+* Endpoint information, aimed primarily at existing users.
 
 Overview information **SHOULD** cover:
 
-* Security and authentication, including acquiring and using authentication tokens, if used.
-* API stability, versioning and deprecation policy, including how to select the desired API version.
-* Common request and response headers.
-* Error serialisation format.
+* Security and authentication, including acquiring and using authentication tokens, if used
+* API stability, versioning and deprecation policy, including how to select the desired API version
+* Common request and response headers
+* Error serialisation format, including warnings, notices, etc.
 * Rate limiting
 * Data sources, accuracy and limitations 
-* Feedback, Issues, contacts
-* Mailing list - i.e. some way to stay up to date with any changes.
+* Feedback, issues and contacts
+* Mailing list - i.e. some way to stay up to date with any changes
+* The version of these guidelines used
+* Copyright and licensing
 * Contribution policy
 * Real world examples
 
 Endpoint information **SHOULD** cover, for each endpoint:
 
-* Access (including endpoint URL, anonymous/authenticated status, required authorisation)
-* Stability & Deprecation
-* Request parameters & headers
-* Response headers, supported data types output
+* Access, including endpoint URL, anonymous/authenticated status, required authorisation
+* Stability and deprecation status
+* Request parameters and headers, including value range limitations or lists of acceptable values
+* Response headers, supported data types and output
 * Associated resources
 * Additional information as required
 
@@ -504,17 +504,17 @@ In addition to through and accurate documentation, examples of how to make reque
 
 This aids users in evaluating if the API will provide the information they are looking for, more so than verbose descriptions of responses.
 
-When implementing an API end users can use examples to get started quickly. Therefore examples **SHOULD** be functional (i.e. use a real ids) using safe, sensible defaults for real world, typical requests.
+When implementing an API end users can use examples to get started quickly. Therefore examples **SHOULD** be functional (i.e. use real endpoints and resources) using safe, sensible defaults for real world, typical, requests.
 
 Documentation **SHOULD** clarify any extreme values or lists of acceptable values, these **SHOULD NOT** be defined within examples.
 
-Examples **SHOULD** be runnable with a minimum of effort, ideally from the browser or the command line. Provision for features such as authentication/authorisation **SHOULD** be made, such as:
+Examples **SHOULD** be useable with a minimum of effort, ideally from the browser or the command line. Provision for features such as authentication/authorisation **SHOULD** be made, such as:
 
-* Use public methods (where available)
-* Use test credentials which may return fake data but sufficiently similar to read data to be useful for testing, e.g. give fake but realistic ship positions.
-* Show typical responses users can inspect to get a good idea what they would get.
+* Using public methods (where available)
+* Using test credentials which may return fake data but are sufficiently similar to real data to be useful e.g. give fake, but realistic, ship positions
+* Show typical responses users can inspect to receive
 
-Complex APIs, where requests cannot be tested within a browser, **SHOULD** still offer some way to experiment. Commonly this is done using an API 'explorer' or 'playground'. In addition to self hosted solutions there are a number of SAAS options, though millage may vary in supporting complex APIs.
+Complex APIs, where requests cannot be tested within a browser, **SHOULD** still offer some way to experiment. Commonly this is done using an API 'explorer' or 'playground'. In addition to self hosted solutions there are a number of SAAS options to provide this functionality, though millage may vary.
 
 Sources:
 
@@ -540,12 +540,12 @@ Resources:
 Developer documentation **SHOULD** contain:
 
 * A description of the technology stack used by an API and how this should be provisioned to allow new instances of the API to be created, either for further development or deployment.
-* In addition, a 'getting started' walkthrough of how to checkout the API source code through to launching the API into production. This is crucial for new developers, especially where you are using non-standard or custom technologies.
+* A "getting started" walkthrough on how to checkout the API from source code through to launching the API into production. This is crucial for new developers, especially where non-standard or custom technologies are used.
 * A brief overview of the development process, issues that were encountered, any non-straight forward decisions that were taken and why, etc. This aids new developers understand how the API was built and why it works the way it does. This is especially important if non-standard design decisions were made.
 
-The standard of documentation for both internal and externally released APIs **SHOULD** be the same, i.e. you **SHOULD** assume the developer has never used one of our APIs before. It is reasonable to assume knowledge of basic programming terminology and concepts and a certain familiarity with the BAS domain.
+The standard of documentation for both internal and external APIs **SHOULD** be the same, i.e. you **SHOULD** assume the developer has never used one of our APIs before. It is reasonable to assume knowledge of basic programming terminology and concepts and a certain familiarity with the BAS domain.
 
-Where useful and available, link to meeting minutes, process reports or other sources of information that may have been created as part of a development. This can provide more context without much effort on your part.
+Where useful and available, link to meeting minutes, progress reports or other sources of information that may have been created as part of a development. This can provide more context without much effort on your part.
 
 ### [x.x] APIs **SHOULD** be backed by a schema
 
@@ -579,25 +579,25 @@ Sources:
 
 ### [x.x] APIs **MUST NOT** assume a version for requests that do not specify one
 
-APIs **MUST NOT** use conventions such as `/latest/`, `/current/`, `/head/` etc. as pointers to the latest API version. This behaviour is not clear or unambiguous, requests made in this way may suddenly fail if a breaking change is introduced to a new version.
+APIs **MUST NOT** use conventions such as `/latest/`, `/current/`, `/head/` etc. as pointers to the latest API version. This behaviour is not clear or unambiguous, requests made in this way may suddenly fail if a breaking change is introduced in a new version.
 
 Instead users **MUST** explicitly state the version they wish to use. If no version is provided, the API **MUST** return a fatal error until one is provided.
 
 ### [x.x] APIs **MUST** preserve backwards compatibility within a version
 
-APIs **MUST NOT** introduce braking changes *within* an API version. If you need to do this create a new version.
+APIs **MUST NOT** introduce braking changes *within* an API version. If you need to do this, create a new version.
 
 Examples of changes that can be implemented in the current version:
 
 * New resources (with associated methods)
 * New methods for existing resources
-* New data formats
-* New attributes or elements on existing data types
+* Support for new data formats
+* New attributes or elements for existing resources
 
 Examples of changes that **MUST** be implemented in a new version:
 
-* Removed or renamed methods/resources/URLs, including changes to HTTP verb
-* Changes to the data returned by a method
+* Removed or renamed methods/resources/endpoints, including changes to the HTTP verb used
+* Changes to the data returned by a method or the structure of this data
 
 Sources:
 
@@ -607,11 +607,11 @@ Sources:
 
 ### [x.x] APIs **SHOULD** try to be compatible with older versions, providing they remain clear and unambiguous
 
-For example, an API method is moved from `/ships` to `/fleet/ships` to be better organised, no other aspects of the method are changed.
+For example, an API endpoint moved from `/ships` to `/fleet/ships` to be better organised, no other aspects of the endpoint are changed.
 
 This represents a breaking change, as requests made to `/ships` will no longer return what they did previously. In this case a request made to the earlier `/ships` and newer `/fleet/ships` will be identical (other than the URL obviously). Backwards compatibility can therefore be preserved by using a `301 Moved Permanently` header to redirect requests made to the old method to the new.
 
-This remains clear and unambiguous by informing the user, 'this has moved to here', the user can then update their requests accordingly in their own time, which is nice.
+This remains clear and unambiguous by informing the user, "this has moved to here", the user can then update their requests in their own time.
 
 Sources:
 
@@ -619,15 +619,15 @@ Sources:
 
 ### [x.x] Where appropriate,  APIs **SHOULD** support old versions
 
-It is not reasonable to assume all users will upgrade to newer API versions at the same time. Therefore old APIs **SHOULD** continue to be supported, for a limited period, to allow users to upgrade in their own time.
+It is not reasonable to assume all users will upgrade to newer API versions at the same time. Therefore old API version **SHOULD** continue to be supported, for a limited period, to allow users to upgrade in their own time.
 
-The length of this time period will depend on the audience of the API, for internal APIs the period can be quite short, for external APIs a longer period **SHOULD** be given. The number of users of the API **SHOULD** also be taken into account, which **SHOULD** be judged from API analytics and logs.
+The length of this limited period will depend on the audience of the API. For internal APIs the period can be quite short, for external APIs a longer period **SHOULD** be given. The number of users of the API **SHOULD** also be taken into account, which **SHOULD** be judged from API analytics and logs.
 
-Wherever possible users **SHOULD** be notified of new API versions in advance, increasing the likelihood of a quicker adoption by allowing testing. Additionally, requests made to deprecated API versions **SHOULD** inform the user the version is deprecated and how they can use the new version.
+Wherever possible users **SHOULD** be notified of new API versions in advance, increasing the likelihood of a quicker adoption by allowing testing. Additionally, requests made to deprecated API versions **SHOULD** inform the user that API version is deprecated and how they can use the new version.
 
-APIs **SHOULD** clearly state their deprecation policy within their documentation, this allows users to evaluate if they can commit to this schedule before a version change occurs.
+APIs **SHOULD** clearly state their deprecation policy within their documentation, this allows users to evaluate if they can commit to this schedule before committing to the API.
 
-The number of API versions that **SHOULD** be supported will depend on the same factors as above and the rate at which new versions are released. Ultimately these are judgement calls with internal resources for supporting these older version being the limiting factor.
+The number of API versions that **SHOULD** be supported will depend on the same factors as above, plus the rate at which new versions are released. Ultimately these are judgement calls with internal resources for supporting older versions being the limiting factor.
 
 Supported, in these guidelines, mean older versions **SHOULD** remain accessible, bugs and faults **SHOULD** be addressed (as these will likely exist in newer versions as well). Security issues **MUST** be addressed, if this is not possible the older version **MUST** no longer be made available.
 
@@ -641,7 +641,7 @@ Sources:
 
 APIs **SHOULD** be designed to be robust and forward thinking, given the speed of evolution on the web.
 
-For example, if a new header is added to later API versions older API versions **SHOULD** ignore it, rather than fail. Documentation **SHOULD** emphasise where different versions may give different responses for the same request, however these situations **SHOULD** be avoided where possible.
+For example, if a new header is added to later API versions older API versions **SHOULD** ignore it, rather than fail. Documentation **SHOULD** emphasise where different versions may give different responses for the same request, however these situations **SHOULD** be avoided wherever possible.
 
 Sources: 
 
@@ -662,9 +662,9 @@ Sources:
 
 Simply put Cryptography is hard and we **SHOULD NOT** design it ourselves. Cryptography, encryption, etc. are all excellent examples of when it's better to use something by someone else, or more specifically by someone that knows what they're doing.
 
-Even *implementing* cryptography is different, as a quick internet search will prove. Banks struggle with stuff so it would insane for us to attempt to 'roll our own' cryptography or implementation.
+Even *implementing* cryptography is difficult, as a quick internet search will prove. 
 
-If you think you do need to **STOP!** Consult widely with others (both internally and online) to test your reasoning and ensure you haven't missed something.
+It would insane for us to attempt to 'roll our own' cryptography or implementation. If you think you do need to **STOP!** Consult widely with others (both internally and online) to test your reasoning and ensure you haven't missed something.
 
 Sources:
 
@@ -677,15 +677,15 @@ Resources:
 
 ### [x.x] Where appropriate, APIs **SHOULD** allow anonymous access
 
-This means access **SHOULD** require authentication or authorisation, unless it is necessary.
+This means access **SHOULD NOT** require authentication or authorisation, unless it is necessary.
 
-This ensures APIs are easier to experiment with and integrate, especially for semolina like a scientist who just wants to get the information they want as quickly and easily as possible.
+This ensures APIs are easier to experiment and integrate with, especially for users like a scientist who just wants to get the information they want as quickly and easily as possible.
 
-Anonymous responses can be externally cached much more easily and effectively, for popular APIs this saves resources and speeds up response times.
+Anonymous responses can be externally cached much more easily and effectively, saving APIs this saves resources and speeding up response times.
 
-Clearly there will be many cases where anonymous access simply isn't tenable (or useful). As a general rule `GET` methods for most resources can be made accessible anonymously, other methods would typically require authentication/authorisation.
+Clearly there will be many cases where anonymous access isn't appropriate (or useful). As a general rule `GET` methods, for most resources, can be made accessible anonymously, whereas other methods would typically require authentication/authorisation.
 
-In some cases authentication is a useful feature for the end user, such as 'favourites' or usage histories. These are perfectly acceptable and **SHOULD** be offered if they help the user.
+In some cases authentication is a useful feature for the end user, such as user "favourites" or usage histories. These are perfectly acceptable and **SHOULD** be offered if they help the user.
 
 Sources:
 
@@ -706,19 +706,19 @@ Sources:
 
 ### [x.x] Where appropriate, APIs **SHOULD** use common authentication sources
 
-Many APIs will be accessible to the same group of people (i.e. BAS/NERC staff). It would therefore make sense to centralise the verification of user credentials to a central service, or order to keep our APIs as simple as possible, and to reduce the number of passwords users have to remember. 
+Many APIs will be accessible to the same group of people (i.e. BAS/NERC staff). It would therefore make sense to centralise and delegate user authentication to a central service. This reduces the number of passwords users have to remember and keeps keep our APIs as simple as possible. 
 
-For internal APIs this central service **SHOULD** be all or part of the NERC Active Directory. This allows the authentication of users to be delegated out completely, saving considerable time and effort. Integration with Active Directory directly or through LDAP is widely supported by a range of technologies and, if correctly implemented, is secure.
+For internal APIs, this central service **SHOULD** be all or part of the NERC Active Directory. This allows the authentication of users to be delegated, saving considerable time and effort. Integration with Active Directory directly or through LDAP is widely supported by a range of technologies and, if correctly implemented, is secure.
 
-It is reasonable to assume users will be able to readily provide their NERC AD account details, and if not we can again delegate password resets to IT Help Desks. This ensures where authentication is needed, it is as painless as possible.
+It is reasonable to assume users will be able to readily provide their NERC AD account details, and if not we can delegate password resets to IT Help Desks. This ensures where authentication is needed, it is as painless as possible.
 
-For external (to NERC) users, a similar approach **SHOULD** be adopted where a common authentication source is created to contain these users, to which our APIs authenticate credentials. This may take the form of a formal internal LDAP service or users database or, for academic users, Shibboleth, or for the general public, OAuth for providers such as Google, Facebook and Twitter.
+For external (to NERC) users, a similar approach **SHOULD** be adopted where a common authentication source is created to contain these users, to which our APIs verify credentials. This may take the form of a formal internal LDAP service or users database or, for academic users, Shibboleth, or for the general public, OAuth for providers such as Google, Facebook and Twitter.
 
-These external authentication sources offer similar benefits as internal sources, they also offer much larger audience sizes and, in some cases, access to additional user information, subject to the user's approval.
+These external authentication sources offer similar benefits as internal sources, some also offer much larger audience sizes and access to additional user information, subject to the user's approval.
 
 The key point to this guideline is APIs **SHOULD NOT** maintain their directory of users for the purposes of authentication.
 
-However, there will likely be times where APIs may need to store information about a user that is specific to that API. In this cases, APIs **SHOULD** store this extra information within the API so as not to 'pollute' the authentication service.
+However, there will likely be times where APIs may need to store information about a user that is specific to that API. In these cases, APIs **SHOULD** store this extra information within the API so as not to 'pollute' the authentication service.
 
 Sources:
 
@@ -732,7 +732,7 @@ Resources:
 
 ### [x.x] APIs **SHOULD** use HTTPS
 
-The 18F API Standards summarise the benefits of using HTTPS, they are echoed here for convenience:
+The 18F API Standards summarise the benefits of using HTTPS, echoed here for convenience:
 
 > "Any new API should use and require HTTPS encryption (using TLS/SSL). HTTPS provides:
 
@@ -743,13 +743,13 @@ The 18F API Standards summarise the benefits of using HTTPS, they are echoed her
 
 > HTTPS **SHOULD** be configured using modern best practices, including ciphers that support forward secrecy, and HTTP Strict Transport Security."
 
-For internal testing, the Web & Applications team maintain a internal Certification Authority which can issue certificates on a per domain basis. This simplifies trusting self signed certificates by owning needing to trust the CA certificate. These certificates **MUST NOT** be used externally or for services hosted outside of BAS.
+For internal testing, the Web & Applications team maintain a internal Certification Authority which can issue certificates on a per domain basis. This simplifies trusting self-signed certificates by only needing to trust the CA, not each certificate it signs.
 
-Please contact the [BAS Web & Applications Team](mailto:basweb@bas.ac.uk) for how to request an internal certificate or how to trust the internal CA.
+**These certificates MUST NOT be used externally or for services hosted outside of BAS.**
 
-For hosting outside of BAS or non-testing purposes BAS IT maintain certificates for `antarctica.ac.uk` and `nerc-bas.ac.uk`. These are wildcard certificates issued by a well supported Certification Authority.
+Please contact the [BAS Web & Applications Team](mailto:basweb@bas.ac.uk) to request an internal certificate and how to trust the internal CA.
 
-Please contact the [BAS IT Help Desk](mailto:helpdesk@bas.ac.uk) for how to use these certificates for your API.
+For hosting outside of BAS or non-testing purposes, BAS IT maintain certificates for `*.antarctica.ac.uk` and `*.nerc-bas.ac.uk`. These are wildcard certificates issued by a well supported Certification Authority. Please contact the [BAS IT Help Desk](mailto:helpdesk@bas.ac.uk) for how to use these certificates for your API.
 
 Sources:
 
@@ -774,7 +774,7 @@ It is clearer and simpler to support only one protocol and ensures all requests 
 
 Ideally insecure requests **SHOULD NOT** be accepted, either by refusing the connection or using a `403 Forbidden` response.
 
-Insecure requests **SHOULD NOT** be silently 'upgraded' or redirected to secure alternatives. This introduces ambiguity and requires additional complexity to support. Taking a hard line approach is not as permissive as redirecting but it ensures 'lazy' behaviours are not tolerated.
+Insecure requests **SHOULD NOT** be silently 'upgraded' or redirected to secure alternatives. This introduces ambiguity and requires additional complexity to support. Taking a hard line approach is not as permissive as redirecting but ensures 'lazy' behaviours are not tolerated.
 
 Sources:
 
@@ -788,11 +788,11 @@ Aggregating and analysing request data **SHOULD** inform the future development 
 
 Information on which methods and features are used most provides an evidence base for planning future development with the needs of users in mind. This data is unlikely to explain what *new* functionality might be required, but is invaluable in identifying features that are not used.
 
-At a technical level this data is useful at both a macro and micro level. For example, frequent errors can be highlighted to ensure common problems can be identified or fixed swiftly. Or an issue with a specific resource or even request can be flagged for manual review later. Whilst testing may identify some of these types of issue in advance, its not feasible to test every condition and request premonition possible.
+At a technical level this data is useful at both a macro and micro level. For example, frequent errors can be highlighted to ensure common problems can be identified or fixed swiftly. Or an issue with a specific resource or even request can be flagged for manual review later. Whilst testing may identify some of these types of issue in advance, its not feasible to test every condition and request permutation  possible.
 
-By recording factors such as the time taken to generate requests and logging queries/requests to other data sources or services the performance of the API can be measured objectively. Knowing which types of requests result in slow database queries for example can only feasibly be gathered using this type of analysis.
+By recording factors such as the time taken to generate requests and logging queries/requests to data sources or services, the performance of the API can be measured objectively. Knowing which types of requests result in slow database queries, for example, can only feasibly be gathered using this type of analysis.
 
-Key to the success of this staggery lies not only in the raw data being available, but in the tools used to process, analyse and present it in a useful fashion. Fortunately a multitude of third party and self hosted solutions are available to assist with this. Given the availability of these tools, and high value for effort ratio of the insight they can be provide, our APIs **SHOULD** use such an approach.
+Key to the success of this staggery lies not only in the raw data being available, but in the tools used to collect, store, analyse and present it in a useful fashion. Fortunately, a multitude of third party and self-hosted solutions are available to assist with this. Given the availability of these tools, and high value to effort ratio of the insight they can be provide, our APIs **SHOULD** use such an approach.
 
 Sources:
 
@@ -801,9 +801,9 @@ Sources:
 
 ### [x.x] APIs **SHOULD** log requests using an unique identifier
 
-Each request made to an API **SHOULD** be given a UUID. This **SHOULD** be returned in the response to that request as a `x-request-id` header allowing the client to easily log and quote this value.
+Each request made to an API **SHOULD** be given a UUID. This **SHOULD** be returned in the response to that request in a `x-request-id` header allowing the client to easily log and reference this value.
 
-APIs **SHOULD** log this request ID, along with an other relevant information, such as the endpoint called, parameters and options and an indication of what was returned (an error, some data etc).
+APIs **SHOULD** also log each request ID, along with an other relevant information, such as the endpoint called, its parameters and options and an indication of what was returned (an error, some data etc).
 
 This information is invaluable when resolving bugs or issues that are reported.
 
@@ -824,13 +824,13 @@ There are two forms of caching:
 * *External* caching, caches Endpoint responses and can provide information even when the API itself is unavailable.
 * *Internal* caching takes place the API application, e.g. query caching.
 
-External caching is much more robust and effective than internal caching and **SHOULD** be used for APIs with large (thousands) of users. However this method of caching is only effective for anonymous requests, returning the same information. If authentication is used the effectiveness will be decreased.
+External caching is much more robust and effective than internal caching and **SHOULD** be used for APIs with large (thousands) of users. However this method of caching is only effective for anonymous requests, returning the same information. If authentication is used its effectiveness will be decreased.
 
-Caching, of any kind, **SHOULD** only become a focus after an API has been launched and is proving, through metrics, to be causing performance problems. That said techniques that would make adding caching more difficult, such as a authenticating all methods, **SHOULD** be taken into consideration during development so as not to make adding caching more trouble than it needs to.
+Caching, of any kind, **SHOULD** only become a focus after an API has been launched and is proving, through metrics, to be causing performance problems. That said techniques that would make adding caching more difficult, such as a authenticating all methods, **SHOULD** be taken into consideration during development, so as not to make adding caching more trouble than it needs to.
 
 ### [x.x] Where appropriate, APIs **SHOULD** use Etags for cached resources
 
-Importantly the Etag for a resource **SHOULD** be the same regardless of the data-type used for the response.
+The Etag for a resource **SHOULD** be the same regardless of the data-type used for the response.
 
 Sources:
 
@@ -839,13 +839,13 @@ Sources:
 
 ### [x.x] Where appropriate, APIs **SHOULD** use sensible time limits for cached responses
 
-Where caching is used suitable measures **SHOULD** be used to ensure stale or invalid data is removed in a trimly fashion.
+Where caching is used, suitable measures **SHOULD** be used to ensure stale or invalid data is removed in a timely fashion.
 
 Techniques such as `Cache-Control` headers can be used to instruct caching systems, and users, how long a response should be cached before a new request is made.
 
-Users **SHOULD** be able to query this information in subsequent requests using a `If-None-Match` header.
+Users **SHOULD** be able to query this information in subsequent requests using an `If-None-Match` header.
 
-For example, an Endpoint may update once an hour with a new ship position, responses from this endpoint **SHOULD** include a `Cache-Control` header to inform the user the information will not change until the next update. This also ensures any request made after this period has expired will automatically receive the updated information.
+For example, an endpoint may update once an hour with a new ship position, responses from this endpoint **SHOULD** include a `Cache-Control` header to inform the user the information will not change until the next update. This also ensures any request made after this period has expired will automatically receive the updated information.
 
 Sources:
 
@@ -856,7 +856,7 @@ Sources:
 
 In some cases, for endpoints that may update frequently or which are expensive to process, rate limiting can be used to ensure users do not (inadvertently) overwhelm the API or cause performance/access problems for other users.
 
-Where this type of activity apparent rate limiting can be used, to inform users they are making to many requests in a given period. This can be combined with technologies within the API to ensure this is enforced.
+Where this type of activity is apparent, rate limiting can be used. To inform users they are making too many requests in a given period. This can be combined with technologies within the API to ensure this is enforced.
 
 Sources:
 
@@ -873,21 +873,21 @@ Resources:
 Within these guidelines, an *endpoint* consists of 4 elements:
 
 1. HTTP verb (e.g. `GET`)
-2. HTTP headers (e.g. `Accept: application/json`
+2. HTTP headers (e.g. `Accept: application/json`)
 3. URL path (e.g. `/ships`)
 4. URL parameters (e.g. `?operator=BAS`) 
 
-The HTTP verb and URL Path **MUST** be specified in each API request (and indeed by HTTP itself), these are referred to as *required* elements.
+The HTTP verb and URL Path **MUST** be specified in each API request, these are referred to as *required* elements.
 
-HTTP headers and URL parameters can be specified in each API request, these are referred to as *optional* elements.
+HTTP headers and URL parameters can be specified in an API request, these are referred to as *optional* elements.
 
 **An API endpoint is considered unique if its required elements are unique.**
 
 For example,
 
-* `[GET]V2/ships` and `[GET]V2/ships/{id}` are unique as the URL path is different.
-* `[GET]V2/ship/{id}` and `[PUT]V2/ship/{id}` are unique as the HTTP verb is different.
-* `[Get]V2/ships` and `[Get]V2/ships?id={id}` are NOT unique as the required endpoint elements are not unique.
+* `[GET]v2/ships` and `[GET]v2/ships/{id}` are unique, as the URL path is different.
+* `[GET]v2/ship/{id}` and `[PUT]v2/ship/{id}` are unique, as the HTTP verb is different.
+* `[Get]v2/ships` and `[Get]v2/ships?id={id}` are **NOT** unique, as the required  elements are the same.
 
 This ensures each API endpoint can be bookmarked and referenced easily and that each API request refers to a unique API method, which is needed for analytics.
 
@@ -898,7 +898,7 @@ Sources:
 
 ### [x.x] API endpoints **SHOULD** not change
 
-Where endpoints do change location and perform the same function, use redirects (e.g. `301 Moved Permanently`) to ensure backwards compatibility. You **MUST NOT** do this if the method an endpoint refers to has changed, or where doing so would introduce confusion and ambiguity.
+Where endpoints do change location and perform the same function, redirects (e.g. `301 Moved Permanently`) **SHOULD** be used to ensure backwards compatibility. You **MUST NOT** do this if the method an endpoint refers to has changed, or where doing so would introduce confusion and ambiguity.
  
 Sources:
 
@@ -910,8 +910,8 @@ For example, mapping to CRUD these would be:
 
 * `GET` for retrieving/reading
 * `POST` for creating
-* `PUT` for updateing
-* `DELETE` for deleting
+* `PUT` for updating
+* `DELETE` for destroying/deleting
 
 Sources:
 
@@ -919,12 +919,12 @@ Sources:
 
 ### [x.x] API endpoints **SHOULD NOT** rely on HTTP verbs other than `GET` and `POST` 
 
-A mechanism for using `POST` requests instead with some way specify the intended verb **SHOULD** be supported.
+A mechanism for using `POST` requests with some way to specify the intended verb **SHOULD** be supported.
 
-For example, a `_method` parameter could be used to fake other request types.
+For example, a `_method` parameter could be used to fake other verbs.
 
-APIs **SHOULD NOT** use verbs such as **PATCH** which are unambiguous.
-APIS **SHOULD** treat less common verbs with caution and **SHOULD** always a well supported alternative if used. 
+APIs **SHOULD NOT** use verbs such as `PATCH` which are unambiguous.
+APIs **SHOULD** treat less common verbs with caution and **SHOULD** always offer a well supported alternative if used. 
 
 Sources:
 
@@ -932,7 +932,7 @@ Sources:
 
 ### [x.x] API endpoints **MUST NOT** allow `GET` requests to alter resources
 
-`GET` endpoints **MUST** be *safe* and essentially act as read-only.
+`GET` endpoints **MUST** be safe and read-only.
 
 Sources:
 
@@ -940,13 +940,13 @@ Sources:
 
 ### [x.x] API endpoints **SHOULD** be self descriptive
 
-It **SHOULD** be possible to gather what an API method does from its endpoint alone. Therefore endpoints **SHOULD** be as self descriptive as possible, whilst being concise and ensuring endpoints remain well structured.
+It **SHOULD** be possible to gather what an endpoint does from its URL alone. Therefore endpoints **SHOULD** be as self descriptive as possible, whilst being concise and ensuring endpoints remain well structured.
 
-The easiest way to do this is to use descriptive and logical names for endpoints, you **SHOULD NOT** use verbs. If the method belongs to a resource use its name in its description.
+The easiest way to do this is to use descriptive and logical names for endpoints, you **SHOULD NOT** use verbs.
 
-Further endpoints **SHOULD** be structured logically and intuitively. Methods for a resource **SHOULD** be nested under the resource.
+Endpoints **SHOULD** be structured logically and intuitively. Methods for a resource **SHOULD** be nested under the resource.
 
-For example, `[GET]V2/ships/{id}/voyages` indicates the resource is `ships`, `{id}` the specific resource and the method is `voyages`. From this alone, it should be reasonably obvious this endpoint returns a list of voyages for a ship specified by `{id}`.
+For example, `[GET]v2/ships/{id}/voyages` indicates the resource is `ships`, `{id}` the specific resource and the method is `voyages`. From this alone, it should be reasonably obvious that this endpoint returns a list of voyages for a ship specified by `{id}`.
 
 Sources:
 
@@ -956,9 +956,9 @@ Sources:
 
 Ideally EndPoints **SHOULD** be snappy, URLs with more tokens require more effort to understand and increase the chance of making a mistake (in the spelling, order, etc.).
 
-EndPoints do not need to reflect the underlying relationship between resources, providing this full relationship 'chain' is not relevant for the EndPoint.
+Endpoints do not need to reflect the underlying relationship between resources, providing this full relationship 'chain' is not relevant for the endpoint.
 
-The Interagent HTTP API Design guidelines provide a good example of when this technique makes sense. In this case there is no need to understand what the resources used are, other than their relationship (shown in the first URL example).
+The Interagent HTTP API Design guidelines provide a good example of when this technique makes sense. In this case there is no need to understand what the resources used in this example are, other than their relationship (shown in the first URL example).
 
 > "
 
@@ -982,7 +982,7 @@ Sources:
 
 This aids consistency and removes ambiguity, it also preserves compatibility with hostnames.
 
-For example, `ships` not `Ships`, `cruise-reports` not `cruise_reports`.
+For example, `ships` not `Ships`, `cruise-reports` not `cruise_reports` or `cruiseReports`.
 
 Sources:
 
@@ -990,9 +990,9 @@ Sources:
 
 ### [x.x] Where appropriate, API endpoints **SHOULD** use the plural term for a resource
 
-The same endpoint **SHOULD** be used for both 'a thing' and 'a collection of things'. This helps keep URLs consistent as datasets change and are more predictable by not splitting methods over multiple URL paths.
+The same endpoint **SHOULD** be used for both "a thing" and "a collection of things". This helps keep endpoints consistent as resources change and are more predictable by not splitting methods over multiple URL paths.
 
-For example, `[GET]v2/ships/{id}/` and `[GET]v2/ships` both use `ships` even though the first returns a single *ship* and the latter multiple *ships*.
+For example, `[GET]v2/ships/{id}` and `[GET]v2/ships` both use `ships` even though the first returns a single *ship* and the latter multiple *ships*.
 
 You **SHOULD NOT** have URLs such as:
 
@@ -1013,11 +1013,11 @@ In many cases resources will contain one or more 'pseudo-IDs' such as a username
 
 Where this is the case our APIs **SHOULD** support using these additional references as aliases to the same resource.
 
-Aliases may not guarantee the correct resource will be returned, and in some cases may return more than one resource. A judgement should be made to ensure a balance between ease of referring to resources, and accuracy of results. Aliases which are likely to exhibit these problems **SHOULD** not be used.
+Aliases may not guarantee the correct resource will be returned, and in some cases may return more than one resource. A judgement should be made to ensure a balance between ease of referring to resources, and accuracy of results. Aliases which are likely to exhibit these problems **SHOULD NOT** be used.
 
-Whilst supporting aliases does increase the complexity of an API, providing this behaviour is documented properly, there is no significant loss of clarity or  unambiguousness. Clearly there will be *some* loss which highlights the judgement aspect of this guideline. In general the cases where this behaviour **SHOULD** be used will be obvious. If in doubt, you **SHOULD NOT** use an alias.
+Whilst supporting aliases does increase the complexity of an API, providing this behaviour is documented properly, there is no significant loss of clarity or  unambiguousness. Clearly there will be *some* loss which highlights the judgement aspect of this guideline. In general, the cases where this behaviour **SHOULD** be used will be obvious. If in doubt, you **SHOULD NOT** use an alias.
 
-For example, the call sign of BAS ship's are not likely to change, the call sign attributes id also an attribute by which a ship is commonly known. In this case it would be appropriate to use the ship callsign as an alias to a ship resource.
+For example, the call sign of BAS ship's are not likely to change and an attribute by which a ship is commonly known. In this case, it would be appropriate to use the ship callsign as an alias for a ship resource.
 
 Sources:
 
@@ -1027,7 +1027,7 @@ Sources:
 
 URL Parameters (query strings) **MUST** be optional.
 
-Generally URL parameters are used for filtering information in a request, for example setting sorting or specifying a date range. API requests made without these parameters would be the same in both cases, though in a different order or a super set of the same information.
+Generally URL parameters are used for filtering information in a request, for example setting sorting preferences or specifying a date range. API requests made without these parameters would be the same in both cases, though in a different order or a super set of the same information.
 
 Sources:
 
@@ -1049,7 +1049,7 @@ Sources:
 
 Where JSON is used for both the request and response data-type this provides a symmetry, simplifying making requests for the user.
 
-This also prevents any errors when converting JSON data into HTTP form key-value pairs. This makes use the users code simpler and clearer without introducing ambiguity in our API.
+This also prevents any errors when converting JSON data into HTTP key-value pairs. This makes users API integrations simpler and clearer without introducing ambiguity in our API.
 
 For example,
 
@@ -1065,12 +1065,9 @@ Sources:
 
 ### [x.x] API responses **SHOULD** use an appropriate status code
 
-The general case, i.e. look it up if you don't know.
+It isn't practical to give guidance on specific status codes for every situation, look for the common consensus elsewhere.
 
-Its not practical to give guidance on specific status codes for every situation, look for the common consensus elsewhere.
-
-4XX responses **SHOULD** be used to indicate client errors, i.e. that the user must fix
-5XX responses **SHOULD** be used to indicate server errors, i.e. that we must fix
+`4XX` responses **SHOULD** be used to indicate client errors, i.e. that the user must fix, `5XX` responses **SHOULD** be used to indicate server errors, i.e. that we must fix.
 
 Sources:
 
@@ -1078,11 +1075,11 @@ Sources:
 
 ### [x.x] Where appropriate, API responses **MUST NOT** use a 2XX status code for an unsuccessful request
 
-If the API is unable to return a response to a request that does not meet it documented output a non-2XX status code **MUST** be used.
+If the API is unable to return a response to a request accounting to its documented output a non-`2XX` status code **MUST NOT** be used.
 
 For example, a request is made for a resource that cannot be found, the API is unable to return the expected output meaning a 2XX status code **MUST NOT** be used.
 
-If, for the same request, the resource can be found but the resource has been deprecated, the API has been able to return the expected output, in addition to some additional information (that it is deprecated). In this case a 2XX status code **MUST** be used, and the additional information included in the request (i.e. as a warning).
+If, for the same request, the resource can be found but the resource has been deprecated, the API has been able to return the expected output, in addition to some additional information (that it is deprecated). In this case a `2XX` status code **MUST** be used, and the additional information included in the request (i.e. as a warning).
 
 Sources:
 
@@ -1092,9 +1089,9 @@ Sources:
 
 CORS is an industry standard for allowing access to APIs from multiple origins from within web browsers. 
 
-All major browsers, servers (including TomCat) and frameworks (including jQuery) support this standard and ensure strong security and wide interoperability.
+All major browsers, web servers (such as TomCat) and frameworks (such as jQuery) support this standard ensuring wide interoperability.
 
-Depending on how CORS is configured access can be restricted at the origin level. Outside of browsers these restrictions are meaningless (its just a header) but CORS provides good protection against certain web based attacks.
+Depending on how CORS is configured, access can be restricted at the origin level. Outside of browsers these restrictions are meaningless (its just a header) but CORS provides good protection against some web based attacks.
 
 APIs **SHOULD NOT** use JSONP, its a hack and we **SHOULD NOT** condone its use. The 18F API Standards provide good reasons not to use this, they are echoed for convenience:
 
@@ -1112,9 +1109,9 @@ Resources:
 
 ### [x.x] API responses **SHOULD** support appropriate data formats, defaulting to the simplest
 
-The default format **SHOULD** the most useful for the given response. Where multiple data formats are offered, at least one **SHOULD** be a widely interoperable, ideally open, format.
+The default format **SHOULD** be the most useful for the given response. Where multiple data formats are offered, at least one **SHOULD** be a widely interoperable, ideally open, format.
 
-Often more complex, specialised formats may be more useful for particular tasks. These **SHOULD** be offered, where feasible and based on user need, alongside simpler but more interoperable alternatives.
+Often more complex, specialised formats may be more useful for particular purposes. These **SHOULD** be offered, where feasible and based on user need, alongside simpler but more interoperable alternatives.
 
 Sources:
 
@@ -1136,7 +1133,7 @@ Sources:
 
 Where a single data format is offered this **SHOULD** ideally be JSON, unless another, similarly open format is available.
 
-The 18F API Standards summarise the benefits of using JSON, they are echoed here for convenience:
+The 18F API Standards summarise the benefits of using JSON, echoed here for convenience:
 
 "JSON is an excellent, widely supported transport format, suitable for many web APIs.
 
@@ -1161,11 +1158,11 @@ Sources:
 
 ### [x.x] Where appropriate, API responses **SHOULD** return a full representation of a resource
 
-This prevents additional requests (for example a POST followed by a GET request for the same resource), which reduces load on the API and improves the experience for the user.
+This prevents additional requests (for example a `POST` followed by a `GET` request for the same resource), which reduces load on the API and improves the experience for the user.
 
 Where a response may contain nested resources, judgement should be used whether to include all or part of each nested resource.
 
-Wherever feasible nested resources **SHOULD** be returned in full, as requesting each nested resource separately would create significantly more requests than simply making the original request alone.
+Where appropriate nested resources **SHOULD** be returned in full, as requesting each nested resource separately would create significantly more requests than simply making the original request alone.
 
 Sources:
 
@@ -1209,7 +1206,7 @@ The Interagent HTTP API Design guidelines provide a good example of why this tec
         },
         ...
     }
-> "
+> "I
 
 Sources:
 
@@ -1217,13 +1214,13 @@ Sources:
 
 ### [x.x] Where appropriate, API responses **SHOULD** support pagination for managing large numbers of items
 
-Where a response involves returning a large number of resources or other items pagination **SHOULD** be used to split these items into a number of 'chunks'. Only one chunk **SHOULD** be returned in each response, with additional requests used to request other 'chunks'.
+Where a response involves returning a large number of resources, or other items pagination **SHOULD** be used to split these items into a number of 'chunks'. Only one chunk **SHOULD** be returned in a response, with additional requests used to request other 'chunks'.
 
-The API **SHOULD** provide the mechanism for managing this process and communicating with the user using meta-data. This meta-data **SHOULD** include, where chunking has been used in a response, which chunk is present and how to request other chunks.
+The API **SHOULD** provide the mechanism for managing this process and communicating with the user using meta-data. This meta-data **SHOULD** include, where chunking has been used, which chunk is present and how to request other chunks.
 
 There are numerous implementations of pagination, most have similar features but expose these to the user in different ways. Some use HTTP headers whilst others data structures within response bodies themselves.
 
-These guidelines don't make a preference as to which implementation **SHOULD** be used, and there is no fixed point where pagination need to be used. However any solution **SHOULD** allow the user to determine the size of each 'chunk'.
+These guidelines don't make a preference as to which implementation **SHOULD** be used, and there is no fixed point where pagination needs to be used. However any solution **SHOULD** allow the user to determine the size of each 'chunk'.
 
 Pagination is often combined with sorting to return the most useful, as determined by the request, information first.
 
