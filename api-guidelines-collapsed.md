@@ -1,5 +1,93 @@
 # API Guidlines
 
+Version:
+
+* **0.1.0** - November 2014 - Draft
+
+Authors:
+
+* [Felix Fennell](mailto:felnne@bas.ac.uk) (BASIS)
+
+Status: 
+
+* **These guidelines have not yet been adopted**. When they are, they will automatically become version 1.0.0.
+* **Adopted versions** of these guidelines will be tracked in the **master** branch of the [API Guidelines repository](), tagged by version.
+* **Draft versions** of these guidelines will be tracked in the **develop** branch of the [API Guidelines repository]().
+
+## Conventions & Terms
+
+**MUST** / **MUST NOT** - As defined by [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+
+**SHOULD** / **SHOULD NOT** - As defined by [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+
+* REST(ful) - [Representational state transfer](http://en.wikipedia.org/wiki/Representational_state_transfer)
+* Method - [Methods are actions performed on a resource, accessed through an endpoint](http://restful-api-design.readthedocs.org/en/latest/methods.html)
+* Resource - [Similar to the concept of an object in object orientated programming](http://restful-api-design.readthedocs.org/en/latest/resources.html)
+* Request - [A request for something, such as a resource made by a user](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_message)
+* Response - [A reply to a request, such as a representation of a resource](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Response_message)
+* CRUD - **C**reate, **R**etrieve (**R**ead), **U**pdate, **D**estroy (**D**elete).
+* BASIS - British Antarctic Survey Information Services
+
+Guidelines use a numbered prefix like this:
+
+#### [X.X] Guideline
+
+ e.g. 
+
+####[2.4] Guideline
+
+## Audience
+
+These guidelines are aimed at API authors or those working closely with them, such as technical managers for APIs used in a project. You do not need to know these guidelines to consume an API based upon them. The documentation for the respective API **SHOULD** contain any information you require.
+
+These guidelines are written for a technical audience and use technical terms where appropriate. The *Conventions & Terms* section will document any terms that may not be generally known by such an audience, or where a term is used to mean something other than its common definition.
+
+## Feedback
+
+**Feedback and discussion is strongly encouraged,** either formally through revisions to this document, or informally by contacting any of the authors.
+
+## Acknowledgements
+
+As noted later, **BAS APIs are not significantly unique**, therefore large parts of guidelines produced by others are directly applicable here. Consequently, large parts of these guidelines are based on other peoples work, namely.
+
+* [Government Digital Service - Service Manual](https://www.gov.uk/service-manual)
+* [18F - 18F API Standards](https://github.com/18f/api-standards)[1]
+* [Interagent - HTTP API Design](https://github.com/interagent/http-api-design)[2]
+
+[1] 18F are the US equivalent of the GDS.  
+[2] AKA Heroku
+
+## Aims & Objectives
+
+The aims of these guidelines are:
+
+* To ensure APIs created by BASIS follow best practice in a way that makes them easier to maintain and use.
+* To ensure, where appropriate, APIs created by BASIS are of a consistent design with one another, so as to be able to share experience and efficiently maintain multiple APIs.
+
+These aims will be achieved through these objectives:
+
+* Provide a series of guidelines focusing on the *design* and *behaviour* of APIs[1].
+* Promote the use of standards, best practice and how these create better APIs.
+* Ensure technologies and approaches used to create APIs are justified.
+* Provide, real world, non-abstract resources and implementations which creators can use to provide functionality that meet these guidelines[2].
+* In some cases, make opinionated decisions, with explanations why these have been made.
+* Ensure any relevant requirements that apply to BASIS through BAS, NERC, Government, etc. are followed.
+* Ensure these guidelines are updated in a timely fashion to ensure guidance remains relevant and APIs remain useful.
+
+[1] These guidelines provide one way of doing things, this is not the **only** way, and in some cases may not be the **best** way. In such cases, you **SHOULD** move away from these guidelines. However such APIs **MUST** state they do not follow these guidelines. You **MUST** be aware of the potential repercussions of doing this such as security and interoperability issues, etc. and manage these yourself.
+
+[2] These are not required implementations, where others are more suitable they **SHOULD** be used.
+
+## Scope
+
+* Currently these guidelines apply to APIs created by members of BAS Information Services (BASIS) only.
+* These guidelines apply to both **new** and **existing** APIs, which may require some existing APIs to be modified [1].
+* These guidelines apply to both **internal** and **external** APIs. Internal in this case refers to APIs used solely within BASIS, BAS or NERC.
+* These guidelines apply to HTTP based 'RESTful' APIs only. Web and data services in general are out of scope.
+* The specific technology stack used within an API is out of scope. These guidelines provide criteria on how choices in technology **SHOULD** be made and how these **SHOULD** be justified, but do not specify what languages, frameworks, methodologies **SHOULD** be used.
+
+[1] APIs where this cannot be achieved are still in scope of these guidelines, but can choose not to implement them. Such APIs **MUST** state whether they follow or no not follow these guidelines in their documentation. If an API does follow these guidelines it **MUST** indicate the version used. If an API does not follow these guidelines you **MUST** be of the potential repercussions of doing so, such as security and interoperability issues, etc. and manage these yourself.
+
 ## General Principles
 
 ### [x.x] APIs **SHOULD** be consistent but not uniform, using the most appropriate solution for each need
