@@ -140,7 +140,6 @@ Sources:
 
 ### [1.3] APIs **SHOULD** be clear and explicit in their operation, returning helpful errors 
 
-
 APIs **SHOULD NOT** try to "guess" or make assumptions about what what the user wants. If a request doesn't make sense, or is unclear, the API **SHOULD** say so by returning an error/warning etc.  
 
 "Guessing" introduces unnecessary logic within the API, making it more complex, increasing the changes of something going wrong. This decreases reliability and increases unpredictability. Instead, APIs **SHOULD** be "helpful".
