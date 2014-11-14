@@ -90,7 +90,7 @@ These aims will be achieved through these objectives:
 
 ## General Principles
 
-### [x.x] APIs **SHOULD** be consistent but not uniform, using the most appropriate solution for each need
+### [1.1] APIs **SHOULD** be consistent but not uniform, using the most appropriate solution for each need
 
 Consistency, within these guidelines, refers to not only providing a similar response format, errors, etc. but also the *stability* (amount of change) and *sustainability* (long term maintenance and availability) of an API.
 
@@ -117,7 +117,7 @@ Sources:
 * [Naming Principles - Microformats](http://microformats.org/wiki/naming-principles)
 * [18F API Standards - Design For Common Use Cases - I8F](https://github.com/18f/api-standards#design-for-common-use-cases)
 
-### [x.x] APIs **SHOULD** be as simple as possible
+### [1.2] APIs **SHOULD** be as simple as possible
 
 Simple APIs, and code, are easier to understand than complex APIs and code. This increases the maintainability of the API, and through having 'less moving parts' creates fewer places for bugs to hide.
 
@@ -138,7 +138,7 @@ Sources:
 * [Second Principle - GDS Design Principles](https://www.gov.uk/design-principles#second)
 * [APIs - Consuming and Using APIs - GDS Design Principles](https://www.gov.uk/service-manual/making-software/apis.html#consuming-and-using-apis)
 
-### [x.x] APIs **SHOULD** be clear and explicit in their operation, returning helpful errors 
+### [1.3] APIs **SHOULD** be clear and explicit in their operation, returning helpful errors 
 
 
 APIs **SHOULD NOT** try to "guess" or make assumptions about what what the user wants. If a request doesn't make sense, or is unclear, the API **SHOULD** say so by returning an error/warning etc.  
@@ -170,7 +170,7 @@ Sources:
 * [APIs Explicitly Set Expectations - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#explicitly-set-expectations)
 * [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
 
-### [x.x] APIs **SHOULD** make things as easy as possible, whilst remaining clear and consistent
+### [1.4] APIs **SHOULD** make things as easy as possible, whilst remaining clear and consistent
 
 If there is something we can do to make things easier for the end user we **SHOULD** do so, providing this is clearly explained, either in the response or in documentation.
 
@@ -184,7 +184,7 @@ Sources:
 
 * [Fourth Principle - GDS Design Principles](https://www.gov.uk/design-principles#fourth)
 
-### [x.x] APIs **SHOULD** be as resilient as possible
+### [1.5] APIs **SHOULD** be as resilient as possible
 
 Where we create APIs that rely on third parties, we **MUST** ensure we have plans in place for where these services are either temporally or permanently unavailable in the future.
 
@@ -198,7 +198,7 @@ Sources:
 
 * [APIs - Service Agreements and Resilience - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#service-agreements-and-resilience)
 
-### [x.x] Where appropriate, APIs **SHOULD** use best practice for solving common problems
+### [1.6] Where appropriate, APIs **SHOULD** use best practice for solving common problems
 
 APIs **SHOULD NOT** 'reinvent the wheel'. The types of APIs BAS will commonly create will not be unique. They therefore don't require unique functionality or solutions to common problems.
 
@@ -220,7 +220,7 @@ Sources:
 
 * [HTTP API Design - Generate Structured Errors - Interagent](https://github.com/interagent/http-api-design#generate-structured-errors)
 
-### [x.x] Where appropriate, APIs **SHOULD** be open, and made available publicly
+### [1.7] Where appropriate, APIs **SHOULD** be open, and made available publicly
 
 Given BAS is Government organisation (according to Wikipedia so it must be true) our work **SHOULD** visible and accessible. Providing APIs aids this by offering data in an organised, logical way in convenient formats, ideally without the involvement of BAS staff.
 
@@ -238,7 +238,7 @@ Sources:
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
 * [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
 
-### [x.x] Where appropriate, APIs **SHOULD** use established standards and open formats
+### [1.8] Where appropriate, APIs **SHOULD** use established standards and open formats
 
 Good standards encourage interoperability through consistency between different systems that implement the same standard.
 
@@ -259,7 +259,7 @@ Sources:
 * [APIs - Just Use the Web - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#just-use-the-web)
 * [APIs - Choosing Appropriate Formats - GDS Service Manual](https://www.gov.uk/service-manual/user-centred-design/choosing-appropriate-formats.html)
 
-### [x.x] Where appropriate, APIs **SHOULD** favour proven and open source alternatives over experimental or proprietary, alternatives
+### [1.9] Where appropriate, APIs **SHOULD** favour proven and open source alternatives over experimental or proprietary, alternatives
 
 A experimental or immature technology may be discontinued. If resources are not available to reimplement the features that technology provided, the API may be degraded or cease to function. Similarly, if proprietary technology is used and is no longer supported or open sourced, it will become obsolete and incompatible with newer technologies.
 
@@ -274,7 +274,7 @@ Sources:
 
 ## Need Driven
 
-### [x.x] APIs **MUST**  meet the needs of their users
+### [2.1] APIs **MUST**  meet the needs of their users
 
 Ideally all stakeholders **SHOULD** be involved in the development of an API, including data providers, API creators, relevant project mangers, significant end users and representative end users.
 
@@ -289,7 +289,7 @@ Sources:
 * [First Principle - GDS Design Principles](https://www.gov.uk/design-principles#first)
 * [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
 
-### [x.x] APIs **MUST** allow user feedback, and this **MUST** be taken seriously
+### [2.2] APIs **MUST** allow user feedback, and this **MUST** be taken seriously
 
 Ideally the individual responsible for each API **SHOULD** be contactable directly.
 
@@ -304,7 +304,7 @@ Sources:
 
 * [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
 
-### [x.x] APIs **SHOULD NOT** be created in isolation, and we **SHOULD** use our own APIs 
+### [2.3] APIs **SHOULD NOT** be created in isolation, and we **SHOULD** use our own APIs 
 
 API creators **SHOULD** be also be API consumers, this is the quickest and easiest way to validate our APIs do what they should.
 
@@ -318,7 +318,7 @@ Sources:
 
 ## API Development
 
-### [x.x] APIs **SHOULD** have a single owner responsible for its delivery and support
+### [3.1] APIs **SHOULD** have a single owner responsible for its delivery and support
 
 This person **SHOULD**:
 
@@ -331,7 +331,7 @@ Sources:
 
 * [18F API Standards - Point of Contact - I8F](https://github.com/18f/api-standards#point-of-contact)
 
-### [x.x] APIs **SHOULD** be loosely coupled
+### [3.2] APIs **SHOULD** be loosely coupled
 
 This means the use of interfaces to separate actions from specific implementations, and repositories to separate data sources from how and where that data is accessed.
 
@@ -342,7 +342,7 @@ Sources:
 * [APIs - Code Integration - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#code-integration)
 * [Seperation of Concerns - WikiPedia](http://en.wikipedia.org/wiki/Separation_of_concerns)
 
-### [x.x] APIs **SHOULD** use source control
+### [3.3] APIs **SHOULD** use source control
 
 Git is preferred, specifically the NERC Stash repository provided by CEH.
 
@@ -361,7 +361,7 @@ Resources:
 * [Stash - CEH](https://stash.ceh.ac.uk)
 * [Comparing Workflows - Atlassian Tutorials](https://www.atlassian.com/git/tutorials/comparing-workflows)
 
-### [x.x] APIs **SHOULD** use issue tracking
+### [3.4] APIs **SHOULD** use issue tracking
 
 These guidelines have no preference on how issues are managed, or the system used to do so. The type of issue tracker you choose will depend on the audience of the API, the number and range of people contributing to the API and the complexity of the issues that will need to be handled.
 
@@ -382,7 +382,7 @@ Resources:
 * [Jira - CEH](https://jira.ceh.ac.uk)
 * [Stash - CEH](https://stash.ceh.ac.uk)
 
-### [x.x] APIs **SHOULD** be robustly tested
+### [3.5] APIs **SHOULD** be robustly tested
 
 This takes a number of forms:
 
@@ -395,7 +395,7 @@ Sources:
 
 ## API Design
 
-### [x.x] APIs **SHOULD** use `UTF-8` for character encoding 
+### [4.1] APIs **SHOULD** use `UTF-8` for character encoding 
 
 The 18F API Standards summarise the benefits of using this, echoed here for convenience:
 
@@ -411,7 +411,7 @@ Resources:
 
 * [UTF-8 Everywhere](http://utf8everywhere.org/)
 
-### [x.x] APIs **SHOULD** use `ISO 8601` and `UTC` for dates and times
+### [4.2] APIs **SHOULD** use `ISO 8601` and `UTC` for dates and times
 
 The 18F API Standards summarise the benefits of using this, echoed here for convenience:
 
@@ -423,7 +423,7 @@ Sources:
 * [18F API Standards - Use A Consistent Date Format - I8F](https://github.com/18f/api-standards#use-a-consistent-date-format)
 * [HTTP API Design - Use UTC Times Formatted in ISO8601 - Interagent](https://github.com/interagent/http-api-design#use-utc-times-formatted-in-iso8601)
 
-### [x.x] APIs **SHOULD** use unique ids for resources
+### [4.3] APIs **SHOULD** use unique ids for resources
 
 Each resource **SHOULD** be identified by a unique identifier, ideally using a UUID ***SHOULD** be used. This ID **SHOULD** be unique across all instances of an API and ideally other APIs as well.
 
@@ -433,7 +433,7 @@ Sources:
 
 * [HTTP API Design - Provide Resource (UU)IDs - Interagent](https://github.com/interagent/http-api-design#provide-resource-uuids)
 
-### [x.x] Where Appropriate, resources **SHOULD** use `created_at` and `modified_at` timestamps
+### [4.4] Where Appropriate, resources **SHOULD** use `created_at` and `modified_at` timestamps
 
 A "created at" timestamp **SHOULD** be set when the object is first created and **SHOULD NOT** change. A "modified at" timestamp **SHOULD** change whenever a resource is modified.
 
@@ -445,7 +445,7 @@ Sources:
 
 ## Documentation
 
-### [x.x] APIs **MUST**  provide end user documentation
+### [5.1] APIs **MUST**  provide end user documentation
 
 It isn't feasible to cover exactly how each API **SHOULD** be documented as this will depend on its purpose, intended audience and other factors. However in general APIs **MUST** be well documented so it is clear to users what the API can do and how they should use it to achieve what they want.
 
@@ -498,7 +498,7 @@ Resources:
 	* [New York Times](http://developer.nytimes.com/docs/read/article_search_api_v2)
 	* [Twilio](https://www.twilio.com/docs/api)
 
-### [x.x] APIs **SHOULD** provide real world examples
+### [5.2] APIs **SHOULD** provide real world examples
 
 In addition to through and accurate documentation, examples of how to make requests for different scenarios and responses which would be returned **SHOULD** be provided.
 
@@ -535,7 +535,7 @@ Resources:
 		* [Guardian API Explorer](http://open-platform.theguardian.com/explore/)
 		* [Google Search for API Explorer](https://www.google.co.uk/search?hl=en&q=API+explorer)
 
-### [x.x] APIs **SHOULD** provide developer documentation
+### [5.3] APIs **SHOULD** provide developer documentation
 
 Developer documentation **SHOULD** contain:
 
@@ -547,7 +547,7 @@ The standard of documentation for both internal and external APIs **SHOULD** be 
 
 Where useful and available, link to meeting minutes, progress reports or other sources of information that may have been created as part of a development. This can provide more context without much effort on your part.
 
-### [x.x] APIs **SHOULD** be backed by a schema
+### [5.4] APIs **SHOULD** be backed by a schema
 
 This ensures all elements of an API are defined in a structured, testable, way and can be validated either by hand or using automatic tools.
 
@@ -561,15 +561,15 @@ Resources:
 
 ## Versioning
 
-### [x.x] APIs **MUST** use versioning using whole integers
+### [6.1] APIs **MUST** use versioning using whole integers
 
 New API versions **SHOULD** replace older versions, therefore older versions **SHOULD** be deprecated.
 
-### [x.x] API versions **SHOULD** map to major releases
+### [6.2] API versions **SHOULD** map to major releases
 
 API versions are not alternatives, they are linear progressions, ideally improving over time.
 
-###[x.x] The API version **MUST** be the first token in a URL path, prefixed by a "v"
+###[6.3] The API version **MUST** be the first token in a URL path, prefixed by a "v"
 
 For example `api.nerc-bas.ac.uk/V2/ships`.
 
@@ -577,13 +577,13 @@ Sources:
 
 * [Version Control For APIs - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-VersionControlforAPIs)
 
-### [x.x] APIs **MUST NOT** assume a version for requests that do not specify one
+### [6.4] APIs **MUST NOT** assume a version for requests that do not specify one
 
 APIs **MUST NOT** use conventions such as `/latest/`, `/current/`, `/head/` etc. as pointers to the latest API version. This behaviour is not clear or unambiguous, requests made in this way may suddenly fail if a breaking change is introduced in a new version.
 
 Instead users **MUST** explicitly state the version they wish to use. If no version is provided, the API **MUST** return a fatal error until one is provided.
 
-### [x.x] APIs **MUST** preserve backwards compatibility within a version
+### [6.5] APIs **MUST** preserve backwards compatibility within a version
 
 APIs **MUST NOT** introduce braking changes *within* an API version. If you need to do this, create a new version.
 
@@ -605,7 +605,7 @@ Sources:
 * [Version Control For APIs - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-VersionControlforAPIs)
 * [18F API Standards - I8F](https://github.com/18f/api-standards)
 
-### [x.x] APIs **SHOULD** try to be compatible with older versions, providing they remain clear and unambiguous
+### [6.6] APIs **SHOULD** try to be compatible with older versions, providing they remain clear and unambiguous
 
 For example, an API endpoint moved from `/ships` to `/fleet/ships` to be better organised, no other aspects of the endpoint are changed.
 
@@ -617,7 +617,7 @@ Sources:
 
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 
-### [x.x] Where appropriate,  APIs **SHOULD** support old versions
+### [6.7] Where appropriate,  APIs **SHOULD** support old versions
 
 It is not reasonable to assume all users will upgrade to newer API versions at the same time. Therefore old API version **SHOULD** continue to be supported, for a limited period, to allow users to upgrade in their own time.
 
@@ -637,7 +637,7 @@ Sources:
 
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 
-### [x.x] **SHOULD** APIs **SHOULD** be forwards compatible, providing they remain clear and unambiguous
+### [6.8] **SHOULD** APIs **SHOULD** be forwards compatible, providing they remain clear and unambiguous
 
 APIs **SHOULD** be designed to be robust and forward thinking, given the speed of evolution on the web.
 
@@ -649,7 +649,7 @@ Sources:
 
 ## Security
 
-### [x.x] APIs **MUST NOT** rely on 'security through obscurity'
+### [7.1] APIs **MUST NOT** rely on 'security through obscurity'
 
 It is a dangerous fallacy and **MUST NOT** be relied upon.
 
@@ -658,7 +658,7 @@ Sources:
 * [Security Through Obscurity - Wikipedia](http://en.wikipedia.org/wiki/Security_through_obscurity)
 * [Why is Security Through Obscurity a Bad Idea - Stack Overflow](http://stackoverflow.com/questions/533965/why-is-security-through-obscurity-a-bad-idea)
 
-### [x.x] APIs **MUST NOT** use non-standard cryptography
+### [7.2] APIs **MUST NOT** use non-standard cryptography
 
 Simply put Cryptography is hard and we **SHOULD NOT** design it ourselves. Cryptography, encryption, etc. are all excellent examples of when it's better to use something by someone else, or more specifically by someone that knows what they're doing.
 
@@ -675,7 +675,7 @@ Resources:
 
 * [OWASP](https://www.owasp.org/index.php/Main_Page)
 
-### [x.x] Where appropriate, APIs **SHOULD** allow anonymous access
+### [7.3] Where appropriate, APIs **SHOULD** allow anonymous access
 
 This means access **SHOULD NOT** require authentication or authorisation, unless it is necessary.
 
@@ -692,7 +692,7 @@ Sources:
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
 * [18F API Standards - API keys - I8F](https://github.com/18f/api-standards#api-keys)
 
-### [x.x] Where appropriate, APIs **MUST** restrict access to sensitive information
+### [7.4] Where appropriate, APIs **MUST** restrict access to sensitive information
 
 This includes anything information that is personally identifying, confidential or privileged (including anything rated as 'OFFICIAL' under the Government Security Classifications.
 
@@ -704,7 +704,7 @@ Sources:
 * [Government Security Classifications - GOV.UK](https://www.gov.uk/government/publications/government-security-classifications)
 * [Principle of Least Privileged Access](http://en.wikipedia.org/wiki/Principle_of_least_privilege)
 
-### [x.x] Where appropriate, APIs **SHOULD** use common authentication sources
+### [7.5] Where appropriate, APIs **SHOULD** use common authentication sources
 
 Many APIs will be accessible to the same group of people (i.e. BAS/NERC staff). It would therefore make sense to centralise and delegate user authentication to a central service. This reduces the number of passwords users have to remember and keeps keep our APIs as simple as possible. 
 
@@ -730,7 +730,7 @@ Resources:
 * [OAuth](http://oauth.net/)
 * HTTP Basic authentication
 
-### [x.x] APIs **SHOULD** use HTTPS
+### [7.6] APIs **SHOULD** use HTTPS
 
 The 18F API Standards summarise the benefits of using HTTPS, echoed here for convenience:
 
@@ -759,7 +759,7 @@ Resources:
 
 * [SSL Labs](https://ssllabs.com/ssltest/analyze.html)
 
-### [x.x] Where appropriate, APIs **MUST** use HTTPS for sensitive information
+### [7.7] Where appropriate, APIs **MUST** use HTTPS for sensitive information
 
 This includes anything information that is personally identifying, confidential or privileged (including anything rated as 'OFFICIAL' under the Government Security Classifications.
 
@@ -768,7 +768,7 @@ Sources:
 * [APIs - Be Public By Default - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#be-public-by-default)
 * [Government Security Classifications - GOV.UK](https://www.gov.uk/government/publications/government-security-classifications)
 
-###  [x.x] Where HTTPS is used, APIs  **SHOULD** reject HTTP requests
+###  [7.8] Where HTTPS is used, APIs  **SHOULD** reject HTTP requests
 
 It is clearer and simpler to support only one protocol and ensures all requests are made securely.
 
@@ -782,7 +782,7 @@ Sources:
 
 ## Logging & analytics
 
-### [x.x] APIs **SHOULD** collect information about itself to determine user needs and identify problems
+### [8.1] APIs **SHOULD** collect information about itself to determine user needs and identify problems
 
 Aggregating and analysing request data **SHOULD** inform the future development of our APIs.
 
@@ -799,7 +799,7 @@ Sources:
 * [APIs Document by discovery... and Example - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#document-by-discovery-and-example)
 * [APIs - Testing - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#testing)
 
-### [x.x] APIs **SHOULD** log requests using an unique identifier
+### [8.2] APIs **SHOULD** log requests using an unique identifier
 
 Each request made to an API **SHOULD** be given a UUID. This **SHOULD** be returned in the response to that request in a `x-request-id` header allowing the client to easily log and reference this value.
 
@@ -811,13 +811,13 @@ Sources:
 
 * [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#trace-requests-with-request-ids)
 
-### [x.x] Where appropriate, API logs  **SHOULD** be anonymous
+### [8.3] Where appropriate, API logs  **SHOULD** be anonymous
 
 Unless required, identifying information such as full IP addresses, location data, etc. **SHOULD** not be stored.
 
 ## Caching & version control
 
-### [x.x] Where appropriate, API responses **SHOULD** be able to be cached
+### [9.1] Where appropriate, API responses **SHOULD** be able to be cached
 
 There are two forms of caching:
 
@@ -828,7 +828,7 @@ External caching is much more robust and effective than internal caching and **S
 
 Caching, of any kind, **SHOULD** only become a focus after an API has been launched and is proving, through metrics, to be causing performance problems. That said techniques that would make adding caching more difficult, such as a authenticating all methods, **SHOULD** be taken into consideration during development, so as not to make adding caching more trouble than it needs to.
 
-### [x.x] Where appropriate, APIs **SHOULD** use Etags for cached resources
+### [9.2] Where appropriate, APIs **SHOULD** use Etags for cached resources
 
 The Etag for a resource **SHOULD** be the same regardless of the data-type used for the response.
 
@@ -837,7 +837,7 @@ Sources:
 * [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
 * [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#support-caching-with-etags)
 
-### [x.x] Where appropriate, APIs **SHOULD** use sensible time limits for cached responses
+### [9.3] Where appropriate, APIs **SHOULD** use sensible time limits for cached responses
 
 Where caching is used, suitable measures **SHOULD** be used to ensure stale or invalid data is removed in a timely fashion.
 
@@ -852,7 +852,7 @@ Sources:
 * [Rest Resources - Version Control for Entities section - Atlassian REST API Design Guidelines (V1)](https://developer.atlassian.com/display/DOCS/Atlassian+REST+API+Design+Guidelines+version+1#AtlassianRESTAPIDesignGuidelinesversion1-RESTResources)
 * [HTTP API Design - Support Caching with Etags - Interagent](https://github.com/interagent/http-api-design#support-caching-with-etags)
 
-### [x.x] Where appropriate, APIs **SHOULD** use rate limiting to ensure the API is used fairly 
+### [9.4] Where appropriate, APIs **SHOULD** use rate limiting to ensure the API is used fairly 
 
 In some cases, for endpoints that may update frequently or which are expensive to process, rate limiting can be used to ensure users do not (inadvertently) overwhelm the API or cause performance/access problems for other users.
 
@@ -868,7 +868,7 @@ Resources:
 
 ## API requests
 
-### [x.x]  API methods **MUST** be available at unique endpoints
+### [10.1]  API methods **MUST** be available at unique endpoints
 
 Within these guidelines, an *endpoint* consists of 4 elements:
 
@@ -896,7 +896,7 @@ Sources:
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 * [18F API Standards - API Endpoints - I8F](https://github.com/18f/api-standards#api-endpoints)
 
-### [x.x] API endpoints **SHOULD** not change
+### [10.2] API endpoints **SHOULD** not change
 
 Where endpoints do change location and perform the same function, redirects (e.g. `301 Moved Permanently`) **SHOULD** be used to ensure backwards compatibility. You **MUST NOT** do this if the method an endpoint refers to has changed, or where doing so would introduce confusion and ambiguity.
  
@@ -904,7 +904,7 @@ Sources:
 
 * [APIs - Practice Service Evolution - GDS Service Manual](https://www.gov.uk/service-manual/making-software/apis.html#practice-service-evolution)
 
-### [x.x] API endpoints **SHOULD** use an appropriate HTTP verb
+### [10.3] API endpoints **SHOULD** use an appropriate HTTP verb
 
 For example, mapping to CRUD these would be:
 
@@ -917,7 +917,7 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#use-http-methods-as-tim-intended
 
-### [x.x] API endpoints **SHOULD NOT** rely on HTTP verbs other than `GET` and `POST` 
+### [10.4] API endpoints **SHOULD NOT** rely on HTTP verbs other than `GET` and `POST` 
 
 A mechanism for using `POST` requests with some way to specify the intended verb **SHOULD** be supported.
 
@@ -930,7 +930,7 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#use-http-methods-as-tim-intended
 
-### [x.x] API endpoints **MUST NOT** allow `GET` requests to alter resources
+### [10.5] API endpoints **MUST NOT** allow `GET` requests to alter resources
 
 `GET` endpoints **MUST** be safe and read-only.
 
@@ -938,7 +938,7 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#use-http-methods-as-tim-intended
 
-### [x.x] API endpoints **SHOULD** be self descriptive
+### [10.6] API endpoints **SHOULD** be self descriptive
 
 It **SHOULD** be possible to gather what an endpoint does from its URL alone. Therefore endpoints **SHOULD** be as self descriptive as possible, whilst being concise and ensuring endpoints remain well structured.
 
@@ -952,7 +952,7 @@ Sources:
 
 * [18F API Standards - API Endpoints - I8F](https://github.com/18f/api-standards#api-endpoints)
 
-### [x.x] API endpoints **SHOULD** be succinct
+### [10.7] API endpoints **SHOULD** be succinct
 
 Ideally EndPoints **SHOULD** be snappy, URLs with more tokens require more effort to understand and increase the chance of making a mistake (in the spelling, order, etc.).
 
@@ -978,7 +978,7 @@ Sources:
 
 * [HTTP API Design - Minimize Path Nesting - Interagent](https://github.com/interagent/http-api-design#minimize-path-nesting)
 
-### [x.x] API endpoints **SHOULD** be case insensitive using hyphens as separators
+### [10.8] API endpoints **SHOULD** be case insensitive using hyphens as separators
 
 This aids consistency and removes ambiguity, it also preserves compatibility with hostnames.
 
@@ -988,7 +988,7 @@ Sources:
 
 * [HTTP API Design - Downcase Paths and Attributes - Interagent](https://github.com/interagent/http-api-design#downcase-paths-and-attributes)
 
-### [x.x] Where appropriate, API endpoints **SHOULD** use the plural term for a resource
+### [10.9] Where appropriate, API endpoints **SHOULD** use the plural term for a resource
 
 The same endpoint **SHOULD** be used for both "a thing" and "a collection of things". This helps keep endpoints consistent as resources change and are more predictable by not splitting methods over multiple URL paths.
 
@@ -1005,7 +1005,7 @@ Sources:
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 * [HTTP API Design - Use Consistent Path Formats - Interagent](https://github.com/interagent/http-api-design#use-consistent-path-formats)
 
-### [x.x] Where appropriate, APIs **SHOULD** support aliases for a resource
+### [10.10] Where appropriate, APIs **SHOULD** support aliases for a resource
 
 Typically IDs will be randomly assigned to resources, whether a numeric or UUID like ID is used. Whilst these ensure resources are uniquely referenced, they are not user friendly.
 
@@ -1023,7 +1023,7 @@ Sources:
 
 * [HTTP API Design - Support Non-Id Dereferencing for Convenience - Interagent](https://github.com/interagent/http-api-design#support-non-id-dereferencing-for-convenience)
 
-### [x.x] Where appropriate, URL parameters **MUST NOT** be required
+### [10.11] Where appropriate, URL parameters **MUST NOT** be required
 
 URL Parameters (query strings) **MUST** be optional.
 
@@ -1033,7 +1033,7 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 
-### [x.x] Where appropriate, the order of URL parameters **MUST NOT** be significant
+### [10.12] Where appropriate, the order of URL parameters **MUST NOT** be significant
 
 It **MUST NOT** matter in what order URL parameters are given.
 
@@ -1045,7 +1045,7 @@ Sources:
 
 * https://www.gov.uk/service-manual/making-software/apis.html#give-each-thing-a-bookmarkable-url
 
-### [x.x] Where appropriate, API endpoints which accept JSON **SHOULD** support serialised JSON within the request body
+### [10.13] Where appropriate, API endpoints which accept JSON **SHOULD** support serialised JSON within the request body
 
 Where JSON is used for both the request and response data-type this provides a symmetry, simplifying making requests for the user.
 
@@ -1063,7 +1063,7 @@ Sources:
 
 ## API responses
 
-### [x.x] API responses **SHOULD** use an appropriate status code
+### [11.1] API responses **SHOULD** use an appropriate status code
 
 It isn't practical to give guidance on specific status codes for every situation, look for the common consensus elsewhere.
 
@@ -1073,7 +1073,7 @@ Sources:
 
 * [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
 
-### [x.x] Where appropriate, API responses **MUST NOT** use a 2XX status code for an unsuccessful request
+### [11.2] Where appropriate, API responses **MUST NOT** use a 2XX status code for an unsuccessful request
 
 If the API is unable to return a response to a request accounting to its documented output a non-`2XX` status code **MUST NOT** be used.
 
@@ -1085,7 +1085,7 @@ Sources:
 
 * [18F API Standards - Error Handling - I8F](https://github.com/18f/api-standards#error-handling)
 
-### [x.x] Where appropriate, APIs **SHOULD** support CORS
+### [11.3] Where appropriate, APIs **SHOULD** support CORS
 
 CORS is an industry standard for allowing access to APIs from multiple origins from within web browsers. 
 
@@ -1107,7 +1107,7 @@ Resources:
 * [Enable CORS](http://enable-cors.org/index.html)
 * [Corslight - Mapbox](https://github.com/mapbox/corslite)
 
-### [x.x] API responses **SHOULD** support appropriate data formats, defaulting to the simplest
+### [11.4] API responses **SHOULD** support appropriate data formats, defaulting to the simplest
 
 The default format **SHOULD** be the most useful for the given response. Where multiple data formats are offered, at least one **SHOULD** be a widely interoperable, ideally open, format.
 
@@ -1121,7 +1121,7 @@ Resources:
 
 * [List of common formats](https://www.gov.uk/service-manual/making-software/apis.html#representations-are-for-the-consumer)
 
-### [x.x] APIs **SHOULD** use HTTP content negotiation to decide which supported data format to use
+### [11.5] APIs **SHOULD** use HTTP content negotiation to decide which supported data format to use
 
 Content type (data type) negotiation using the `Accept` and `Content-Type` headers is a best practice which is widely supported and tested.
 
@@ -1129,7 +1129,7 @@ Sources:
 
 * [Content Negotiation - Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation)
 
-### [x.x] API responses **SHOULD** offer JSON as a supported data format
+### [11.6] API responses **SHOULD** offer JSON as a supported data format
 
 Where a single data format is offered this **SHOULD** ideally be JSON, unless another, similarly open format is available.
 
@@ -1143,7 +1143,7 @@ Sources:
 
 * [18F API Standards - Just Use JSON - I8F](https://github.com/18f/api-standards#just-use-json)
 
-### [x.x] Where appropriate, API responses using JSON **SHOULD** use objects and underscored attributes in lower case 
+### [11.7] Where appropriate, API responses using JSON **SHOULD** use objects and underscored attributes in lower case 
 
 Using an array to return data limits the ability to include metadata (including errors/warnings/notices etc.) and limits the ability to add additional top-level keys in the future.
 
@@ -1156,7 +1156,7 @@ Sources:
 * [18F API Standards - Just Use JSON - I8F](https://github.com/18f/api-standards#just-use-json)
 * [HTTP API Design - Downcase Paths and Attributes - Interagent](https://github.com/interagent/http-api-design#downcase-paths-and-attributes)
 
-### [x.x] Where appropriate, API responses **SHOULD** return a full representation of a resource
+### [11.8] Where appropriate, API responses **SHOULD** return a full representation of a resource
 
 This prevents additional requests (for example a `POST` followed by a `GET` request for the same resource), which reduces load on the API and improves the experience for the user.
 
@@ -1168,7 +1168,7 @@ Sources:
 
 * [HTTP API Design - Provide Full Resources Where Available - Interagent](https://github.com/interagent/http-api-design#provide-full-resources-where-available)
 
-### [x.x] Where appropriate, API responses **SHOULD** nest related resources
+### [11.9] Where appropriate, API responses **SHOULD** nest related resources
 
 For a resource contains relations to other resources these **SHOULD** be nested within the resource returned.
 
@@ -1212,7 +1212,7 @@ Sources:
 
 * [HTTP API Design - Nest foreign key relations - Interagent](https://github.com/interagent/http-api-design#nest-foreign-key-relations)
 
-### [x.x] Where appropriate, API responses **SHOULD** support pagination for managing large numbers of items
+### [11.10] Where appropriate, API responses **SHOULD** support pagination for managing large numbers of items
 
 Where a response involves returning a large number of resources, or other items pagination **SHOULD** be used to split these items into a number of 'chunks'. Only one chunk **SHOULD** be returned in a response, with additional requests used to request other 'chunks'.
 
