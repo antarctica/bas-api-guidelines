@@ -1292,3 +1292,39 @@ Sources:
 Resources:
 
 * [Ranges - Heroku Platform API](https://devcenter.heroku.com/articles/platform-api-reference#ranges)
+
+----------
+## Unreleased information
+
+The information in this section is still being researched, written-up or waiting to be included to existing sections of the guidelines.
+
+You **MUST NOT** implement any guidelines contained in this section. 
+
+You **MUST NOT** rely on any information in this section, it may be incomplete (and therefore misleading by omission), inaccurate, or otherwise wrong.
+
+### [11.11] Where appropriate, API responses **SHOULD** use a standard response object
+
+This object **SHOULD** from the body of the response and be the top level object. It **SHOULD** support multiple, distinct, "aspects" of a response.
+
+These aspects may include:
+
+* *Errors* - Used for reporting fatal errors
+* *Warnings* - Non-fatal errors, or information with a negative context such as deprecation warnings
+* *Notices* - Information of any other context, related to the API in general or to specific responses, such as new feature releases etc.
+* *Data* - A general or default aspect, usually this will contain resource representations
+* *Meta* - Meta-data about the *Data* aspect, such as the number of resources returned
+
+Note: The purpose (and list) of these aspects is yet fully decided and may change in future revisions of these guidelines. This applies mainly to the *notices* aspect.
+
+Aspects **SHOULD** always be used in plural. If used, the *Errors* aspect **MUST** be used alone.
+
+### [11.12] Where appropriate, API error responses **SHOULD** use a standard response format
+
+APIs should use a standard response format to increase interoperability with other tools and services.
+
+There are a range of standards available, and these guidelines currently have no preference on which error standard should be used. Critically we **SHOULD NOT** come up with our own standard.
+
+Resources:
+
+* [JSON API error format](http://jsonapi.org/format/#errors)
+* [Draft HTTP problem specification](http://datatracker.ietf.org/doc/draft-ietf-appsawg-http-problem/?include_text=1)
