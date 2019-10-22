@@ -1,22 +1,12 @@
 # BAS API Guidelines
 
-## Current version
+## Status
 
-The latest published version of these guidelines can be found in the **master** branch. Versions are tagged using semantic versioning.
+This project is now obsolete and no longer maintained. This project is retained for reference and in case it's useful to others.
 
-The latest pre-publication version of these guidelines (which contains pending corrections, additions or other changes) can be found in the **develop** branch.
+BAS Staff are recommended to follow the advice provided and maintained by the (UK) Government Digital Service (GDS), older versions of which were included in these guidelines.
 
-## Release process
-
-1. When significant changes have been made, or a significant period of time has past, the develop branch will be forked into a new **release** branch.
-
-2. The release branch will be discussed to ensure agreement of any changes.
-
-3. Proofing and other pre-publication steps will then be performed to produce a release ready set of changes. This includes the creation of Microsoft Word and PDF versions of the updated guidelines.
-
-3. The release branch is merged into the **master** branch and tagged as the next version of the guidelines.
-
-4. The newly tagged version becomes the latest version of the guidelines.
+Specifically refer to [API technical and data standards (v2 - 2019)](https://www.gov.uk/guidance/gds-api-technical-and-data-standards).
 
 ## Available formats
 
@@ -30,13 +20,13 @@ These guidelines are available in three formats
 
 [1] Where differences exist between different formats, the markdown format is considered authoritative.
 
-[2] The markdown format is available in two forms. The first is the full, complete guidelines, the second removes the contents of each guideline (and any unreleased information).
+[2] The markdown format is available in two forms. The first is the full, complete guidelines, the second removes the contents of each guideline (and any other unreleased information).
 
 ## Creating alternate formats
 
 ### Microsoft word
 
-1. Use [pandoc]() to covert the full guidelines from markdown to a Word File
+1. Use [pandoc](https://pandoc.org) to covert the full guidelines from markdown to a Word File
 
 2. Open file in word (2013) and covert to latest file format, save
 
@@ -100,4 +90,13 @@ These guidelines are available in three formats
 
 ### PDF
 
-1. From Microsoft Word version of guidelines export as an 'Adobe PDF' (if Acrobat Pro installed), otherwise as a 'PDF'.
+1. From Microsoft Word version of the guidelines, export as a PDF
+
+## License
+
+© UK Research and Innovation (UKRI), 2014 - 2019, British Antarctic Survey.
+
+You may use and re-use this software and associated documentation files free of charge in any format or medium, under
+the terms of the Open Government Licence v3.0.
+
+You may obtain a copy of the Open Government Licence at http://www.nationalarchives.gov.uk/doc/open-government-licence/
